@@ -1,92 +1,90 @@
-
+import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:quran_app/models/ayah_model.dart';
+import 'package:quran_app/models/surah_model.dart';
 import 'package:quran_app/services/quran_service.dart';
-import 'package:quran_app/services/audio_service.dart';
-import 'package:quran_app/services/prayer_times_service.dart';
-import 'package:quran_app/services/tafsir_service.dart';
-Future<void> testFetchSurahs(QuranService service) async {
-  print('Fetching all surahs');
-  final surahs = await service.fetchSurahs();
-  surahs.forEach((surah) => print('${surah.name} - ${surah.englishName}'));
-}
-
-Future<void> testFetchSurahAyahs(QuranService service, int surahNumber) async {
-  print('Fetching ayahs for Surah $surahNumber');
-  final ayahs = await service.fetchSurahAyahs(surahNumber);
-  ayahs.forEach((ayah) => print('${ayah.number}: ${ayah.text}'));
-}
-
-Future<void> testSearchAyah(QuranService service, String searchText) async {
-  print('Searching for ayah: $searchText');
-  final searchResults = await service.searchAyah(searchText);
-  searchResults.isNotEmpty
-      ? searchResults.forEach((ayah) => print(ayah.text))
-      : print('No results found.');
-}
-
-Future<void> testFetchReciters(AudioService service) async {
-  print('Fetching all reciters');
-  await service.fetchReciters();
-}
-
-Future<void> testFetchSurahAudio(AudioService service, int reciterId, int surahNumber) async {
-  print('Fetching audio for Surah $surahNumber by Reciter $reciterId');
-  final audio = await service.fetchSurahAudio(reciterId, surahNumber);
-  if (audio != null && audio.audioUrl.isNotEmpty) {
-    print('Reciter: ${audio.reciterName}');
-    print('Audio URL: ${audio.audioUrl}');
-  } else {
-    print('No audio found.');
-  }
-}
-
-Future<void> testFetchPrayerTimes(PrayerTimesService service, String city, String country) async {
-  print('Fetching prayer times for $city, $country...');
-  final prayerTimes = await service.fetchPrayerTimes(city, country);
-  print('Fajr: ${prayerTimes.fajr}');
-  print('Dhuhr: ${prayerTimes.dhuhr}');
-  print('Asr: ${prayerTimes.asr}');
-  print('Maghrib: ${prayerTimes.maghrib}');
-  print('Isha: ${prayerTimes.isha}');
-}
-
-Future<void> testFetchTafsir(TafsirService service, int surah, int ayah) async {
-  print('Fetching Tafsir for Surah $surah, Ayah $ayah');
-  final tafsir = await service.fetchTafsir(surah, ayah);
-  tafsir != null
-      ? print('Tafsir: ${tafsir.text}')
-      : print('No Tafsir found.');
-}
+import 'package:quran_app/surah_details.dart';
 
 void main() async {
-  final quranService = QuranService();
-  final audioService = AudioService();
-  final prayerService = PrayerTimesService();
-  final tafsirService = TafsirService();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  Hive.registerAdapter(SurahModelAdapter());
+  Hive.registerAdapter(AyahModelAdapter()); 
 
-  try {
-        print('---------------------------------------');
+  await Hive.openBox<SurahModel>('surahs');
+  await Hive.openBox<List<AyahModel>>('ayahs'); 
 
-    await testFetchSurahs(quranService);
-        print('---------------------------------------');
+  runApp(const MyApp());
+}
 
-    await testFetchSurahAyahs(quranService, 114);
-        print('---------------------------------------');
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-    await testSearchAyah(quranService, 'ربنا وابعث فيهم');
-        print('---------------------------------------');
-
-    await testFetchReciters(audioService);
-        print('---------------------------------------');
-
-    await testFetchSurahAudio(audioService, 54, 114);
-        print('---------------------------------------');
-
-    await testFetchPrayerTimes(prayerService, 'zagazig', 'Egypt');
-        print('---------------------------------------');
-
-    await testFetchTafsir(tafsirService, 3, 114);
-  } catch (e) {
-    print('Error: $e');
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: SurahListScreen(),
+    );
   }
 }
 
+class SurahListScreen extends StatefulWidget {
+  const SurahListScreen({super.key});
+
+  @override
+  _SurahListScreenState createState() => _SurahListScreenState();
+}
+
+class _SurahListScreenState extends State<SurahListScreen> {
+  final QuranService _quranService = QuranService();
+  List<SurahModel> _surahs = [];
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSurahs();
+  }
+
+  Future<void> _loadSurahs() async {
+    try {
+      final surahs = await _quranService.fetchSurahs();
+      setState(() {
+        _surahs = surahs;
+        _isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Surah List')),
+      body: _isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              itemCount: _surahs.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(_surahs[index].name),
+                  subtitle: Text(_surahs[index].englishName),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SurahDetailsScreen(
+                          surahNumber: _surahs[index].number,
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+    );
+  }
+}
