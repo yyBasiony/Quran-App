@@ -91,7 +91,6 @@ Future<List<AyahModel>> fetchSurahAyahs(int surahNumber) async {
     throw Exception(' Something went wrong. try again');
 }
 }
-
   Future<List<SearchAyahModel>> searchAyah(String searchText) async {
     final response = await http.get(Uri.parse('https://api-quran.com/api?text=$searchText&type=search'));
 

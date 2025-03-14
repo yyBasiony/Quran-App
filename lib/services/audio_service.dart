@@ -1,27 +1,21 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
-
+import 'package:path_provider/path_provider.dart';
 import '../models/audio_mobel.dart';
 
 class AudioService {
   static const String baseUrl = 'https://mp3quran.net/api/v3';
 
-  Future<void> fetchReciters() async {
+  Future<List<AudioModel>> fetchReciters() async {
     final response = await http.get(Uri.parse('$baseUrl/reciters'));
 
     if (response.statusCode == 200) {
       final List<dynamic> recitersJson = jsonDecode(response.body)['reciters'];
 
-      if (recitersJson.isNotEmpty) {
-        print('Fetched ${recitersJson.length} reciters:');
-        for (var reciter in recitersJson) {
-          print('Reciter: ${reciter['name']} - ID: ${reciter['id']}');
-        }
-      } else {
-        print('No reciters found.');
-      }
+      return recitersJson.map((reciter) => AudioModel.fromJson(reciter, 1)).toList();
     } else {
-      print('Error: ${response.statusCode}');
+      throw Exception('   فشل تحميل القراء');
     }
   }
 
@@ -33,18 +27,30 @@ class AudioService {
       var reciter = reciters.firstWhere((r) => r['id'] == reciterId, orElse: () => {});
 
       if (reciter.isNotEmpty && reciter.containsKey('moshaf')) {
-        final List<dynamic> moshafList = reciter['moshaf'];
-
-        if (moshafList.isNotEmpty) {
-          final moshaf = moshafList[0];
-
-          return AudioModel.fromJson({
-            'name': reciter['name'],
-            'moshaf': [moshaf]
-          }, surahNumber);
-        }
+        return AudioModel.fromJson(reciter, surahNumber);
       }
     }
     return null;
+  }
+
+  Future<String> getOrDownloadAudio(String audioUrl, String filename) async {
+    final dir = await getApplicationDocumentsDirectory();
+    final filePath = '${dir.path}/$filename';
+
+    if (await File(filePath).exists()) {
+      print('الصوت موجود لوكل');
+      return filePath;
+    }
+
+    print('تحميل الصوت من ال api ');
+    final response = await http.get(Uri.parse(audioUrl));
+
+    if (response.statusCode == 200) {
+      final file = File(filePath);
+      await file.writeAsBytes(response.bodyBytes);
+      return filePath;
+    } else {
+      throw Exception(' فشل تحميل الصوت');
+    }
   }
 }
