@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'main/home/prayer_time_page.dart';
+
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
   @override
@@ -50,7 +52,9 @@ class StartScreen extends StatelessWidget {
                     )),
                 const SizedBox(height: 20),
                 ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) =>const PrayerTimesScreen()));
+                    },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xffa3ebe3),
                         padding: const EdgeInsets.symmetric(
