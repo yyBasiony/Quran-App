@@ -9,10 +9,10 @@
 //   WidgetsFlutterBinding.ensureInitialized();
 //   await Hive.initFlutter();
 //   Hive.registerAdapter(SurahModelAdapter());
-//   Hive.registerAdapter(AyahModelAdapter()); 
+//   Hive.registerAdapter(AyahModelAdapter());
 
 //   await Hive.openBox<SurahModel>('surahs');
-//   await Hive.openBox<List<AyahModel>>('ayahs'); 
+//   await Hive.openBox<List<AyahModel>>('ayahs');
 
 //   runApp(const MyApp());
 // }
@@ -93,7 +93,7 @@ import 'package:flutter/material.dart';
 import 'app/app.dart';
 
 void main() {
-  runApp(const IslamicApp());
+  runApp(
+    const IslamicApp(),
+  );
 }
-
-
