@@ -51,12 +51,12 @@ Future<List<AyahModel>> fetchSurahAyahs(int surahNumber) async {
 
     if (cachedData is List<dynamic>) {
       return cachedData.map((e) {
-        if (e is Map<String, dynamic>) {
-          return AyahModel.fromJson(e);
+        if (e is Map) {
+          return AyahModel.fromJson(Map<String, dynamic>.from(e));
         } else if (e is AyahModel) {
           return e; 
         } else {
-          throw Exception(" error in hive");
+          throw Exception("حدث خطأ في قراءة بيانات Hive");
         }
       }).toList();
     } else {
@@ -64,7 +64,7 @@ Future<List<AyahModel>> fetchSurahAyahs(int surahNumber) async {
     }
   }
 
-      print("  الداتا من ال api");
+  print("  الداتا من ال API");
   final url = Uri.parse('$baseUrl/surah/$surahNumber/quran-uthmani');
 
   try {
@@ -80,31 +80,35 @@ Future<List<AyahModel>> fetchSurahAyahs(int surahNumber) async {
         await box.put(surahNumber, ayahsList.map((ayah) => ayah.toJson()).toList());
 
         return ayahsList;
-} else {
-    throw Exception(' No data');
-}
-} else {
-    throw Exception(' Failed  fetch data (Error: ${response.statusCode})');
-}
-} catch (e) {
-    print(' Error: $e');
-    throw Exception(' Something went wrong. try again');
-}
-}
-  Future<List<SearchAyahModel>> searchAyah(String searchText) async {
-    final response = await http.get(Uri.parse('https://api-quran.com/api?text=$searchText&type=search'));
-
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> data = jsonDecode(response.body);
-
-      if (data.containsKey('result') && data['result'] is List) {
-        final List<dynamic> results = data['result'];
-        return results.map((ayahText) => SearchAyahModel.fromText(ayahText)).toList();
       } else {
-        return [];
+        throw Exception('لا توجد بيانات للعرض');
       }
     } else {
-      throw Exception('Failed to search Ayah: ${response.statusCode}');
+      throw Exception('فشل في تحميل البيانات (رمز الخطأ: ${response.statusCode})');
     }
+  } catch (e) {
+    print('خطأ: $e');
+    throw Exception('حدث خطأ أثناء جلب البيانات، برجاء المحاولة لاحقًا');
   }
 }
+Future<List<SearchAyahModel>> searchAyah(String searchText) async {
+  final response = await http.get(Uri.parse('https://api-quran.com/api?text=$searchText&type=search'));
+
+  if (response.statusCode == 200) {
+    final Map<String, dynamic> data = jsonDecode(response.body);
+
+    if (data.containsKey('result') && data['result'] is List) {
+      final List<dynamic> results = data['result'];
+      return results
+          .whereType<String>()
+          .map((ayahText) => SearchAyahModel(text: ayahText))
+          .toList();
+    } else {
+      return [];
+    }
+  } else {
+    throw Exception('Failed to search Ayah: ${response.statusCode}');
+  }
+}
+}
+

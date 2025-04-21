@@ -1,8 +1,12 @@
 import 'dart:async';
 import 'package:intl/intl.dart';
 
+import '../../../../models/audio_mobel.dart';
+import '../../../../models/ayah_model.dart';
 import '../../../../models/prayer_times_model.dart';
+import '../../../../services/audio_service.dart';
 import '../../../../services/prayer_times_service.dart';
+import '../../../../services/quran_service.dart';
 
 class LogicMethods {
   static Future<PrayerTimesModel?> fetchPrayerTimes(
@@ -43,5 +47,22 @@ class LogicMethods {
       return null;
     }
   }
+  //surah details
+    static Future<List<AyahModel>> fetchAyahs(int surahNumber) async {
+    return await QuranService().fetchSurahAyahs(surahNumber);
+  }
+
+  static Future<List<AudioModel>> fetchReciters() async {
+    return await AudioService().fetchReciters();
+  }
+    static Future<AudioModel?> fetchSurahAudio(int reciterId, int surahNumber) async {
+    return await AudioService().fetchSurahAudio(reciterId, surahNumber);
+  }
+
+  static Future<String> getOrDownloadAudio(String url, String fileName) async {
+    return await AudioService().getOrDownloadAudio(url, fileName);
+  }
+
+
 }
 

@@ -15,7 +15,7 @@ class CityDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment.centerRight, 
+      alignment: Alignment.centerRight,
       child: Padding(
         padding: const EdgeInsets.only(right: 16),
         child: Row(
@@ -23,7 +23,7 @@ class CityDropdown extends StatelessWidget {
           children: [
             DropdownButton<String>(
               value: selectedCity,
-              icon: const Icon(Icons.location_on, color: Color(0xffa3ebe3), size: 20),
+              icon: const Icon(Icons.location_on, color: Color(0xFF006400), size: 20),
               dropdownColor: Colors.white,
               style: const TextStyle(
                 color: Color(0xff3e6d69),
@@ -39,7 +39,7 @@ class CityDropdown extends StatelessWidget {
               items: cities.map<DropdownMenuItem<String>>((String city) {
                 return DropdownMenuItem<String>(
                   value: city,
-                  child: Text(city, style: const TextStyle(color: Colors.black)),
+                  child: Text(city, style: const TextStyle(color: Color(0xFF006400))),
                 );
               }).toList(),
             ),

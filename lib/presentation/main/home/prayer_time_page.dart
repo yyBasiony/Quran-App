@@ -20,7 +20,6 @@ class _PrayerTimesPageState extends State<PrayerTimesPage> {
   String _nextPrayer = "";
   String _nextPrayerTime = "";
   Timer? _timer;
-  int _selectedIndex = 0;
   String _selectedCity = 'Zagazig';
 
   @override
@@ -57,7 +56,7 @@ class _PrayerTimesPageState extends State<PrayerTimesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xfff0faf9),
+      backgroundColor: const Color(0xFFD6EFE7),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -74,7 +73,7 @@ class _PrayerTimesPageState extends State<PrayerTimesPage> {
               width: double.infinity,
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: const Color(0xFF3e6d69),
+                color: const Color(0xFF006400),
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: const [
                   BoxShadow(
@@ -85,7 +84,7 @@ class _PrayerTimesPageState extends State<PrayerTimesPage> {
                 ],
                 image: const DecorationImage(
                   image: AssetImage('assets/background.png'),
-                  fit: BoxFit.cover, 
+                  fit: BoxFit.cover,
                 ),
               ),
               child: Column(
@@ -129,16 +128,6 @@ class _PrayerTimesPageState extends State<PrayerTimesPage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-          items: [for (var item in AppConstants.bottomNavBarData) BottomNavigationBarItem(icon: Icon(item.icon), label: item.label)],
-          currentIndex: _selectedIndex,
-          selectedItemColor: const Color(0xFFA3EBE3),
-          unselectedItemColor: Colors.grey,
-          onTap: (index) {
-            setState(() {
-              _selectedIndex = index;
-            });
-          }),
     );
   }
 
@@ -153,10 +142,10 @@ class _PrayerTimesPageState extends State<PrayerTimesPage> {
 
     prayers.remove(_nextPrayer);
     List<Color> colors = [
+      const Color(0xff9ACD32),
       const Color(0xff714ae5),
-      const Color(0xff91d4f6),
       const Color(0xffeba065),
-      const Color(0xff714ae5),
+      const Color(0xff00c27e),
     ];
 
     List<Widget> prayerCards = [];
