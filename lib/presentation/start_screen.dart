@@ -16,11 +16,10 @@ class StartScreen extends StatelessWidget {
             right: 0,
             child: Image.asset(
               'assets/startscreen.png',
-              height: 300,
+              height: 340,
               fit: BoxFit.cover,
             ),
           ),
-
           Positioned.fill(
             top: 200,
             child: Column(
@@ -71,10 +70,8 @@ class StartScreen extends StatelessWidget {
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF006400),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 32, vertical: 12),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(24)),
+                          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
                         ),
                         child: const Text(
                           "Let's get started",
