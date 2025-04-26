@@ -88,7 +88,7 @@ Future<List<AyahModel>> fetchSurahAyahs(int surahNumber) async {
     }
   } catch (e) {
     print('خطأ: $e');
-    throw Exception('حدث خطأ أثناء جلب البيانات، برجاء المحاولة لاحقًا');
+     throw Exception('حدث خطأ أثناء جلب البيانات، برجاء المحاولة لاحقًا');
   }
 }
 Future<List<SearchAyahModel>> searchAyah(String searchText) async {
