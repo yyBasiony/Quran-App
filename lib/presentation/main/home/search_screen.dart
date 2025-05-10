@@ -46,20 +46,22 @@ class SearchScreen extends StatelessWidget {
                   itemCount: provider.searchResults.length,
                   itemBuilder: (context, index) {
                     final ayah = provider.searchResults[index];
-                    return Card(
-                      margin: const EdgeInsets.symmetric(vertical: 8),
-                      child: ListTile(
-                        title: Text(
-                          ayah.text,
-                          textAlign: TextAlign.right,
-                          textDirection: TextDirection.rtl,
-                        ),
-                        subtitle: Text(
-                          '[${ayah.surah} : ${ayah.ayah}]',
-                          textAlign: TextAlign.right,
-                        ),
-                      ),
-                    );
+return Card(
+  margin: const EdgeInsets.symmetric(vertical: 8),
+  child: ListTile(
+    title: Text(
+      ayah.text,
+      textAlign: TextAlign.right,
+      textDirection: TextDirection.rtl,
+    ),
+    subtitle: ayah.surah != null
+        ? Text(
+            '[${ayah.surah}]',
+            textAlign: TextAlign.right,
+          )
+        : null,
+  ),
+);
                   },
                 ),
               ),
