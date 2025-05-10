@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'main/home/main_screen.dart';
+import '../../providers/start_provider.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final startProvider = Provider.of<StartProvider>(context);
+
     return Scaffold(
       backgroundColor: const Color(0xFF006400),
       body: Stack(
@@ -41,7 +45,7 @@ class StartScreen extends StatelessWidget {
                     children: [
                       const SizedBox(height: 60),
                       const Text(
-                        "Islamic App",
+                        "تطبيق اسلامي",
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -50,7 +54,7 @@ class StartScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 12),
                       const Text(
-                        "Ini adalah Aplikasi Dzikir Pagi Dan Petang. Aplikasi ini cocok untuk kalian yang mau menghafal dzikir pagi petang.",
+                        "هذا تطبيق إسلامي يقدم آيات قرآنية ومواقيت الصلاة...",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 14,
@@ -60,27 +64,34 @@ class StartScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
                       ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => const MainScreen(),
-                            ),
-                          );
-                        },
+                        onPressed: startProvider.isLoading
+                            ? null
+                            : () {
+                                startProvider.startApp(
+                                  context,
+                                  () => Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => const MainScreen(),
+                                    ),
+                                  ),
+                                );
+                              },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF006400),
                           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
                         ),
-                        child: const Text(
-                          "Let's get started",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                        child: startProvider.isLoading
+                            ? const CircularProgressIndicator(color: Colors.white)
+                            : const Text(
+                                "لنبدأ  ",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                       ),
                     ],
                   ),

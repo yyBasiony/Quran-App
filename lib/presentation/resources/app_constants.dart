@@ -43,7 +43,7 @@ class AppConstants {
   static const List<BottomNavBarData> bottomNavBarData = [
     (label: 'Home', icon: Icons.home),
     (label: 'Quran', icon: Icons.menu_book),
-    (label: 'Schedule', icon: Icons.calendar_today),
+    (label: 'Search', icon: Icons.search),
         (label: 'Settings', icon: Icons.settings)
 
   ];

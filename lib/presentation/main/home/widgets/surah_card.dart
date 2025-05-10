@@ -14,7 +14,6 @@ class SurahCard extends StatelessWidget {
         child: Text(surah.number.toString(), style: const TextStyle(color: Colors.white)),
       ),
       title: Text(surah.englishName, style: const TextStyle(fontWeight: FontWeight.bold)),
-      subtitle: Text(surah.englishName, style: const TextStyle(color: Colors.grey)),
       trailing: Text(surah.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
       onTap: () {
         Navigator.push(

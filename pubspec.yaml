@@ -38,4 +38,4 @@ flutter:
   fonts:
     - family: Uthmani
       fonts:
-        - asset: assets/fonts/18_Khebrat_Musamim_Bold.ttf
+        - asset: assets/fonts/KSARegular.ttf

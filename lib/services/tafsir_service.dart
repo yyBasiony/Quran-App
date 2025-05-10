@@ -11,13 +11,18 @@ class TafsirService {
       if (response.statusCode == 200) {
         var data = json.decode(response.body);
 
-        return TafsirModel.fromJson(data['data'][0]);
+        if (data['data'] is List && data['data'].isNotEmpty) {
+          return TafsirModel.fromJson(data['data'][0]);
+        } else {
+          print("No tafsir data available");
+          return null;
+        }
       } else {
-         print("Failed to load Tafsir: \${response.statusCode}");
+        print("Failed to load Tafsir: ${response.statusCode}");
         return null;
       }
     } catch (e) {
-      print("Error: \$e");
+      print("Error: $e");
       return null;
     }
   }
