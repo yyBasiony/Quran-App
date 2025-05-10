@@ -1,4 +1,4 @@
 # quran_app
 
-![ start screen]("C:/Users/Dell/Pictures/Screenshots/Screenshot 2025-05-10 175717.png")
+![ start screen](https://github.com/yyBasiony/Quran-App/blob/main/assets/Screenshot%202025-05-10%20175717.png)
 
