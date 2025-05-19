@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quran_app/presentation/resources/app_colors.dart';
 import 'main/home/main_screen.dart';
 import '../../providers/start_provider.dart';
 
@@ -9,9 +10,10 @@ class StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final startProvider = Provider.of<StartProvider>(context);
+    final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
-      backgroundColor: const Color(0xFF006400),
+      backgroundColor: AppColors.primary,
       body: Stack(
         children: [
           Positioned(
@@ -34,7 +36,7 @@ class StartScreen extends StatelessWidget {
                   margin: const EdgeInsets.symmetric(horizontal: 24),
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: AppColors.white,
                     borderRadius: BorderRadius.circular(32),
                     boxShadow: const [
                       BoxShadow(color: Colors.black12, blurRadius: 12),
@@ -44,23 +46,15 @@ class StartScreen extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const SizedBox(height: 60),
-                      const Text(
+                      Text(
                         "تطبيق اسلامي",
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
-                        ),
+                        style: textTheme.titleLarge,
                       ),
                       const SizedBox(height: 12),
-                      const Text(
+                      Text(
                         "هذا تطبيق إسلامي يقدم آيات قرآنية ومواقيت الصلاة...",
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey,
-                          height: 1.5,
-                        ),
+                        style: textTheme.bodyMedium?.copyWith(height: 1.5),
                       ),
                       const SizedBox(height: 20),
                       ElevatedButton(
@@ -78,17 +72,16 @@ class StartScreen extends StatelessWidget {
                                 );
                               },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF006400),
+                          backgroundColor: AppColors.primary,
                           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
                         ),
                         child: startProvider.isLoading
-                            ? const CircularProgressIndicator(color: Colors.white)
-                            : const Text(
+                            ? const CircularProgressIndicator(color: AppColors.white)
+                            : Text(
                                 "لنبدأ  ",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
+                                style: textTheme.bodyLarge?.copyWith(
+                                  color: AppColors.white,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),

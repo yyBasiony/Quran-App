@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../providers/prayer_times_provider.dart';
 import '../../resources/app_constants.dart';
+import '../../resources/app_colors.dart';
 import 'widgets/city_dropdown.dart';
 import 'widgets/prayer_card.dart';
 
@@ -12,6 +13,7 @@ class PrayerTimesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = Provider.of<PrayerTimesProvider>(context);
     final prayerTimes = provider.prayerTimes;
+    final textTheme = Theme.of(context).textTheme;
 
     Map<String, String> prayers = {
       "Fajr": prayerTimes?.fajr ?? "--:--",
@@ -24,14 +26,14 @@ class PrayerTimesPage extends StatelessWidget {
     prayers.remove(provider.nextPrayer);
 
     List<Color> colors = [
-      const Color(0xff9ACD32),
-      const Color(0xff714ae5),
-      const Color(0xffeba065),
-      const Color(0xff00c27e),
+      AppColors.prayerCard1,
+      AppColors.prayerCard2,
+      AppColors.prayerCard3,
+      AppColors.prayerCard4,
     ];
 
     return Scaffold(
-      backgroundColor: const Color(0xFFD6EFE7),
+      backgroundColor: AppColors.background,
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -48,7 +50,7 @@ class PrayerTimesPage extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: const Color(0xFF006400),
+                color: AppColors.primary,
                 borderRadius: BorderRadius.circular(12),
                 image: const DecorationImage(
                   image: AssetImage('assets/background.png'),
@@ -60,18 +62,27 @@ class PrayerTimesPage extends StatelessWidget {
                 children: [
                   Text(
                     provider.nextPrayer,
-                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+                    style: textTheme.titleLarge?.copyWith(color: AppColors.white),
                   ),
                   Text(
                     provider.nextPrayerTime,
-                    style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
+                    style: textTheme.titleLarge?.copyWith(
+                      fontSize: 30,
+                      color: AppColors.white,
+                    ),
                   ),
                 ],
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text("Prayer Times", style: TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold)),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "Prayer Times",
+                style: textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.black,
+                ),
+              ),
             ),
             Expanded(
               child: GridView.count(

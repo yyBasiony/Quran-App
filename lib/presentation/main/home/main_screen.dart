@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../providers/main_provider.dart';
 import '../../resources/app_constants.dart';
+import '../../resources/app_colors.dart';
 import 'prayer_time_page.dart';
 import 'search_screen.dart';
 import 'setting_screen.dart';
@@ -35,8 +36,8 @@ class MainScreen extends StatelessWidget {
             )
         ],
         currentIndex: provider.selectedIndex,
-        selectedItemColor: const Color(0xFF006400),
-        unselectedItemColor: Colors.grey,
+        selectedItemColor: AppColors.primary,
+        unselectedItemColor: AppColors.grey,
         onTap: provider.setIndex,
       ),
     );

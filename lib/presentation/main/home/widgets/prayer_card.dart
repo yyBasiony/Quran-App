@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../resources/app_colors.dart';
 
 class PrayerCard extends StatelessWidget {
   final String name;
@@ -11,8 +12,9 @@ class PrayerCard extends StatelessWidget {
     required this.time,
     required this.color,
   });
+
   String getPrayerImage(String prayerName) {
-    Map<String, String> prayerImages = {
+    final Map<String, String> prayerImages = {
       "Fajr": 'assets/Fajr.png',
       "Dhuhr": 'assets/Dhuhr.png',
       "Asr": 'assets/Asr.png',
@@ -20,11 +22,13 @@ class PrayerCard extends StatelessWidget {
       "Isha": 'assets/Isha.png',
     };
 
-    return prayerImages[prayerName] ?? 'assets/images/Isha.png';
+    return prayerImages[prayerName] ?? 'assets/Isha.png';
   }
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
@@ -36,10 +40,8 @@ class PrayerCard extends StatelessWidget {
         children: [
           Text(
             name,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
+            style: textTheme.titleLarge?.copyWith(
+              color: AppColors.white,
             ),
           ),
           const SizedBox(height: 5),
@@ -47,12 +49,11 @@ class PrayerCard extends StatelessWidget {
             children: [
               Text(
                 time,
-                style: const TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
+                style: textTheme.bodyLarge?.copyWith(
+                  color: AppColors.white,
                 ),
               ),
-              const SizedBox(width: 40),
+              const Spacer(),
               Image.asset(
                 getPrayerImage(name),
                 width: 40,
