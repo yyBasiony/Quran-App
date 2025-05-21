@@ -13,7 +13,9 @@ class PrayerTimesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = Provider.of<PrayerTimesProvider>(context);
     final prayerTimes = provider.prayerTimes;
-    final textTheme = Theme.of(context).textTheme;
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+    final isDark = theme.brightness == Brightness.dark;
 
     Map<String, String> prayers = {
       "Fajr": prayerTimes?.fajr ?? "--:--",
@@ -33,7 +35,7 @@ class PrayerTimesPage extends StatelessWidget {
     ];
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -62,13 +64,13 @@ class PrayerTimesPage extends StatelessWidget {
                 children: [
                   Text(
                     provider.nextPrayer,
-                    style: textTheme.titleLarge?.copyWith(color: AppColors.white),
+                    style: textTheme.titleLarge?.copyWith(color: AppColors.onPrimary),
                   ),
                   Text(
                     provider.nextPrayerTime,
                     style: textTheme.titleLarge?.copyWith(
                       fontSize: 30,
-                      color: AppColors.white,
+                      color: AppColors.onPrimary,
                     ),
                   ),
                 ],
@@ -80,7 +82,7 @@ class PrayerTimesPage extends StatelessWidget {
                 "Prayer Times",
                 style: textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: AppColors.black,
+                  color: isDark ? AppColors.darkTextPrimary : AppColors.textPrimary,
                 ),
               ),
             ),

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-
 class AppConstants {
   AppConstants._();
   static const List<String> cities = [

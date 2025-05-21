@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:quran_app/providers/theme_provider.dart';
 
-class SettingScreen extends StatefulWidget {
+class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
 
   @override
-  State<SettingScreen> createState() => _SettingScreenState();
-}
-
-class _SettingScreenState extends State<SettingScreen> {
-  bool isDarkMode = false;
-
-  @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDarkMode = themeProvider.isDarkMode;
+
     return Scaffold(
-      backgroundColor: const Color(0xFFD6EFE7),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF006400),
         title: const Text(
           'Settings',
           style: TextStyle(
@@ -29,7 +25,7 @@ class _SettingScreenState extends State<SettingScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Container(
           decoration: BoxDecoration(
-            color: const Color(0xFF006400),
+            color: Theme.of(context).primaryColor,
             borderRadius: BorderRadius.circular(16),
             border: Border.all(color: Colors.blueAccent),
           ),
@@ -50,9 +46,7 @@ class _SettingScreenState extends State<SettingScreen> {
             trailing: Switch(
               value: isDarkMode,
               onChanged: (value) {
-                setState(() {
-                  isDarkMode = value;
-                });
+                themeProvider.toggleTheme(value);
               },
               activeColor: Colors.blueAccent,
             ),

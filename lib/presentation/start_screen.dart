@@ -10,7 +10,8 @@ class StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final startProvider = Provider.of<StartProvider>(context);
-    final textTheme = Theme.of(context).textTheme;
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
 
     return Scaffold(
       backgroundColor: AppColors.primary,
@@ -24,6 +25,8 @@ class StartScreen extends StatelessWidget {
               'assets/startscreen.png',
               height: 340,
               fit: BoxFit.cover,
+              color: theme.brightness == Brightness.dark ? Colors.white.withOpacity(0.1) : null,
+              colorBlendMode: BlendMode.modulate,
             ),
           ),
           Positioned.fill(
@@ -36,10 +39,13 @@ class StartScreen extends StatelessWidget {
                   margin: const EdgeInsets.symmetric(horizontal: 24),
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
-                    color: AppColors.white,
+                    color: theme.brightness == Brightness.dark ? Colors.grey[900] : AppColors.white,
                     borderRadius: BorderRadius.circular(32),
-                    boxShadow: const [
-                      BoxShadow(color: Colors.black12, blurRadius: 12),
+                    boxShadow: [
+                      BoxShadow(
+                        color: theme.brightness == Brightness.dark ? Colors.black54 : Colors.black12,
+                        blurRadius: 12,
+                      ),
                     ],
                   ),
                   child: Column(
@@ -74,10 +80,14 @@ class StartScreen extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primary,
                           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(24),
+                          ),
                         ),
                         child: startProvider.isLoading
-                            ? const CircularProgressIndicator(color: AppColors.white)
+                            ? const CircularProgressIndicator(
+                                color: AppColors.white,
+                              )
                             : Text(
                                 "لنبدأ  ",
                                 style: textTheme.bodyLarge?.copyWith(

@@ -23,7 +23,6 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
   @override
   void initState() {
     super.initState();
-    // تأجيل تحميل البيانات بعد build
     Future.delayed(Duration.zero, () {
       provider.loadData(widget.surahNumber);
     });
@@ -44,19 +43,20 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<SurahDetailProvider>(context);
+    final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: const Color(0xFFD6EFE7),
+      backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF006400),
+        backgroundColor: theme.primaryColor,
         title: Text(
           widget.surahName,
-          style: const TextStyle(color: Colors.white),
+          style: theme.textTheme.titleLarge?.copyWith(color: Colors.white),
         ),
       ),
       bottomNavigationBar: BottomAppBar(
         elevation: 10,
-        color: Colors.white,
+        color: theme.cardColor,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           child: Row(
@@ -65,7 +65,7 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
               IconButton(
                 icon: Icon(
                   provider.isPlaying ? Icons.pause_circle : Icons.play_circle,
-                  color: const Color(0xFF006400),
+                  color: theme.primaryColor,
                   size: 30,
                 ),
                 onPressed: provider.isPlaying
@@ -75,7 +75,7 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
               DropdownButton<AudioModel>(
                 value: provider.selectedReciter,
                 underline: const SizedBox(),
-                icon: const Icon(Icons.keyboard_arrow_down, color: Color(0xFF006400)),
+                icon: Icon(Icons.keyboard_arrow_down, color: theme.primaryColor),
                 onChanged: (value) {
                   if (value != null) {
                     provider.changeReciter(value);
@@ -86,9 +86,9 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
                     value: reciter,
                     child: Text(
                       reciter.reciterName,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF006400),
+                        color: theme.primaryColor,
                       ),
                     ),
                   );
@@ -106,15 +106,15 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
                   margin: const EdgeInsets.symmetric(vertical: 16),
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.orange, width: 1.5),
+                    border: Border.all(color: theme.colorScheme.secondary, width: 1.5),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Text(
                     widget.surahName,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.orange,
+                      color: theme.colorScheme.secondary,
                       fontFamily: 'Uthmani',
                     ),
                   ),
@@ -126,10 +126,10 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
                       textAlign: TextAlign.center,
                       textDirection: TextDirection.rtl,
                       text: TextSpan(
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 16,
                           fontFamily: 'Uthmani',
-                          color: Colors.black,
+                          color: theme.textTheme.bodyLarge?.color,
                         ),
                         children: provider.ayahs.map((ayah) {
                           return TextSpan(text: '${ayah.text} ﴿${ayah.number}﴾ ');

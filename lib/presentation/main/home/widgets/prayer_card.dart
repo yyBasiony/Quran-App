@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../resources/app_colors.dart';
 
 class PrayerCard extends StatelessWidget {
   final String name;
@@ -27,12 +26,17 @@ class PrayerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+
+    final textColor = theme.brightness == Brightness.dark
+        ? Colors.white70
+        : Colors.white;
 
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: color,
+        color: color, 
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
@@ -41,7 +45,7 @@ class PrayerCard extends StatelessWidget {
           Text(
             name,
             style: textTheme.titleLarge?.copyWith(
-              color: AppColors.white,
+              color: textColor,
             ),
           ),
           const SizedBox(height: 5),
@@ -50,7 +54,7 @@ class PrayerCard extends StatelessWidget {
               Text(
                 time,
                 style: textTheme.bodyLarge?.copyWith(
-                  color: AppColors.white,
+                  color: textColor,
                 ),
               ),
               const Spacer(),

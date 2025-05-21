@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../models/surah_model.dart';
 import '../surah_details_screen.dart';
-import '../../../resources/app_colors.dart';
 
 class SurahCard extends StatelessWidget {
   final SurahModel surah;
@@ -10,14 +9,23 @@ class SurahCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+
+    final avatarBgColor = theme.brightness == Brightness.dark
+        ? Colors.green.shade700  
+        : theme.colorScheme.primary; 
+
+    final avatarTextColor = theme.brightness == Brightness.dark
+        ? Colors.white70
+        : Colors.white;
 
     return ListTile(
       leading: CircleAvatar(
-        backgroundColor: AppColors.primary,
+        backgroundColor: avatarBgColor,
         child: Text(
           surah.number.toString(),
-          style: const TextStyle(color: AppColors.white),
+          style: TextStyle(color: avatarTextColor),
         ),
       ),
       title: Text(

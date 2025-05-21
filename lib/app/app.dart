@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
+import 'package:quran_app/presentation/resources/app_theme.dart';
+import 'package:quran_app/providers/theme_provider.dart';
 import '../presentation/start_screen.dart';
 
 class IslamicApp extends StatelessWidget {
@@ -7,9 +9,16 @@ class IslamicApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home:  StartScreen(),
+    return Consumer<ThemeProvider>(
+      builder: (context, themeProvider, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: themeProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+          home: const StartScreen(),
+        );
+      },
     );
   }
 }

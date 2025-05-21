@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../resources/app_colors.dart'; 
+import 'package:quran_app/presentation/resources/app_colors.dart';
 
 class CityDropdown extends StatelessWidget {
   final String selectedCity;
@@ -15,7 +15,12 @@ class CityDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+    final isDark = theme.brightness == Brightness.dark;
+
+    final dropdownColor = isDark ? AppColors.darkInputFill : AppColors.white;
+    final textColor = isDark ? AppColors.darkTextPrimary : AppColors.textPrimary;
 
     return Align(
       alignment: Alignment.centerRight,
@@ -26,14 +31,14 @@ class CityDropdown extends StatelessWidget {
           children: [
             DropdownButton<String>(
               value: selectedCity,
-              icon: const Icon(
+              icon: Icon(
                 Icons.location_on,
                 color: AppColors.primary,
                 size: 20,
               ),
-              dropdownColor: AppColors.white,
+              dropdownColor: dropdownColor,
               style: textTheme.bodyLarge?.copyWith(
-                color: AppColors.textPrimary,
+                color: textColor,
                 fontWeight: FontWeight.bold,
               ),
               underline: Container(height: 0),
