@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../providers/main_provider.dart';
+import '../../../providers/prayer_times_provider.dart';
+import '../../../providers/surah_provider.dart';
+import '../../../providers/search_provider.dart';
 import '../../resources/app_colors.dart';
 import '../../resources/app_constants.dart';
 import 'prayer_time_page.dart';
@@ -11,17 +14,26 @@ import 'surah_list_screen.dart';
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
 
-  final List<Widget> _screens = const [
-    PrayerTimesPage(),
-    SurahListScreen(),
-    SearchScreen(),
-    SettingScreen(),
-  ];
-
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<MainProvider>(context);
     final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    final List<Widget> _screens = [
+      ChangeNotifierProvider(
+        create: (_) => PrayerTimesProvider(),
+        child: const PrayerTimesPage(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => SurahProvider(),
+        child: const SurahListScreen(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => SearchProvider(),
+        child: const SearchScreen(),
+      ),
+      const SettingScreen(),
+    ];
 
     return Scaffold(
       body: IndexedStack(
