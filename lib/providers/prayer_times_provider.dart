@@ -6,6 +6,7 @@ import '../presentation/main/home/widgets/logic_methods.dart';
 
 class PrayerTimesProvider with ChangeNotifier {
   final PrayerTimesService _prayerService = PrayerTimesService();
+
   PrayerTimesModel? _prayerTimes;
   String _selectedCity = 'Zagazig';
   String _nextPrayer = "";
@@ -19,7 +20,7 @@ class PrayerTimesProvider with ChangeNotifier {
   String get nextPrayerTime => _nextPrayerTime;
 
   PrayerTimesProvider() {
-    fetchPrayerTimes(); 
+    fetchPrayerTimes();
   }
 
   void changeCity(String city) {
@@ -31,9 +32,9 @@ class PrayerTimesProvider with ChangeNotifier {
     final times = await LogicMethods.fetchPrayerTimes(_prayerService, _selectedCity);
     if (times != null) {
       _prayerTimes = times;
-      var nextPrayerData = LogicMethods.getNextPrayerTime(times);
-      _nextPrayer = nextPrayerData["name"]!;
-      _nextPrayerTime = nextPrayerData["time"]!;
+      final next = LogicMethods.getNextPrayerTime(times);
+      _nextPrayer = next["name"] ?? "";
+      _nextPrayerTime = next["time"] ?? "";
       notifyListeners();
     }
   }

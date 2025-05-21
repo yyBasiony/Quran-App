@@ -67,6 +67,7 @@ class PrayerTimesPage extends StatelessWidget {
                     provider.nextPrayer,
                     style: textTheme.titleLarge?.copyWith(color: AppColors.onPrimary),
                   ),
+                  const SizedBox(height: 8),
                   Text(
                     provider.nextPrayerTime,
                     style: textTheme.titleLarge?.copyWith(
@@ -78,7 +79,7 @@ class PrayerTimesPage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.symmetric(vertical: 16),
               child: Text(
                 "Prayer Times",
                 style: textTheme.titleLarge?.copyWith(

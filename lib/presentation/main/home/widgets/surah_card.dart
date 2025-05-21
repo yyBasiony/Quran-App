@@ -12,7 +12,6 @@ class SurahCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
-
     final avatarTextColor = theme.brightness == Brightness.dark ? Colors.white70 : Colors.white;
 
     return ListTile(

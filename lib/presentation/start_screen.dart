@@ -10,7 +10,6 @@ class StartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final startProvider = Provider.of<StartProvider>(context);
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
 
@@ -38,7 +37,9 @@ class StartScreen extends StatelessWidget {
                   margin: const EdgeInsets.symmetric(horizontal: 24),
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
-                    color: theme.brightness == Brightness.dark ? Colors.grey[900] : AppColors.white,
+                    color: theme.brightness == Brightness.dark
+                        ? Colors.grey[900]
+                        : AppColors.white,
                     borderRadius: BorderRadius.circular(32),
                   ),
                   child: Column(
@@ -56,33 +57,41 @@ class StartScreen extends StatelessWidget {
                         style: textTheme.bodyMedium?.copyWith(height: 1.5),
                       ),
                       const SizedBox(height: 20),
-                      ElevatedButton(
-                        onPressed: startProvider.isLoading
-                            ? null
-                            : () {
-                                startProvider.startApp(
-                                    context,
-                                    () =>
-Navigator.pushReplacementNamed(context, AppRoutes.mainScreen));
-                              },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primary,
-                          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                        ),
-                        child: startProvider.isLoading
-                            ? const CircularProgressIndicator(
-                                color: AppColors.white,
-                              )
-                            : Text(
-                                "لنبدأ  ",
-                                style: textTheme.bodyLarge?.copyWith(
-                                  color: AppColors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                      Consumer<StartProvider>(
+                        builder: (context, startProvider, _) {
+                          return ElevatedButton(
+                            onPressed: startProvider.isLoading
+                                ? null
+                                : () {
+                                    startProvider.startApp(
+                                      context,
+                                      () => Navigator.pushReplacementNamed(
+                                        context,
+                                        AppRoutes.mainScreen,
+                                      ),
+                                    );
+                                  },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.primary,
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 32, vertical: 12),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(24),
                               ),
+                            ),
+                            child: startProvider.isLoading
+                                ? const CircularProgressIndicator(
+                                    color: AppColors.white,
+                                  )
+                                : Text(
+                                    "لنبدأ",
+                                    style: textTheme.bodyLarge?.copyWith(
+                                      color: AppColors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                          );
+                        },
                       ),
                     ],
                   ),

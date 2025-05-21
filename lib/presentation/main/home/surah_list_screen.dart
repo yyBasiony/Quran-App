@@ -24,9 +24,7 @@ class SurahListScreen extends StatelessWidget {
         builder: (context, provider, child) {
           if (provider.isLoading) {
             return const Center(
-              child: CircularProgressIndicator(
-                color: AppColors.primary, 
-              ),
+              child: CircularProgressIndicator(color: AppColors.primary),
             );
           }
 

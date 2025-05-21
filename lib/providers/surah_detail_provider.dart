@@ -4,7 +4,6 @@ import 'package:quran_app/models/audio_mobel.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:quran_app/presentation/main/home/widgets/logic_methods.dart';
 
-
 class SurahDetailProvider with ChangeNotifier {
   List<AyahModel> ayahs = [];
   List<AudioModel> reciters = [];
@@ -13,13 +12,20 @@ class SurahDetailProvider with ChangeNotifier {
   AudioModel? selectedReciter;
   bool isPlaying = false;
 
+  SurahDetailProvider() {
+    player.onPlayerComplete.listen((event) {
+      isPlaying = false;
+      notifyListeners();
+    });
+  }
+
   Future<void> loadData(int surahNumber) async {
     isLoading = true;
     notifyListeners();
 
     ayahs = await LogicMethods.fetchAyahs(surahNumber);
     reciters = await LogicMethods.fetchReciters();
-    selectedReciter = reciters.first;
+    selectedReciter = reciters.isNotEmpty ? reciters.first : null;
 
     isLoading = false;
     notifyListeners();
@@ -57,12 +63,5 @@ class SurahDetailProvider with ChangeNotifier {
 
   void disposePlayer() {
     player.dispose();
-  }
-
-  SurahDetailProvider() {
-    player.onPlayerComplete.listen((event) {
-      isPlaying = false;
-      notifyListeners();
-    });
   }
 }
