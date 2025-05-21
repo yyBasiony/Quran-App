@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quran_app/presentation/resources/app_routes.dart';
 import 'package:quran_app/presentation/resources/app_theme.dart';
 import 'package:quran_app/providers/theme_provider.dart';
 import '../presentation/start_screen.dart';
@@ -12,6 +13,7 @@ class IslamicApp extends StatelessWidget {
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, child) {
         return MaterialApp(
+          onGenerateRoute: AppRoutes.generateRoutes,
           debugShowCheckedModeBanner: false,
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,

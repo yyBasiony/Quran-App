@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quran_app/presentation/resources/app_colors.dart';
+import 'package:quran_app/presentation/resources/app_routes.dart';
 import '../../../../models/surah_model.dart';
-import '../surah_details_screen.dart';
 
 class SurahCard extends StatelessWidget {
   final SurahModel surah;
@@ -32,14 +32,13 @@ class SurahCard extends StatelessWidget {
         style: textTheme.titleLarge?.copyWith(fontSize: 18),
       ),
       onTap: () {
-        Navigator.push(
+        Navigator.pushNamed(
           context,
-          MaterialPageRoute(
-            builder: (_) => SurahDetailScreen(
-              surahNumber: surah.number,
-              surahName: surah.name,
-            ),
-          ),
+          AppRoutes.surahDetails,
+          arguments: {
+            'surahNumber': surah.number,
+            'surahName': surah.name,
+          },
         );
       },
     );

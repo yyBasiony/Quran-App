@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quran_app/presentation/resources/app_assets.dart';
 import 'package:quran_app/presentation/resources/app_colors.dart';
-import 'main/home/main_screen.dart';
+import 'package:quran_app/presentation/resources/app_routes.dart';
 import '../../providers/start_provider.dart';
 
 class StartScreen extends StatelessWidget {
@@ -61,14 +61,9 @@ class StartScreen extends StatelessWidget {
                             ? null
                             : () {
                                 startProvider.startApp(
-                                  context,
-                                  () => Navigator.pushReplacement(
                                     context,
-                                    MaterialPageRoute(
-                                      builder: (_) => const MainScreen(),
-                                    ),
-                                  ),
-                                );
+                                    () =>
+Navigator.pushReplacementNamed(context, AppRoutes.mainScreen));
                               },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primary,
