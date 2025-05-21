@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quran_app/presentation/resources/app_assets.dart';
 import 'package:quran_app/presentation/resources/app_colors.dart';
 import 'main/home/main_screen.dart';
 import '../../providers/start_provider.dart';
@@ -22,11 +23,9 @@ class StartScreen extends StatelessWidget {
             left: 0,
             right: 0,
             child: Image.asset(
-              'assets/startscreen.png',
+              AppAssets.welcome,
               height: 340,
               fit: BoxFit.cover,
-              color: theme.brightness == Brightness.dark ? Colors.white.withOpacity(0.1) : null,
-              colorBlendMode: BlendMode.modulate,
             ),
           ),
           Positioned.fill(
@@ -41,12 +40,6 @@ class StartScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: theme.brightness == Brightness.dark ? Colors.grey[900] : AppColors.white,
                     borderRadius: BorderRadius.circular(32),
-                    boxShadow: [
-                      BoxShadow(
-                        color: theme.brightness == Brightness.dark ? Colors.black54 : Colors.black12,
-                        blurRadius: 12,
-                      ),
-                    ],
                   ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,

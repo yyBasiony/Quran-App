@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quran_app/presentation/resources/app_assets.dart';
 
 class PrayerCard extends StatelessWidget {
   final String name;
@@ -14,14 +15,14 @@ class PrayerCard extends StatelessWidget {
 
   String getPrayerImage(String prayerName) {
     final Map<String, String> prayerImages = {
-      "Fajr": 'assets/Fajr.png',
-      "Dhuhr": 'assets/Dhuhr.png',
-      "Asr": 'assets/Asr.png',
-      "Maghrib": 'assets/Maghrib.png',
-      "Isha": 'assets/Isha.png',
+      "Fajr": AppAssets.Fajr,
+      "Dhuhr": AppAssets.Dhuhr,
+      "Asr": AppAssets.Asr,
+      "Maghrib": AppAssets.Maghrib,
+      "Isha": AppAssets.Isha,
     };
 
-    return prayerImages[prayerName] ?? 'assets/Isha.png';
+    return prayerImages[prayerName] ?? AppAssets.Isha;
   }
 
   @override
@@ -29,14 +30,12 @@ class PrayerCard extends StatelessWidget {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
 
-    final textColor = theme.brightness == Brightness.dark
-        ? Colors.white70
-        : Colors.white;
+    final textColor = theme.brightness == Brightness.dark ? Colors.white70 : Colors.white;
 
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: color, 
+        color: color,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(

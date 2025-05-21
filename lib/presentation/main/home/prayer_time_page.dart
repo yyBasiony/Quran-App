@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quran_app/presentation/resources/app_assets.dart';
 import '../../../providers/prayer_times_provider.dart';
 import '../../resources/app_constants.dart';
 import '../../resources/app_colors.dart';
@@ -55,7 +56,7 @@ class PrayerTimesPage extends StatelessWidget {
                 color: AppColors.primary,
                 borderRadius: BorderRadius.circular(12),
                 image: const DecorationImage(
-                  image: AssetImage('assets/background.png'),
+                  image: AssetImage(AppAssets.background),
                   fit: BoxFit.cover,
                 ),
               ),
