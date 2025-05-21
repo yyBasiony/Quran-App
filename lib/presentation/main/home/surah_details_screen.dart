@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quran_app/models/audio_mobel.dart';
+import 'package:quran_app/presentation/resources/app_colors.dart';
 import 'package:quran_app/providers/surah_detail_provider.dart';
 
 class SurahDetailScreen extends StatefulWidget {
@@ -68,9 +69,7 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
                   color: theme.primaryColor,
                   size: 30,
                 ),
-                onPressed: provider.isPlaying
-                    ? provider.pauseAudio
-                    : () => provider.playFullSurah(widget.surahNumber),
+                onPressed: provider.isPlaying ? provider.pauseAudio : () => provider.playFullSurah(widget.surahNumber),
               ),
               DropdownButton<AudioModel>(
                 value: provider.selectedReciter,
@@ -106,15 +105,15 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
                   margin: const EdgeInsets.symmetric(vertical: 16),
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                   decoration: BoxDecoration(
-                    border: Border.all(color: theme.colorScheme.secondary, width: 1.5),
+                    border: Border.all(color: AppColors.orange, width: 1.5),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Text(
                     widget.surahName,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: theme.colorScheme.secondary,
+                      color:  AppColors.orange,
                       fontFamily: 'Uthmani',
                     ),
                   ),
