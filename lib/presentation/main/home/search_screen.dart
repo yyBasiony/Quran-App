@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quran_app/presentation/resources/app_colors.dart';
 import '../../../providers/search_provider.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -14,9 +15,9 @@ class SearchScreen extends StatelessWidget {
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
         backgroundColor: theme.primaryColor,
-        title: Text(
+        title: const Text(
           'البحث والتفسير',
-          style: TextStyle(color: theme.colorScheme.onPrimary),
+          style: TextStyle(color: AppColors.onPrimary),
         ),
       ),
       body: Padding(
