@@ -19,27 +19,33 @@ class MainScreen extends StatelessWidget {
     final provider = Provider.of<MainProvider>(context);
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    final List<Widget> _screens = [
-      ChangeNotifierProvider(
-        create: (_) => PrayerTimesProvider(),
-        child: const PrayerTimesPage(),
-      ),
-      ChangeNotifierProvider(
-        create: (_) => SurahProvider(),
-        child: const SurahListScreen(),
-      ),
-      ChangeNotifierProvider(
-        create: (_) => SearchProvider(),
-        child: const SearchScreen(),
-      ),
-      const SettingScreen(),
-    ];
+    Widget _getScreenByIndex(int index) {
+      switch (index) {
+        case 0:
+          return ChangeNotifierProvider(
+            create: (_) => PrayerTimesProvider(),
+            child: const PrayerTimesPage(),
+          );
+        case 1:
+          return ChangeNotifierProvider(
+            create: (_) => SurahProvider(),
+            child: const SurahListScreen(),
+          );
+  
+        case 2:
+          return ChangeNotifierProvider(
+            create: (_) => SearchProvider(),
+            child: const SearchScreen(),
+          );
+        case 3:
+          return const SettingScreen();
+        default:
+          return const SizedBox(); 
+      }
+    }
 
     return Scaffold(
-      body: IndexedStack(
-        index: provider.selectedIndex,
-        children: _screens,
-      ),
+      body: _getScreenByIndex(provider.selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: [
           for (var item in AppConstants.bottomNavBarData)
