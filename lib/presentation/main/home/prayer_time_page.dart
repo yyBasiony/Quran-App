@@ -17,6 +17,13 @@ class PrayerTimesPage extends StatelessWidget {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
     final isDark = theme.brightness == Brightness.dark;
+    Map<String, String> arabicNames = {
+      "Fajr": "الفجر",
+      "Dhuhr": "الظهر",
+      "Asr": "العصر",
+      "Maghrib": "المغرب",
+      "Isha": "العشاء",
+    };
 
     Map<String, String> prayers = {
       "Fajr": prayerTimes?.fajr ?? "--:--",
@@ -64,7 +71,7 @@ class PrayerTimesPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    provider.nextPrayer,
+                    arabicNames[provider.nextPrayer] ?? provider.nextPrayer,
                     style: textTheme.titleLarge?.copyWith(color: AppColors.onPrimary),
                   ),
                   const SizedBox(height: 8),
@@ -81,7 +88,7 @@ class PrayerTimesPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16),
               child: Text(
-                "Prayer Times",
+                "مواقيت الصلاة",
                 style: textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: isDark ? AppColors.darkTextPrimary : AppColors.textPrimary,
@@ -96,7 +103,7 @@ class PrayerTimesPage extends StatelessWidget {
                 children: prayers.entries.map((entry) {
                   int index = prayers.keys.toList().indexOf(entry.key);
                   return PrayerCard(
-                    name: entry.key,
+                    name: arabicNames[entry.key] ?? entry.key,
                     time: entry.value,
                     color: colors[index % colors.length],
                   );

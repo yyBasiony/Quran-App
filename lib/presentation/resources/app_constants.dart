@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 class AppConstants {
   AppConstants._();
+
   static const List<String> cities = [
     'Cairo',
     'Alexandria',
@@ -39,13 +41,11 @@ class AppConstants {
 
 
   static const List<BottomNavBarData> bottomNavBarData = [
-    (label: 'Home', icon: Icons.home),
-    (label: 'Quran', icon: Icons.menu_book),
-    (label: 'Search', icon: Icons.search),
-        (label: 'Settings', icon: Icons.settings)
-
+    (label: 'الرئيسية', icon: Icons.home),
+    (label: 'القرآن', icon: Icons.menu_book),
+    (label: 'بحث', icon: Icons.search),
+    (label: 'الإعدادات', icon: Icons.settings),
   ];
 }
+
 typedef BottomNavBarData = ({String label, IconData icon});
-
-

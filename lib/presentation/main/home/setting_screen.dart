@@ -13,7 +13,7 @@ class SettingScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Settings',
+          'الإعدادات',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
@@ -33,14 +33,14 @@ class SettingScreen extends StatelessWidget {
             contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             leading: const Icon(Icons.nightlight_round, color: Colors.white),
             title: const Text(
-              'Dark Mode',
+              'الوضع الداكن',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
             ),
             subtitle: const Text(
-              'Toggle dark theme',
+              'تبديل الوضع الليلي',
               style: TextStyle(color: Colors.grey),
             ),
             trailing: Switch(

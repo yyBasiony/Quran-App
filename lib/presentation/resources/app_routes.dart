@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quran_app/presentation/main/home/main_screen.dart';
 import 'package:quran_app/presentation/main/home/surah_details_screen.dart';
-import '../../../providers/main_provider.dart';
 import '../../../providers/surah_detail_provider.dart';
 
 class AppRoutes {
@@ -12,13 +11,10 @@ class AppRoutes {
   static Route<dynamic> generateRoutes(RouteSettings settings) {
     switch (settings.name) {
 
-      case mainScreen:
-        return MaterialPageRoute(
-          builder: (_) => ChangeNotifierProvider(
-            create: (_) => MainProvider(),
-            child: const MainScreen(),
-          ),
-        );
+case mainScreen:
+  return MaterialPageRoute(
+    builder: (_) => const MainScreen(),
+  );
 
 case surahDetails:
   final args = settings.arguments as Map<String, dynamic>;

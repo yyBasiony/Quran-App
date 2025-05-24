@@ -4,6 +4,7 @@ import 'package:quran_app/presentation/resources/app_assets.dart';
 import 'package:quran_app/presentation/resources/app_colors.dart';
 import 'package:quran_app/presentation/resources/app_routes.dart';
 import '../../providers/start_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
@@ -60,17 +61,20 @@ class StartScreen extends StatelessWidget {
                       Consumer<StartProvider>(
                         builder: (context, startProvider, _) {
                           return ElevatedButton(
-                            onPressed: startProvider.isLoading
-                                ? null
-                                : () {
-                                    startProvider.startApp(
-                                      context,
-                                      () => Navigator.pushReplacementNamed(
-                                        context,
-                                        AppRoutes.mainScreen,
-                                      ),
-                                    );
-                                  },
+onPressed: startProvider.isLoading
+    ? null
+    : () async {
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setBool('is_first_time', false);
+
+        startProvider.startApp(
+          context,
+          () => Navigator.pushReplacementNamed(
+            context,
+            AppRoutes.mainScreen,
+          ),
+        );
+      },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppColors.primary,
                               padding: const EdgeInsets.symmetric(
