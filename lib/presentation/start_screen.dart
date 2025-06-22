@@ -15,93 +15,63 @@ class StartScreen extends StatelessWidget {
     final textTheme = theme.textTheme;
 
     return Scaffold(
-      backgroundColor: AppColors.primary,
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: Stack(
         children: [
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: Image.asset(
-              AppAssets.welcome,
-              height: 340,
-              fit: BoxFit.cover,
-            ),
+          SizedBox.expand(
+            child: Image.asset(AppAssets.welcome, fit: BoxFit.cover, colorBlendMode: BlendMode.darken),
           ),
-          Positioned.fill(
-            top: 200,
-            child: Column(
-              children: [
-                const Spacer(),
-                Container(
-                  height: 380,
-                  margin: const EdgeInsets.symmetric(horizontal: 24),
-                  padding: const EdgeInsets.all(24),
-                  decoration: BoxDecoration(
-                    color: theme.brightness == Brightness.dark
-                        ? Colors.grey[900]
-                        : AppColors.white,
-                    borderRadius: BorderRadius.circular(32),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 90),
+                  Text(
+                    "يوفر لك هذا التطبيق مواقيت الصلاة، آيات قرآنية ",
+                    style: textTheme.bodyLarge?.copyWith(fontSize: 22, color: AppColors.orange, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
                   ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const SizedBox(height: 60),
-                      Text(
-                        "تطبيق اسلامي",
-                        style: textTheme.titleLarge,
-                      ),
-                      const SizedBox(height: 12),
-                      Text(
-                        "هذا تطبيق إسلامي يقدم آيات قرآنية ومواقيت الصلاة...",
-                        textAlign: TextAlign.center,
-                        style: textTheme.bodyMedium?.copyWith(height: 1.5),
-                      ),
-                      const SizedBox(height: 20),
-                      Consumer<StartProvider>(
-                        builder: (context, startProvider, _) {
-                          return ElevatedButton(
-onPressed: startProvider.isLoading
-    ? null
-    : () async {
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.setBool('is_first_time', false);
+                  const SizedBox(height: 36),
+                  Consumer<StartProvider>(
+                    builder: (context, startProvider, _) {
+                      return ElevatedButton(
+                          onPressed: startProvider.isLoading
+                              ? null
+                              : () async {
+                                  final prefs = await SharedPreferences.getInstance();
+                                  await prefs.setBool('is_first_time', false);
 
-        startProvider.startApp(
-          context,
-          () => Navigator.pushReplacementNamed(
-            context,
-            AppRoutes.mainScreen,
-          ),
-        );
-      },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.primary,
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 32, vertical: 12),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(24),
-                              ),
-                            ),
-                            child: startProvider.isLoading
-                                ? const CircularProgressIndicator(
-                                    color: AppColors.white,
-                                  )
-                                : Text(
-                                    "لنبدأ",
-                                    style: textTheme.bodyLarge?.copyWith(
-                                      color: AppColors.white,
-                                      fontWeight: FontWeight.bold,
+                                  startProvider.startApp(
+                                    context,
+                                    () => Navigator.pushReplacementNamed(
+                                      context,
+                                      AppRoutes.mainScreen,
                                     ),
-                                  ),
-                          );
-                        },
-                      ),
-                    ],
+                                  );
+                                },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.primary,
+                            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                          ),
+                          child: startProvider.isLoading
+                              ? const CircularProgressIndicator(
+                                  color: Colors.white,
+                                )
+                              : Text("لنبدأ",
+                                  style: textTheme.bodyLarge?.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  )));
+                    },
                   ),
-                ),
-                const Spacer(),
-              ],
+                ],
+              ),
             ),
           ),
         ],

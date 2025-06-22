@@ -86,7 +86,7 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
                     textDirection: TextDirection.rtl,
                     text: TextSpan(
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 18,
                         fontFamily: 'Uthmani',
                         color: theme.textTheme.bodyLarge?.color,
                       ),

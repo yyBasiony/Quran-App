@@ -4,16 +4,16 @@ import 'package:quran_app/presentation/resources/app_assets.dart';
 class PrayerCard extends StatelessWidget {
   final String name;
   final String time;
-  final Color color;
+  final String imageKey;
 
   const PrayerCard({
     super.key,
     required this.name,
     required this.time,
-    required this.color,
+    required this.imageKey,
   });
 
-  String getPrayerImage(String name) {
+  String getPrayerImage(String key) {
     const images = {
       "Fajr": AppAssets.Fajr,
       "Dhuhr": AppAssets.Dhuhr,
@@ -21,36 +21,47 @@ class PrayerCard extends StatelessWidget {
       "Maghrib": AppAssets.Maghrib,
       "Isha": AppAssets.Isha,
     };
-    return images[name] ?? AppAssets.Isha;
+    return images[key] ?? AppAssets.Isha;
   }
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final textTheme = theme.textTheme;
-    final textColor = theme.brightness == Brightness.dark ? Colors.white70 : Colors.white;
+    final textTheme = Theme.of(context).textTheme;
 
     return Container(
-      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+          borderRadius: BorderRadius.circular(16), image: DecorationImage(image: AssetImage(getPrayerImage(imageKey)), fit: BoxFit.cover)),
+      child: Stack(
         children: [
-          Text(name, style: textTheme.titleLarge?.copyWith(color: textColor)),
-          const SizedBox(height: 5),
-          Row(
-            children: [
-              Text(time, style: textTheme.bodyLarge?.copyWith(color: textColor)),
-              const Spacer(),
-              Image.asset(
-                getPrayerImage(name),
-                width: 40,
-                height: 40,
-              ),
-            ],
+          Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  gradient: LinearGradient(colors: [
+                    Colors.black.withOpacity(0.55),
+                    Colors.transparent,
+                  ], begin: Alignment.bottomCenter, end: Alignment.topCenter))),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  name,
+                  style: textTheme.titleLarge?.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  time,
+                  style: textTheme.titleMedium?.copyWith(
+                    color: Colors.white70,
+                    fontSize: 18,
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),

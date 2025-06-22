@@ -25,10 +25,14 @@ class CityDropdown extends StatelessWidget {
         padding: const EdgeInsets.only(right: 16),
         child: DropdownButton<String>(
           value: selectedCity,
-          icon: Icon(Icons.location_on, color: AppColors.primary, size: 20),
+          icon: Icon(
+            Icons.location_on,
+            color: isDark ? Colors.white : Colors.black,
+            size: 20,
+          ),
           dropdownColor: isDark ? AppColors.darkInputFill : AppColors.white,
           style: textTheme.bodyLarge?.copyWith(
-            color: isDark ? AppColors.darkTextPrimary : AppColors.textPrimary,
+            color: isDark ? Colors.white : Colors.black,
             fontWeight: FontWeight.bold,
           ),
           underline: const SizedBox(),
@@ -40,7 +44,9 @@ class CityDropdown extends StatelessWidget {
               value: city,
               child: Text(
                 city,
-                style: textTheme.bodyLarge?.copyWith(color: AppColors.primary),
+                style: textTheme.bodyLarge?.copyWith(
+                  color: isDark ? Colors.white : Colors.black,
+                ),
               ),
             );
           }).toList(),
