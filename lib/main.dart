@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 import 'package:quran_app/providers/main_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+//import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:quran_app/app/app.dart';
-import 'providers/start_provider.dart';
 import 'models/ayah_model.dart';
 import 'models/surah_model.dart';
 import 'providers/theme_provider.dart';
@@ -21,16 +20,14 @@ void main() async {
     Hive.registerAdapter(AyahModelAdapter());
   }
 
-  final prefs = await SharedPreferences.getInstance();
-  final isFirstTime = prefs.getBool('is_first_time') ?? true;
+  //final prefs = await SharedPreferences.getInstance();
 
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider(create: (_) => StartProvider()),
       ChangeNotifierProvider(create: (_) => ThemeProvider()),
               ChangeNotifierProvider(create: (_) => MainProvider()), 
 
     ],
-    child: IslamicApp(isFirstTime: isFirstTime),
+    child: IslamicApp(),
   ));
 }
