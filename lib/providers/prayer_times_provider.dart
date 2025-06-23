@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../models/prayer_times_model.dart';
 import '../../services/prayer_times_service.dart';
 import '../presentation/main/home/widgets/logic_methods.dart';
@@ -20,12 +21,26 @@ class PrayerTimesProvider with ChangeNotifier {
   String get nextPrayerTime => _nextPrayerTime;
 
   PrayerTimesProvider() {
+    _init();
+  }
+
+  Future<void> _init() async {
+    await _loadSavedCity();
     fetchPrayerTimes();
   }
 
-  void changeCity(String city) {
+  Future<void> _loadSavedCity() async {
+    final prefs = await SharedPreferences.getInstance();
+    _selectedCity = prefs.getString('selected_city') ?? _selectedCity;
+    notifyListeners();
+  }
+
+  Future<void> changeCity(String city) async {
     _selectedCity = city;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selected_city', city);
     fetchPrayerTimes();
+    notifyListeners();
   }
 
   Future<void> fetchPrayerTimes() async {

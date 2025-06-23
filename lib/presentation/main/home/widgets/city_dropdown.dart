@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quran_app/presentation/resources/app_colors.dart';
+import 'package:quran_app/presentation/resources/app_constants.dart';
 
 class CityDropdown extends StatelessWidget {
   final String selectedCity;
@@ -40,10 +41,11 @@ class CityDropdown extends StatelessWidget {
             if (newValue != null) onCityChanged(newValue);
           },
           items: cities.map((city) {
+            final arabicName = AppConstants.cityNamesArabic[city] ?? city;
             return DropdownMenuItem<String>(
               value: city,
               child: Text(
-                city,
+                arabicName,
                 style: textTheme.bodyLarge?.copyWith(
                   color: isDark ? Colors.white : Colors.black,
                 ),

@@ -12,11 +12,17 @@ class SurahDetailProvider with ChangeNotifier {
   AudioModel? selectedReciter;
   bool isPlaying = false;
 
+  BuildContext? _context; 
+
   SurahDetailProvider() {
     player.onPlayerComplete.listen((event) {
       isPlaying = false;
       notifyListeners();
     });
+  }
+
+  void setContext(BuildContext context) {
+    _context = context;
   }
 
   Future<void> loadData(int surahNumber) async {
@@ -34,19 +40,28 @@ class SurahDetailProvider with ChangeNotifier {
   Future<void> playFullSurah(int surahNumber) async {
     if (selectedReciter == null) return;
 
-    final audioModel = await LogicMethods.fetchSurahAudio(
-      selectedReciter!.reciterId,
-      surahNumber,
-    );
+    try {
+      final audioModel = await LogicMethods.fetchSurahAudio(
+        selectedReciter!.reciterId,
+        surahNumber,
+      );
 
-    if (audioModel != null && audioModel.audioUrl.isNotEmpty) {
+      if (audioModel == null || audioModel.audioUrl.isEmpty) {
+        _showAudioNotFoundMessage();
+        return;
+      }
+
       final localPath = await LogicMethods.getOrDownloadAudio(
         audioModel.audioUrl,
         '${surahNumber}_${selectedReciter!.reciterId}.mp3',
       );
+
       await player.play(DeviceFileSource(localPath));
       isPlaying = true;
       notifyListeners();
+    } catch (e) {
+      print(" خطأ أثناء تشغيل التلاوة: $e");
+      _showAudioNotFoundMessage();
     }
   }
 
@@ -63,5 +78,18 @@ class SurahDetailProvider with ChangeNotifier {
 
   void disposePlayer() {
     player.dispose();
+  }
+
+  void _showAudioNotFoundMessage() {
+    if (_context != null) {
+      ScaffoldMessenger.of(_context!).showSnackBar(
+        const SnackBar(
+          content: Text(" عذرًا، هذه التلاوة غير متوفرة لهذا القارئ."),
+          duration: Duration(seconds: 3),
+        ),
+      );
+    } else {
+      print(" التلاوة غير متوفرة، ولم يتم تمرير السياق.");
+    }
   }
 }

@@ -22,12 +22,14 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
   late SurahDetailProvider provider;
 
   @override
-  void initState() {
-    super.initState();
-    Future.delayed(Duration.zero, () {
-      provider.loadData(widget.surahNumber);
-    });
-  }
+void initState() {
+  super.initState();
+  Future.delayed(Duration.zero, () {
+    provider.setContext(context); 
+    provider.loadData(widget.surahNumber);
+  });
+}
+
 
   @override
   void didChangeDependencies() {

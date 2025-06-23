@@ -30,7 +30,7 @@ class StartScreen extends StatelessWidget {
                   const SizedBox(height: 90),
                   Text(
                     "يوفر لك هذا التطبيق مواقيت الصلاة، آيات قرآنية ",
-                    style: textTheme.bodyLarge?.copyWith(fontSize: 22, color: AppColors.orange, fontWeight: FontWeight.bold),
+                    style: textTheme.bodyLarge?.copyWith(fontSize: 22, color: const Color(0xff0b2c1c), fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 36),
