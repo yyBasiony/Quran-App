@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart'; 
 import 'package:provider/provider.dart';
 import 'package:quran_app/models/audio_mobel.dart';
 import 'package:quran_app/presentation/resources/app_colors.dart';
@@ -22,14 +23,13 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
   late SurahDetailProvider provider;
 
   @override
-void initState() {
-  super.initState();
-  Future.delayed(Duration.zero, () {
-    provider.setContext(context); 
-    provider.loadData(widget.surahNumber);
-  });
-}
-
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      provider.setContext(context);
+      provider.loadData(widget.surahNumber);
+    });
+  }
 
   @override
   void didChangeDependencies() {
@@ -64,16 +64,16 @@ void initState() {
           return Column(
             children: [
               Container(
-                margin: const EdgeInsets.symmetric(vertical: 16),
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                margin: EdgeInsets.symmetric(vertical: 16.h),
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
                 decoration: BoxDecoration(
-                  border: Border.all(color: AppColors.orange, width: 1.5),
-                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: AppColors.orange, width: 1.5.w),
+                  borderRadius: BorderRadius.circular(16.r),
                 ),
                 child: Text(
                   widget.surahName,
-                  style: const TextStyle(
-                    fontSize: 20,
+                  style: TextStyle(
+                    fontSize: 20.sp,
                     fontWeight: FontWeight.bold,
                     color: AppColors.orange,
                     fontFamily: 'Uthmani',
@@ -82,13 +82,13 @@ void initState() {
               ),
               Expanded(
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
                   child: RichText(
                     textAlign: TextAlign.center,
                     textDirection: TextDirection.rtl,
                     text: TextSpan(
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         fontFamily: 'Uthmani',
                         color: theme.textTheme.bodyLarge?.color,
                       ),
@@ -109,7 +109,7 @@ void initState() {
             elevation: 10,
             color: theme.cardColor,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -117,7 +117,7 @@ void initState() {
                     icon: Icon(
                       provider.isPlaying ? Icons.pause_circle : Icons.play_circle,
                       color: theme.primaryColor,
-                      size: 30,
+                      size: 30.sp,
                     ),
                     onPressed: provider.isPlaying
                         ? provider.pauseAudio
@@ -140,6 +140,7 @@ void initState() {
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: theme.primaryColor,
+                            fontSize: 14.sp,
                           ),
                         ),
                       );

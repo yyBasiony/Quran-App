@@ -1,0 +1,2 @@
+C:/Users/Dell/StudioProjects/Quran-App/android/app/.cxx/RelWithDebInfo/583o6p37/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/Dell/StudioProjects/Quran-App/android/app/.cxx/RelWithDebInfo/583o6p37/armeabi-v7a/CMakeFiles/rebuild_cache.dir

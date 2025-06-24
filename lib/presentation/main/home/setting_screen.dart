@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:quran_app/providers/theme_provider.dart';
 
@@ -12,36 +13,41 @@ class SettingScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'الإعدادات',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
+            fontSize: 20.sp,
           ),
         ),
         elevation: 0,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16.w), 
         child: Container(
           decoration: BoxDecoration(
             color: Theme.of(context).primaryColor,
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(16.r),
             border: Border.all(color: Colors.blueAccent),
           ),
           child: ListTile(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            leading: const Icon(Icons.nightlight_round, color: Colors.white),
-            title: const Text(
+            contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+            leading: Icon(Icons.nightlight_round, color: Colors.white, size: 26.sp),
+            title: Text(
               'الوضع الداكن',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
+                fontSize: 16.sp, 
               ),
             ),
-            subtitle: const Text(
+            subtitle: Text(
               'تبديل الوضع الليلي',
-              style: TextStyle(color: Colors.grey),
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 14.sp,
+              ),
             ),
             trailing: Switch(
               value: isDarkMode,

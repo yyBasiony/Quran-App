@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import '../../../providers/main_provider.dart';
 import '../../../providers/prayer_times_provider.dart';
@@ -31,7 +32,6 @@ class MainScreen extends StatelessWidget {
             create: (_) => SurahProvider(),
             child: const SurahListScreen(),
           );
-  
         case 2:
           return ChangeNotifierProvider(
             create: (_) => SearchProvider(),
@@ -40,7 +40,7 @@ class MainScreen extends StatelessWidget {
         case 3:
           return const SettingScreen();
         default:
-          return const SizedBox(); 
+          return const SizedBox();
       }
     }
 
@@ -50,7 +50,7 @@ class MainScreen extends StatelessWidget {
         items: [
           for (var item in AppConstants.bottomNavBarData)
             BottomNavigationBarItem(
-              icon: Icon(item.icon),
+              icon: Icon(item.icon, size: 24.sp),
               label: item.label,
             )
         ],
@@ -60,6 +60,8 @@ class MainScreen extends StatelessWidget {
         backgroundColor: isDark ? AppColors.darkBackground : AppColors.background,
         onTap: provider.setIndex,
         type: BottomNavigationBarType.fixed,
+        selectedLabelStyle: TextStyle(fontSize: 13.sp),
+        unselectedLabelStyle: TextStyle(fontSize: 12.sp), 
       ),
     );
   }

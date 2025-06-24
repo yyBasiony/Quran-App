@@ -1,0 +1,2 @@
+C:/Users/Dell/StudioProjects/Quran-App/android/app/.cxx/RelWithDebInfo/583o6p37/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/Dell/StudioProjects/Quran-App/android/app/.cxx/RelWithDebInfo/583o6p37/x86_64/CMakeFiles/rebuild_cache.dir

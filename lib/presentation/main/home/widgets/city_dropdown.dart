@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quran_app/presentation/resources/app_colors.dart';
 import 'package:quran_app/presentation/resources/app_constants.dart';
 
@@ -23,18 +24,19 @@ class CityDropdown extends StatelessWidget {
     return Align(
       alignment: Alignment.centerRight,
       child: Padding(
-        padding: const EdgeInsets.only(right: 16),
+        padding: EdgeInsets.only(right: 16.w),
         child: DropdownButton<String>(
           value: selectedCity,
           icon: Icon(
             Icons.location_on,
             color: isDark ? Colors.white : Colors.black,
-            size: 20,
+            size: 20.sp, 
           ),
           dropdownColor: isDark ? AppColors.darkInputFill : AppColors.white,
           style: textTheme.bodyLarge?.copyWith(
             color: isDark ? Colors.white : Colors.black,
             fontWeight: FontWeight.bold,
+            fontSize: 16.sp, 
           ),
           underline: const SizedBox(),
           onChanged: (String? newValue) {
@@ -48,6 +50,7 @@ class CityDropdown extends StatelessWidget {
                 arabicName,
                 style: textTheme.bodyLarge?.copyWith(
                   color: isDark ? Colors.white : Colors.black,
+                  fontSize: 15.sp,
                 ),
               ),
             );

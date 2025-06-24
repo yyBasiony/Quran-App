@@ -7,17 +7,44 @@ import '../models/audio_mobel.dart';
 class AudioService {
   static const String baseUrl = 'https://mp3quran.net/api/v3';
 
-  Future<List<AudioModel>> fetchReciters() async {
-    final response = await http.get(Uri.parse('$baseUrl/reciters'));
+  // Future<List<AudioModel>> fetchReciters() async {
+  //   final response = await http.get(Uri.parse('$baseUrl/reciters'));
 
-    if (response.statusCode == 200) {
-      final List<dynamic> recitersJson = jsonDecode(response.body)['reciters'];
+  //   if (response.statusCode == 200) {
+  //     final List<dynamic> recitersJson = jsonDecode(response.body)['reciters'];
 
-      return recitersJson.map((reciter) => AudioModel.fromJson(reciter, 1)).toList();
-    } else {
-      throw Exception('   فشل تحميل القراء');
+  //     return recitersJson.map((reciter) => AudioModel.fromJson(reciter, 1)).toList();
+  //   } else {
+  //     throw Exception('   فشل تحميل القراء');
+  //   }
+  // }
+  Future<List<AudioModel>> fetchRecitersWithSurah(int surahNumber) async {
+  final response = await http.get(Uri.parse('$baseUrl/reciters'));
+
+  if (response.statusCode == 200) {
+    final List<dynamic> recitersJson = jsonDecode(response.body)['reciters'];
+
+    List<AudioModel> validReciters = [];
+
+    for (var reciter in recitersJson) {
+      if (reciter['moshaf'] != null) {
+        List moshafs = reciter['moshaf'];
+        for (var moshaf in moshafs) {
+          final surahList = (moshaf['surah_list'] as String).split(',');
+          if (surahList.contains(surahNumber.toString())) {
+            validReciters.add(AudioModel.fromJson(reciter, surahNumber));
+            break; 
+          }
+        }
+      }
     }
+
+    return validReciters;
+  } else {
+    throw Exception('فشل تحميل القراء');
   }
+}
+
 
   Future<AudioModel?> fetchSurahAudio(int reciterId, int surahNumber) async {
     final response = await http.get(Uri.parse('$baseUrl/reciters'));

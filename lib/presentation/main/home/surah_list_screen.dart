@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart'; 
 import 'package:provider/provider.dart';
 import 'package:quran_app/presentation/main/home/widgets/surah_card.dart';
 import 'package:quran_app/providers/surah_provider.dart';
@@ -31,14 +32,14 @@ class SurahListScreen extends StatelessWidget {
           return Column(
             children: [
               Padding(
-                padding: const EdgeInsets.all(12),
+                padding: EdgeInsets.all(12.w),
                 child: TextField(
                   textDirection: TextDirection.rtl,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     hintText: 'ابحث عن سورة...',
-                    prefixIcon: Icon(Icons.search, color: AppColors.primary),
+                    prefixIcon: Icon(Icons.search, color: AppColors.primary, size: 24.sp), // ✅ حجم أيقونة مرن
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.primary),
+                      borderSide: BorderSide(color: AppColors.primary, width: 1.5.w),
                     ),
                   ),
                   onChanged: provider.filterSurahs,

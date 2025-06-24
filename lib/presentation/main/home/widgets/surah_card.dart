@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quran_app/presentation/resources/app_colors.dart';
 import 'package:quran_app/presentation/resources/app_routes.dart';
 import '../../../../models/surah_model.dart';
@@ -15,21 +16,19 @@ class SurahCard extends StatelessWidget {
     final avatarTextColor = theme.brightness == Brightness.dark ? Colors.white70 : Colors.white;
 
     return ListTile(
+      contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
       leading: CircleAvatar(
-        backgroundColor: AppColors.primary,
-        child: Text(
-          surah.number.toString(),
-          style: TextStyle(color: avatarTextColor),
-        ),
-      ),
+          radius: 20.r,
+          backgroundColor: AppColors.primary,
+          child: Text(surah.number.toString(), style: TextStyle(color: avatarTextColor, fontSize: 14.sp, fontWeight: FontWeight.bold))),
       title: Text(
         surah.englishName,
-        style: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+        style: textTheme.bodyLarge?.copyWith(
+          fontWeight: FontWeight.bold,
+          fontSize: 16.sp,
+        ),
       ),
-      trailing: Text(
-        surah.name,
-        style: textTheme.titleLarge?.copyWith(fontSize: 18),
-      ),
+      trailing: Text(surah.name, style: textTheme.titleLarge?.copyWith(fontSize: 18.sp)),
       onTap: () {
         Navigator.pushNamed(
           context,

@@ -25,17 +25,18 @@ class SurahDetailProvider with ChangeNotifier {
     _context = context;
   }
 
-  Future<void> loadData(int surahNumber) async {
-    isLoading = true;
-    notifyListeners();
+Future<void> loadData(int surahNumber) async {
+  isLoading = true;
+  notifyListeners();
 
-    ayahs = await LogicMethods.fetchAyahs(surahNumber);
-    reciters = await LogicMethods.fetchReciters();
-    selectedReciter = reciters.isNotEmpty ? reciters.first : null;
+  ayahs = await LogicMethods.fetchAyahs(surahNumber);
+  reciters = await LogicMethods.fetchRecitersWithSurah(surahNumber);
+  selectedReciter = reciters.isNotEmpty ? reciters.first : null;
 
-    isLoading = false;
-    notifyListeners();
-  }
+  isLoading = false;
+  notifyListeners();
+}
+
 
   Future<void> playFullSurah(int surahNumber) async {
     if (selectedReciter == null) return;

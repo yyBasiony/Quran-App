@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:quran_app/presentation/resources/app_assets.dart';
 import 'package:quran_app/presentation/resources/app_colors.dart';
@@ -18,56 +19,50 @@ class StartScreen extends StatelessWidget {
       backgroundColor: theme.scaffoldBackgroundColor,
       body: Stack(
         children: [
-          SizedBox.expand(
-            child: Image.asset(AppAssets.welcome, fit: BoxFit.cover, colorBlendMode: BlendMode.darken),
-          ),
+          SizedBox.expand(child: Image.asset(AppAssets.welcome, fit: BoxFit.cover, colorBlendMode: BlendMode.darken)),
           Center(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 90),
+                  SizedBox(height: 90.h),
                   Text(
                     "يوفر لك هذا التطبيق مواقيت الصلاة، آيات قرآنية ",
-                    style: textTheme.bodyLarge?.copyWith(fontSize: 22, color: const Color(0xff0b2c1c), fontWeight: FontWeight.bold),
+                    style: textTheme.bodyLarge?.copyWith(
+                      fontSize: 22.sp,
+                      color: const Color(0xff0b2c1c),
+                      fontWeight: FontWeight.bold,
+                    ),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 36),
+                  SizedBox(height: 36.h),
                   Consumer<StartProvider>(
                     builder: (context, startProvider, _) {
                       return ElevatedButton(
-                          onPressed: startProvider.isLoading
-                              ? null
-                              : () async {
-                                  final prefs = await SharedPreferences.getInstance();
-                                  await prefs.setBool('is_first_time', false);
+                        onPressed: startProvider.isLoading
+                            ? null
+                            : () async {
+                                final prefs = await SharedPreferences.getInstance();
+                                await prefs.setBool('is_first_time', false);
 
-                                  startProvider.startApp(
-                                    context,
-                                    () => Navigator.pushReplacementNamed(
-                                      context,
-                                      AppRoutes.mainScreen,
-                                    ),
-                                  );
-                                },
-                          style: ElevatedButton.styleFrom(
+                                startProvider.startApp(context, () => Navigator.pushReplacementNamed(context, AppRoutes.mainScreen));
+                              },
+                        style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.primary,
-                            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(24),
-                            ),
-                          ),
-                          child: startProvider.isLoading
-                              ? const CircularProgressIndicator(
+                            padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 14.h),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r))),
+                        child: startProvider.isLoading
+                            ? const CircularProgressIndicator(color: Colors.white)
+                            : Text(
+                                "لنبدأ",
+                                style: textTheme.bodyLarge?.copyWith(
                                   color: Colors.white,
-                                )
-                              : Text("لنبدأ",
-                                  style: textTheme.bodyLarge?.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                  )));
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18.sp,
+                                ),
+                              ),
+                      );
                     },
                   ),
                 ],
