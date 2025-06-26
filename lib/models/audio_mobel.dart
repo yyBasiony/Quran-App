@@ -13,25 +13,30 @@ class AudioModel {
     required this.audioUrl,
   });
 
-  factory AudioModel.fromJson(Map<String, dynamic> json, int requestedSurah) {
-    List<MoshafModel> moshafList = [];
+factory AudioModel.fromJson(Map<String, dynamic> json, int requestedSurah) {
+  List<MoshafModel> moshafList = [];
 
-    if (json['moshaf'] != null && (json['moshaf'] as List).isNotEmpty) {
-      moshafList = (json['moshaf'] as List)
-          .map((moshaf) => MoshafModel.fromJson(moshaf, requestedSurah))
-          .toList();
-    }
-
-    String firstAudioUrl = moshafList.isNotEmpty ? moshafList.first.audioUrl : '';
-
-    return AudioModel(
-      reciterName: json['name'] ?? 'Unknown',
-      reciterId: json['id'],
-      surahNumber: requestedSurah,
-      moshafs: moshafList,
-      audioUrl: firstAudioUrl, 
-    );
+  if (json['moshaf'] != null && (json['moshaf'] as List).isNotEmpty) {
+    moshafList = (json['moshaf'] as List)
+        .map((moshaf) => MoshafModel.fromJson(moshaf, requestedSurah))
+        .where((moshaf) => moshaf.audioUrl.isNotEmpty)
+        .toList();
   }
+
+  if (moshafList.isEmpty) {
+    throw Exception("No surah audio for this reciter");
+  }
+
+  String firstAudioUrl = moshafList.first.audioUrl;
+
+  return AudioModel(
+    reciterName: json['name'] ?? 'Unknown',
+    reciterId: json['id'],
+    surahNumber: requestedSurah,
+    moshafs: moshafList,
+    audioUrl: firstAudioUrl,
+  );
+}
 }
 
 class MoshafModel {

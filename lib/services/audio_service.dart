@@ -42,7 +42,13 @@ class AudioService {
       return false;
     }).toList();
 
-    return filtered.map((reciter) => AudioModel.fromJson(reciter, surahNumber)).toList();
+return filtered.map((reciter) {
+  try {
+    return AudioModel.fromJson(reciter as Map<String, dynamic>, surahNumber);
+  } catch (e) {
+    return null;
+  }
+}).whereType<AudioModel>().toList();
   } else {
     throw Exception('فشل تحميل القراء');
   }
