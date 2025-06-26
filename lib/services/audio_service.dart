@@ -29,7 +29,6 @@ class AudioService {
       final moshafList = reciter['moshaf'] as List<dynamic>?;
 
       if (moshafList == null || moshafList.isEmpty) return false;
-
       for (var moshaf in moshafList) {
         final surahList = moshaf['surah_list'];
         if (surahList != null) {
