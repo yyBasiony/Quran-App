@@ -7,44 +7,47 @@ import '../models/audio_mobel.dart';
 class AudioService {
   static const String baseUrl = 'https://mp3quran.net/api/v3';
 
-  // Future<List<AudioModel>> fetchReciters() async {
-  //   final response = await http.get(Uri.parse('$baseUrl/reciters'));
+  Future<List<AudioModel>> fetchReciters() async {
+    final response = await http.get(Uri.parse('$baseUrl/reciters'));
 
-  //   if (response.statusCode == 200) {
-  //     final List<dynamic> recitersJson = jsonDecode(response.body)['reciters'];
+    if (response.statusCode == 200) {
+      final List<dynamic> recitersJson = jsonDecode(response.body)['reciters'];
 
-  //     return recitersJson.map((reciter) => AudioModel.fromJson(reciter, 1)).toList();
-  //   } else {
-  //     throw Exception('   فشل تحميل القراء');
-  //   }
-  // }
-  Future<List<AudioModel>> fetchRecitersWithSurah(int surahNumber) async {
-  final response = await http.get(Uri.parse('$baseUrl/reciters'));
+      return recitersJson.map((reciter) => AudioModel.fromJson(reciter, 1)).toList();
+    } else {
+      throw Exception('   فشل تحميل القراء');
+    }
+  }
+
+ Future<List<AudioModel>> fetchRecitersWithSurah(int surahNumber) async {
+  final response = await http.get(Uri.parse('https://mp3quran.net/api/v3/reciters'));
 
   if (response.statusCode == 200) {
     final List<dynamic> recitersJson = jsonDecode(response.body)['reciters'];
 
-    List<AudioModel> validReciters = [];
+    final filtered = recitersJson.where((reciter) {
+      final moshafList = reciter['moshaf'] as List<dynamic>?;
 
-    for (var reciter in recitersJson) {
-      if (reciter['moshaf'] != null) {
-        List moshafs = reciter['moshaf'];
-        for (var moshaf in moshafs) {
-          final surahList = (moshaf['surah_list'] as String).split(',');
-          if (surahList.contains(surahNumber.toString())) {
-            validReciters.add(AudioModel.fromJson(reciter, surahNumber));
-            break; 
+      if (moshafList == null || moshafList.isEmpty) return false;
+
+      for (var moshaf in moshafList) {
+        final surahList = moshaf['surah_list'];
+        if (surahList != null) {
+          final surahs = surahList.toString().split(',').map((e) => e.trim());
+          if (surahs.contains(surahNumber.toString())) {
+            return true;
           }
         }
       }
-    }
 
-    return validReciters;
+      return false;
+    }).toList();
+
+    return filtered.map((reciter) => AudioModel.fromJson(reciter, surahNumber)).toList();
   } else {
     throw Exception('فشل تحميل القراء');
   }
 }
-
 
   Future<AudioModel?> fetchSurahAudio(int reciterId, int surahNumber) async {
     final response = await http.get(Uri.parse('$baseUrl/reciters'));

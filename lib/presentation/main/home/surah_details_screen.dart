@@ -123,29 +123,22 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
                         ? provider.pauseAudio
                         : () => provider.playFullSurah(widget.surahNumber),
                   ),
-                  DropdownButton<AudioModel>(
-                    value: provider.selectedReciter,
-                    underline: const SizedBox(),
-                    icon: Icon(Icons.keyboard_arrow_down, color: theme.primaryColor),
-                    onChanged: (value) {
-                      if (value != null) {
-                        provider.changeReciter(value);
-                      }
-                    },
-                    items: provider.reciters.map((reciter) {
-                      return DropdownMenuItem(
-                        value: reciter,
-                        child: Text(
-                          reciter.reciterName,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: theme.primaryColor,
-                            fontSize: 14.sp,
-                          ),
-                        ),
-                      );
-                    }).toList(),
-                  ),
+DropdownButton<AudioModel>(
+  value: provider.selectedReciter,
+  icon: const Icon(Icons.arrow_drop_down),
+  underline: Container(height: 0),
+  onChanged: (AudioModel? newValue) {
+    if (newValue != null) {
+      provider.changeReciter(newValue);
+    }
+  },
+  items: provider.reciters.map<DropdownMenuItem<AudioModel>>((AudioModel reciter) {
+    return DropdownMenuItem<AudioModel>(
+      value: reciter,
+      child: Text(reciter.reciterName, style: TextStyle(fontSize: 14.sp)),
+    );
+  }).toList(),
+),
                 ],
               ),
             ),

@@ -30,13 +30,18 @@ Future<void> loadData(int surahNumber) async {
   notifyListeners();
 
   ayahs = await LogicMethods.fetchAyahs(surahNumber);
+
   reciters = await LogicMethods.fetchRecitersWithSurah(surahNumber);
-  selectedReciter = reciters.isNotEmpty ? reciters.first : null;
+
+  if (reciters.isNotEmpty) {
+    selectedReciter = reciters.first;
+  } else {
+    selectedReciter = null;
+  }
 
   isLoading = false;
   notifyListeners();
 }
-
 
   Future<void> playFullSurah(int surahNumber) async {
     if (selectedReciter == null) return;
