@@ -15,7 +15,7 @@ class SearchScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar:
-          AppBar(backgroundColor: theme.primaryColor, title: Text('البحث والتفسير', style: TextStyle(color: AppColors.onPrimary, fontSize: 20.sp))),
+          AppBar(backgroundColor: theme.primaryColor, title: Text('البحث ', style: TextStyle(color: AppColors.onPrimary, fontSize: 20.sp))),
       body: Padding(
         padding: EdgeInsets.all(16.w),
         child: Column(children: [

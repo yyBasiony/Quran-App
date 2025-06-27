@@ -85,7 +85,7 @@ static Future<List<AudioModel>> fetchRecitersWithSurah(int surahNumber) async {
 
    
 
-    static Future<AudioModel?> fetchSurahAudio(int reciterId, int surahNumber) async {
+ static Future<AudioModel?> fetchSurahAudio(int reciterId, int surahNumber) async {
     return await AudioService().fetchSurahAudio(reciterId, surahNumber);
   }
 

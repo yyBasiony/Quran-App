@@ -49,31 +49,24 @@ class PrayerTimesPage extends StatelessWidget {
           children: [
             SizedBox(height: 10.h),
             Container(
-              height: 180.h,
-              width: double.infinity,
-              padding: EdgeInsets.all(12.w),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12.r),
-                image: DecorationImage(
-                    image: AssetImage(getPrayerImage(provider.nextPrayer)),
-                    fit: BoxFit.cover,
-                    colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.3), BlendMode.darken)),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+                height: 180.h,
+                width: double.infinity,
+                padding: EdgeInsets.all(12.w),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12.r),
+                  image: DecorationImage(
+                      image: AssetImage(getPrayerImage(provider.nextPrayer)),
+                      fit: BoxFit.cover,
+                      colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.3), BlendMode.darken)),
+                ),
+                child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Text(
                     arabicNames[provider.nextPrayer] ?? provider.nextPrayer,
                     style: textTheme.titleLarge?.copyWith(color: Colors.white, fontSize: 20.sp),
                   ),
                   SizedBox(height: 8.h),
-                  Text(
-                    provider.nextPrayerTime,
-                    style: textTheme.titleLarge?.copyWith(fontSize: 30.sp, color: Colors.white),
-                  ),
-                ],
-              ),
-            ),
+                  Text(provider.nextPrayerTime, style: textTheme.titleLarge?.copyWith(fontSize: 30.sp, color: Colors.white))
+                ])),
             Padding(
                 padding: EdgeInsets.symmetric(vertical: 16.h),
                 child: Text("مواقيت الصلاة",
@@ -82,8 +75,8 @@ class PrayerTimesPage extends StatelessWidget {
             Expanded(
               child: GridView.count(
                 crossAxisCount: 2,
-                crossAxisSpacing: 10.w, 
-                mainAxisSpacing: 10.h, 
+                crossAxisSpacing: 10.w,
+                mainAxisSpacing: 10.h,
                 children: prayers.entries.map((entry) {
                   String englishKey = entry.key;
                   String arabicName = arabicNames[englishKey] ?? englishKey;

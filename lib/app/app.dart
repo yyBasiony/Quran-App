@@ -5,7 +5,6 @@ import 'package:qanet/presentation/splash_screen.dart';
 import 'package:qanet/presentation/resources/app_routes.dart';
 import 'package:qanet/presentation/resources/app_theme.dart';
 import 'package:qanet/providers/theme_provider.dart';
-
 class IslamicApp extends StatelessWidget {
   const IslamicApp({super.key});
 
