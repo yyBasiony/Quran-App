@@ -17,60 +17,73 @@ class StartScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
-      body: Stack(
-        children: [
-          SizedBox.expand(child: Image.asset(AppAssets.welcome, fit: BoxFit.cover, colorBlendMode: BlendMode.darken)),
-          Center(
-            child: Padding(
+      body: Stack(children: [
+        SizedBox.expand(child: Image.asset(AppAssets.welcome, fit: BoxFit.cover, colorBlendMode: BlendMode.darken)),
+        Center(
+          child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.w),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(height: 90.h),
-                  Text(
-                    "يوفر لك هذا التطبيق مواقيت الصلاة، آيات قرآنية ",
-                    style: textTheme.bodyLarge?.copyWith(
-                      fontSize: 22.sp,
-                      color: const Color(0xff0b2c1c),
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: 36.h),
-                  Consumer<StartProvider>(
-                    builder: (context, startProvider, _) {
-                      return ElevatedButton(
-                        onPressed: startProvider.isLoading
-                            ? null
-                            : () async {
-                                final prefs = await SharedPreferences.getInstance();
-                                await prefs.setBool('is_first_time', false);
+              child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                SizedBox(height: 90.h),
+                Container(
+                    padding: EdgeInsets.all(12.w),
+                    decoration: BoxDecoration(color: Colors.black.withOpacity(0.4), borderRadius: BorderRadius.circular(16.r), boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.3),
+                        blurRadius: 6,
+                        offset: const Offset(0, 3),
+                      )
+                    ]),
+                    child: Column(mainAxisSize: MainAxisSize.min, children: [
+                      Text(
+                        'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ',
+                        style: textTheme.bodyLarge?.copyWith(
+                          fontSize: 22.sp,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: 'Uthmani',
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 12.h),
+                      Text(
+                        '﴿وَقُومُوا لِلَّهِ قَانِتِينَ﴾',
+                        style: textTheme.bodyLarge?.copyWith(
+                          fontSize: 26.sp,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Uthmani',
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 4.h),
+                    ])),
+                SizedBox(height: 36.h),
+                Consumer<StartProvider>(builder: (context, startProvider, _) {
+                  return ElevatedButton(
+                      onPressed: startProvider.isLoading
+                          ? null
+                          : () async {
+                              final prefs = await SharedPreferences.getInstance();
+                              await prefs.setBool('is_first_time', false);
 
-                                startProvider.startApp(context, () => Navigator.pushReplacementNamed(context, AppRoutes.mainScreen));
-                              },
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.primary,
-                            padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 14.h),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r))),
-                        child: startProvider.isLoading
-                            ? const CircularProgressIndicator(color: Colors.white)
-                            : Text(
-                                "لنبدأ",
-                                style: textTheme.bodyLarge?.copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18.sp,
-                                ),
-                              ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
+                              startProvider.startApp(context, () => Navigator.pushReplacementNamed(context, AppRoutes.mainScreen));
+                            },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primary,
+                          padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 14.h),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r))),
+                      child: startProvider.isLoading
+                          ? const CircularProgressIndicator(color: Colors.white)
+                          : Text("لنبدأ",
+                              style: textTheme.bodyLarge?.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18.sp,
+                              )));
+                })
+              ])),
+        )
+      ]),
     );
   }
 }
