@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart'; 
-import 'package:quran_app/presentation/resources/app_assets.dart';
-import 'package:quran_app/presentation/resources/app_routes.dart';
+import 'package:qanet/presentation/resources/app_assets.dart';
+import 'package:qanet/presentation/resources/app_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -50,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: theme.scaffoldBackgroundColor,
       body: Center(
         child: Image.asset(
-          AppAssets.Asr,
+          AppAssets.logo,
           width: 220.w,
           height: 220.h,
           fit: BoxFit.contain,

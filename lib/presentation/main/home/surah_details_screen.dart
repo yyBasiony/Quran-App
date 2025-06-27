@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:quran_app/models/audio_mobel.dart';
-import 'package:quran_app/presentation/resources/app_colors.dart';
-import 'package:quran_app/providers/surah_detail_provider.dart';
+import 'package:qanet/models/audio_mobel.dart';
+import 'package:qanet/presentation/resources/app_colors.dart';
+import 'package:qanet/providers/surah_detail_provider.dart';
 
 class SurahDetailScreen extends StatefulWidget {
   final int surahNumber;

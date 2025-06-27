@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart'; 
 import 'package:provider/provider.dart';
-import 'package:quran_app/presentation/splash_screen.dart';
-import 'package:quran_app/presentation/resources/app_routes.dart';
-import 'package:quran_app/presentation/resources/app_theme.dart';
-import 'package:quran_app/providers/theme_provider.dart';
+import 'package:qanet/presentation/splash_screen.dart';
+import 'package:qanet/presentation/resources/app_routes.dart';
+import 'package:qanet/presentation/resources/app_theme.dart';
+import 'package:qanet/providers/theme_provider.dart';
 
 class IslamicApp extends StatelessWidget {
   const IslamicApp({super.key});

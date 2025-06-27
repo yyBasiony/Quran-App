@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:quran_app/presentation/resources/app_assets.dart';
+import 'package:qanet/presentation/resources/app_assets.dart';
 
 class PrayerCard extends StatelessWidget {
   final String name;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:quran_app/presentation/resources/app_assets.dart';
+import 'package:qanet/presentation/resources/app_assets.dart';
 import '../../../providers/prayer_times_provider.dart';
 import '../../resources/app_constants.dart';
 import '../../resources/app_colors.dart';

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quran_app/presentation/main/home/main_screen.dart';
-import 'package:quran_app/presentation/main/home/surah_details_screen.dart';
-import 'package:quran_app/presentation/start_screen.dart';
-import 'package:quran_app/providers/start_provider.dart';
+import 'package:qanet/presentation/main/home/main_screen.dart';
+import 'package:qanet/presentation/main/home/surah_details_screen.dart';
+import 'package:qanet/presentation/start_screen.dart';
+import 'package:qanet/providers/start_provider.dart';
 import '../../../providers/surah_detail_provider.dart';
 
 class AppRoutes {

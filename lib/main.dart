@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
-import 'package:quran_app/providers/main_provider.dart';
+import 'package:qanet/providers/main_provider.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:quran_app/app/app.dart';
+import 'package:qanet/app/app.dart';
 import 'models/ayah_model.dart';
 import 'models/surah_model.dart';
 import 'providers/theme_provider.dart';
