@@ -1,16 +1,18 @@
 # quran_app
 
-![ start screen](https://github.com/yyBasiony/Quran-App/blob/main/assets/Screenshot%202025-05-10%20175717.png)
-![ prayer time](https://github.com/yyBasiony/Quran-App/blob/main/assets/Screenshot%202025-05-10%20180110.png)
-![ prayer time city](https://github.com/yyBasiony/Quran-App/blob/main/assets/Screenshot%202025-05-10%20180230.png)
-![ surah list](https://github.com/yyBasiony/Quran-App/blob/main/assets/Screenshot%202025-05-10%20180124.png)
-![ surah](https://github.com/yyBasiony/Quran-App/blob/main/assets/Screenshot%202025-05-10%20180139.png)
-![ surah audio](https://github.com/yyBasiony/Quran-App/blob/main/assets/Screenshot%202025-05-10%20180148.png)
-![ ayah search](https://github.com/yyBasiony/Quran-App/blob/main/assets/Screenshot%202025-05-10%20180842.png)
-![ setting screen](https://github.com/yyBasiony/Quran-App/blob/main/assets/sss1.png)
-![ dark mode ](https://github.com/yyBasiony/Quran-App/blob/main/assets/sss3.png)
-![ dark mode1 ](https://github.com/yyBasiony/Quran-App/blob/main/assets/sss2.png
-)
+![ splash screen](https://github.com/yyBasiony/Quran-App/blob/main/assets/spla.jpg)
+![ start screen](https://github.com/yyBasiony/Quran-App/blob/main/assets/start.jpg)
+![ prayer time](https://github.com/yyBasiony/Quran-App/blob/main/assets/time_p.jpg)
+![ prayer time city](https://github.com/yyBasiony/Quran-App/blob/main/assets/select_cit.jpg)
+![dark prayer time](https://github.com/yyBasiony/Quran-App/blob/main/assets/dark_p_tim.jpg)
+![ surah list](https://github.com/yyBasiony/Quran-App/blob/main/assets/surah_list.jpg)
+![dark surah list](https://github.com/yyBasiony/Quran-App/blob/main/assets/dark_list.jpg)
+![ surah](https://github.com/yyBasiony/Quran-App/blob/main/assets/surah_text.jpg)
+![dark surah](https://github.com/yyBasiony/Quran-App/blob/main/assets/dark_text.jpg)
+![ surah audio](https://github.com/yyBasiony/Quran-App/blob/main/assets/audio.jpg)
+![dark surah audio](https://github.com/yyBasiony/Quran-App/blob/main/assets/audio_dark.jpg)
+![ ayah search](https://github.com/yyBasiony/Quran-App/blob/main/assets/sera.jpg)
+![ setting screen](https://github.com/yyBasiony/Quran-App/blob/main/assets/setting.jpg)
 
 
 
