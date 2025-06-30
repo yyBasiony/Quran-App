@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qanet/presentation/resources/app_colors.dart';
+import 'package:qanet/core/themes/app_colors.dart';
 
 class AppTheme {
   static ThemeData get lightTheme {

@@ -21,6 +21,7 @@ class AppColors {
   static const Color darkTextPrimary = Colors.white70;
   static const Color darkTextSecondary = Colors.white54;
   static const Color darkInputFill = Color(0xFF1E1E1E);
-   static const Color onPrimary = Colors.white;
+  static const Color darkAccent = Color(0xFF4DB6AC);
+  static const Color onPrimary = Colors.white;
 
 }

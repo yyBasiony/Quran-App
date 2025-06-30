@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
-import 'package:qanet/models/search_ayah_model.dart';
+import 'package:qanet/data/models/search_ayah_model.dart';
 import '../models/surah_model.dart';
 import '../models/ayah_model.dart';
 

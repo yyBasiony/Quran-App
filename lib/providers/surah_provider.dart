@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../models/surah_model.dart';
-import '../services/quran_service.dart';
+import '../data/models/surah_model.dart';
+import '../data/services/quran_service.dart';
 
 class SurahProvider extends ChangeNotifier {
   final QuranService _quranService = QuranService();

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qanet/models/search_ayah_model.dart';
-import 'package:qanet/services/quran_service.dart';
+import 'package:qanet/data/models/search_ayah_model.dart';
+import 'package:qanet/data/services/quran_service.dart';
 
 class SearchProvider with ChangeNotifier {
   final TextEditingController controller = TextEditingController();

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:qanet/presentation/resources/app_assets.dart';
+import 'package:qanet/core/themes/app_assets.dart';
 import '../../../providers/prayer_times_provider.dart';
-import '../../resources/app_constants.dart';
-import '../../resources/app_colors.dart';
-import 'widgets/city_dropdown.dart';
-import 'widgets/prayer_card.dart';
+import '../../../core/constants/app_constants.dart';
+import '../../../core/themes/app_colors.dart';
+import '../../widgets/city_dropdown.dart';
+import '../../widgets/prayer_card.dart';
 
 class PrayerTimesPage extends StatelessWidget {
   const PrayerTimesPage({super.key});

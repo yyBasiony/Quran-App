@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'package:intl/intl.dart';
 
-import '../../../../models/audio_mobel.dart';
-import '../../../../models/ayah_model.dart';
-import '../../../../models/prayer_times_model.dart';
-import '../../../../services/audio_service.dart';
-import '../../../../services/prayer_times_service.dart';
-import '../../../../services/quran_service.dart';
+import '../../data/models/audio_mobel.dart';
+import '../../data/models/ayah_model.dart';
+import '../../data/models/prayer_times_model.dart';
+import '../../data/services/audio_service.dart';
+import '../../data/services/prayer_times_service.dart';
+import '../../data/services/quran_service.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 

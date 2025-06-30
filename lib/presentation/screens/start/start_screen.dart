@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:qanet/presentation/resources/app_assets.dart';
-import 'package:qanet/presentation/resources/app_colors.dart';
-import 'package:qanet/presentation/resources/app_routes.dart';
-import '../../providers/start_provider.dart';
+import 'package:qanet/core/themes/app_assets.dart';
+import 'package:qanet/core/themes/app_colors.dart';
+import 'package:qanet/presentation/routes/app_routes.dart';
+import '../../../../providers/start_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StartScreen extends StatelessWidget {
@@ -46,7 +46,7 @@ class StartScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 12.h),
                       Text(
-                        '﴿وَقُومُوا لِلَّهِ قَانِتِينَ﴾',
+                        '﴾وَقُومُوا لِلَّهِ قَانِتِينَ﴿',
                         style: textTheme.bodyLarge?.copyWith(
                           fontSize: 26.sp,
                           color: Colors.white,

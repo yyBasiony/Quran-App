@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:qanet/models/audio_mobel.dart';
-import 'package:qanet/presentation/resources/app_colors.dart';
+import 'package:qanet/data/models/audio_mobel.dart';
 import 'package:qanet/providers/surah_detail_provider.dart';
 
 class SurahDetailScreen extends StatefulWidget {
@@ -61,14 +60,14 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
                 margin: EdgeInsets.symmetric(vertical: 16.h),
                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
                 decoration: BoxDecoration(
-                  border: Border.all(color: AppColors.orange, width: 1.5.w),
+                  border: Border.all(color:theme.primaryColor, width: 1.5.w),
                   borderRadius: BorderRadius.circular(16.r),
                 ),
                 child: Text(widget.surahName,
                     style: TextStyle(
                       fontSize: 24.sp,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.orange,
+                      color: theme.primaryColor,
                       fontFamily: 'Uthmani',
                     ))),
             Expanded(

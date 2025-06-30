@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:qanet/presentation/resources/app_colors.dart';
-import 'package:qanet/presentation/resources/app_routes.dart';
-import '../../../../models/surah_model.dart';
+import 'package:qanet/core/themes/app_colors.dart';
+import 'package:qanet/presentation/routes/app_routes.dart';
+import '../../data/models/surah_model.dart';
 
 class SurahCard extends StatelessWidget {
   final SurahModel surah;

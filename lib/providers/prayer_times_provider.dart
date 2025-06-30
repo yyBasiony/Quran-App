@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../models/prayer_times_model.dart';
-import '../../services/prayer_times_service.dart';
-import '../presentation/main/home/widgets/logic_methods.dart';
+import '../data/models/prayer_times_model.dart';
+import '../data/services/prayer_times_service.dart';
+import '../core/utils/logic_methods.dart';
 
 class PrayerTimesProvider with ChangeNotifier {
   final PrayerTimesService _prayerService = PrayerTimesService();

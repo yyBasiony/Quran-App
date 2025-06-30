@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:qanet/presentation/resources/app_colors.dart';
-import 'package:qanet/presentation/resources/app_constants.dart';
+import 'package:qanet/core/themes/app_colors.dart';
+import 'package:qanet/core/constants/app_constants.dart';
 
 class CityDropdown extends StatelessWidget {
   final String selectedCity;
@@ -29,7 +29,7 @@ class CityDropdown extends StatelessWidget {
               value: selectedCity,
               icon: Icon(
                 Icons.location_on,
-                color: isDark ? Colors.white : Colors.black,
+                color: Colors.white ,
                 size: 20.sp,
               ),
               dropdownColor: isDark ? AppColors.darkInputFill : AppColors.white,

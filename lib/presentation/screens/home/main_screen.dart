@@ -5,12 +5,12 @@ import '../../../providers/main_provider.dart';
 import '../../../providers/prayer_times_provider.dart';
 import '../../../providers/surah_provider.dart';
 import '../../../providers/search_provider.dart';
-import '../../resources/app_colors.dart';
-import '../../resources/app_constants.dart';
-import 'prayer_time_page.dart';
-import 'search_screen.dart';
-import 'setting_screen.dart';
-import 'surah_list_screen.dart';
+import '../../../core/themes/app_colors.dart';
+import '../../../core/constants/app_constants.dart';
+import '../prayer_time/prayer_time_page.dart';
+import '../search/search_screen.dart';
+import '../settings/setting_screen.dart';
+import '../surah/surah_list_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:qanet/presentation/main/home/widgets/surah_card.dart';
+import 'package:qanet/presentation/widgets/surah_card.dart';
 import 'package:qanet/providers/surah_provider.dart';
-import 'package:qanet/presentation/resources/app_colors.dart';
+import 'package:qanet/core/themes/app_colors.dart';
 
 class SurahListScreen extends StatelessWidget {
   const SurahListScreen({super.key});

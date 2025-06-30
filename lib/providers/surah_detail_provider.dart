@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:qanet/models/ayah_model.dart';
-import 'package:qanet/models/audio_mobel.dart';
+import 'package:qanet/data/models/ayah_model.dart';
+import 'package:qanet/data/models/audio_mobel.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:qanet/presentation/main/home/widgets/logic_methods.dart';
+import 'package:qanet/core/utils/logic_methods.dart';
 
 class SurahDetailProvider with ChangeNotifier {
   List<AyahModel> ayahs = [];

@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart'; 
-import 'package:qanet/presentation/resources/app_assets.dart';
-import 'package:qanet/presentation/resources/app_routes.dart';
+import 'package:qanet/core/themes/app_assets.dart';
+import 'package:qanet/presentation/routes/app_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
