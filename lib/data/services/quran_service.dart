@@ -75,7 +75,16 @@ Future<List<AyahModel>> fetchSurahAyahs(int surahNumber) async {
 
       if (responseData.containsKey('data') && responseData['data'].containsKey('ayahs')) {
         final List<dynamic> ayahsData = responseData['data']['ayahs'];
-        final List<AyahModel> ayahsList = ayahsData.map((json) => AyahModel.fromJson(json)).toList();
+
+        final List<AyahModel> ayahsList = ayahsData.asMap().entries.map((entry) {
+          final index = entry.key;
+          final ayahJson = entry.value;
+
+          return AyahModel(
+            number: index + 1,
+            text: ayahJson['text'],
+          );
+        }).toList();
 
         await box.put(surahNumber, ayahsList.map((ayah) => ayah.toJson()).toList());
 
@@ -88,7 +97,7 @@ Future<List<AyahModel>> fetchSurahAyahs(int surahNumber) async {
     }
   } catch (e) {
     print('خطأ: $e');
-     throw Exception('حدث خطأ أثناء جلب البيانات، برجاء المحاولة لاحقًا');
+    throw Exception('حدث خطأ أثناء جلب البيانات، برجاء المحاولة لاحقًا');
   }
 }
 Future<List<SearchAyahModel>> searchAyah(String searchText) async {
