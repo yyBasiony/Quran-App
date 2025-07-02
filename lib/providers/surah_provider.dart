@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import '../data/models/surah_model.dart';
-import '../data/services/quran_service.dart';
+import 'package:qanet/core/utils/surah_logic.dart';
+import 'package:qanet/data/models/surah_model.dart';
 
 class SurahProvider extends ChangeNotifier {
-  final QuranService _quranService = QuranService();
-
   List<SurahModel> _surahs = [];
   List<SurahModel> _filteredSurahs = [];
   bool _isLoading = true;
@@ -21,7 +19,7 @@ class SurahProvider extends ChangeNotifier {
       _isLoading = true;
       notifyListeners();
 
-      _surahs = await _quranService.fetchSurahs();
+      _surahs = await SurahLogic.fetchSurahs();
       _filteredSurahs = _surahs;
     } catch (e) {
       _surahs = [];
@@ -33,10 +31,7 @@ class SurahProvider extends ChangeNotifier {
   }
 
   void filterSurahs(String query) {
-    _filteredSurahs = _surahs.where((surah) {
-      return surah.englishName.toLowerCase().contains(query.toLowerCase()) ||
-          surah.name.contains(query);
-    }).toList();
+    _filteredSurahs = SurahLogic.filterSurahs(_surahs, query);
     notifyListeners();
   }
 }

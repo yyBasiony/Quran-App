@@ -12,17 +12,12 @@ class SurahListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final local = AppLocalizations.of(context); 
+    final local = AppLocalizations.of(context);
 
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
-      appBar: AppBar(
-        backgroundColor: AppColors.primary,
-        title: Text(
-          local.quran,
-          style: theme.textTheme.titleLarge?.copyWith(color: AppColors.white),
-        ),
-      ),
+      appBar:
+          AppBar(backgroundColor: AppColors.primary, title: Text(local.quran, style: theme.textTheme.titleLarge?.copyWith(color: AppColors.white))),
       body: Consumer<SurahProvider>(
         builder: (context, provider, child) {
           if (provider.isLoading) {
@@ -31,33 +26,26 @@ class SurahListScreen extends StatelessWidget {
             );
           }
 
-          return Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(12.w),
-                child: TextField(
-                  textDirection: TextDirection.rtl,
-                  decoration: InputDecoration(
+          return Column(children: [
+            Padding(
+              padding: EdgeInsets.all(12.w),
+              child: TextField(
+                textDirection: TextDirection.rtl,
+                decoration: InputDecoration(
                     hintText: local.searchSurahHint,
                     prefixIcon: Icon(Icons.search, color: AppColors.primary, size: 24.sp),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.primary, width: 1.5.w),
-                    ),
-                  ),
-                  onChanged: provider.filterSurahs,
-                ),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColors.primary, width: 1.5.w))),
+                onChanged: provider.filterSurahs,
               ),
-              Expanded(
+            ),
+            Expanded(
                 child: ListView.builder(
-                  itemCount: provider.surahs.length,
-                  itemBuilder: (context, index) {
-                    final surah = provider.surahs[index];
-                    return SurahCard(surah: surah);
-                  },
-                ),
-              ),
-            ],
-          );
+                    itemCount: provider.surahs.length,
+                    itemBuilder: (context, index) {
+                      final surah = provider.surahs[index];
+                      return SurahCard(surah: surah);
+                    }))
+          ]);
         },
       ),
     );
