@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart'; 
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qanet/core/themes/app_assets.dart';
-import 'package:qanet/presentation/routes/app_routes.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:qanet/core/utils/splash_logic.dart'; 
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -28,18 +27,9 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _startTimer() {
-    _timer = Timer(const Duration(seconds: 3), _goNextScreen);
-  }
-
-  Future<void> _goNextScreen() async {
-    final prefs = await SharedPreferences.getInstance();
-    final isFirstTime = prefs.getBool('is_first_time') ?? true;
-
-    if (isFirstTime) {
-      Navigator.pushReplacementNamed(context, AppRoutes.startScreen);
-    } else {
-      Navigator.pushReplacementNamed(context, AppRoutes.mainScreen);
-    }
+    _timer = Timer(const Duration(seconds: 3), () {
+      SplashLogic.goNextScreen(context);
+    });
   }
 
   @override

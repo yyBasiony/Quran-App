@@ -62,7 +62,7 @@ class PrayerTimesPage extends StatelessWidget {
                   clipBehavior: Clip.hardEdge,
                   child: Stack(fit: StackFit.expand, children: [
                     Transform.scale(
-                        scale: 1.3,
+                        scale: 1.1,
                         child: Image.asset(
                           getPrayerImage(provider.nextPrayer),
                           fit: BoxFit.fitHeight,
