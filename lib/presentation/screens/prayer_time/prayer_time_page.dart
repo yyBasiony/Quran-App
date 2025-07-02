@@ -128,6 +128,7 @@ class PrayerTimesPage extends StatelessWidget {
   }
 
   String getPrayerImage(String key) {
+
     const images = {
       "Fajr": AppAssets.Fajr,
       "Dhuhr": AppAssets.Dhuhr,

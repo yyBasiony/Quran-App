@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -78,7 +79,7 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
                           textDirection: TextDirection.rtl,
                           text: TextSpan(
                             style: TextStyle(
-                              fontSize: 22.sp,
+                              fontSize: 26.sp,
                               fontFamily: 'Uthmani',
                               color: theme.textTheme.bodyLarge?.color,
                             ),
@@ -104,22 +105,47 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
                       ),
                       onPressed: provider.isPlaying ? provider.pauseAudio : () => provider.playFullSurah(widget.surahNumber),
                     ),
-                    DropdownButton<AudioModel>(
-                      value: provider.selectedReciter,
-                      icon: const Icon(Icons.arrow_drop_down),
-                      underline: Container(height: 0),
-                      onChanged: (AudioModel? newValue) {
-                        if (newValue != null) {
-                          provider.changeReciter(newValue);
-                        }
-                      },
-                      items: provider.reciters.map<DropdownMenuItem<AudioModel>>((AudioModel reciter) {
-                        return DropdownMenuItem<AudioModel>(
-                          value: reciter,
-                          child: Text(reciter.reciterName, style: TextStyle(fontSize: 14.sp)),
-                        );
-                      }).toList(),
-                    )
+DropdownButton2<AudioModel>(
+  isExpanded: true,
+  value: provider.selectedReciter,
+  onChanged: (AudioModel? newValue) {
+    if (newValue != null) {
+      provider.changeReciter(newValue);
+    }
+  },
+  items: provider.reciters.map((reciter) {
+    return DropdownMenuItem<AudioModel>(
+      value: reciter,
+      child: Text(
+        reciter.reciterName,
+        style: TextStyle(fontSize: 14.sp),
+        overflow: TextOverflow.ellipsis,
+      ),
+    );
+  }).toList(),
+  dropdownStyleData: DropdownStyleData(
+    maxHeight: 200.h,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(10.r),
+      color: theme.cardColor,
+    ),
+  ),
+  buttonStyleData: ButtonStyleData(
+    padding: EdgeInsets.symmetric(horizontal: 12.w),
+    height: 45.h,
+    width: 180.w,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(8.r),
+      border: Border.all(color: theme.primaryColor),
+    ),
+  ),
+  iconStyleData: IconStyleData(
+    icon: Icon(Icons.arrow_drop_down, color: theme.primaryColor),
+    iconSize: 24.sp,
+  ),
+    underline:const  SizedBox.shrink(),
+
+)
                   ])));
         }));
   }

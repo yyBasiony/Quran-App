@@ -23,6 +23,7 @@ dependencies:
   font_awesome_flutter:
   shared_preferences:
   flutter_screenutil:
+  dropdown_button2:
 dev_dependencies:
   hive_generator: ^2.0.0
   build_runner: ^2.1.7
@@ -34,7 +35,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-  
+
   generate: true 
 
   assets:
