@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:qanet/core/utils/search_logic.dart';
 import 'package:qanet/data/models/search_ayah_model.dart';
-import 'package:qanet/data/services/quran_service.dart';
 
 class SearchProvider with ChangeNotifier {
   final TextEditingController controller = TextEditingController();
@@ -18,10 +18,10 @@ class SearchProvider with ChangeNotifier {
     notifyListeners();
 
     try {
-      final results = await QuranService().searchAyah(query);
+      final results = await SearchLogic.search(query);
       searchResults = results;
     } catch (e) {
-errorMessage = 'error';
+      errorMessage = 'حدث خطأ أثناء البحث.';
     } finally {
       isLoading = false;
       notifyListeners();
