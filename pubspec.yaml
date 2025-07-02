@@ -10,6 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   http: ^0.13.6
@@ -21,7 +23,6 @@ dependencies:
   font_awesome_flutter:
   shared_preferences:
   flutter_screenutil:
-
 dev_dependencies:
   hive_generator: ^2.0.0
   build_runner: ^2.1.7
@@ -32,6 +33,9 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  
+  generate: true 
 
   assets:
     - assets/images/

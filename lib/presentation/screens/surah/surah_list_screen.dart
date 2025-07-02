@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:qanet/presentation/widgets/surah_card.dart';
 import 'package:qanet/providers/surah_provider.dart';
 import 'package:qanet/core/themes/app_colors.dart';
+import 'package:qanet/l10n/app_localizations.dart';
 
 class SurahListScreen extends StatelessWidget {
   const SurahListScreen({super.key});
@@ -11,13 +12,14 @@ class SurahListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final local = AppLocalizations.of(context); 
 
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
         backgroundColor: AppColors.primary,
         title: Text(
-          'الْـقُــرْآنُ  ',
+          local.quran,
           style: theme.textTheme.titleLarge?.copyWith(color: AppColors.white),
         ),
       ),
@@ -29,28 +31,33 @@ class SurahListScreen extends StatelessWidget {
             );
           }
 
-          return Column(children: [
-            Padding(
+          return Column(
+            children: [
+              Padding(
                 padding: EdgeInsets.all(12.w),
                 child: TextField(
                   textDirection: TextDirection.rtl,
                   decoration: InputDecoration(
-                    hintText: 'ابحث عن سورة...',
+                    hintText: local.searchSurahHint,
                     prefixIcon: Icon(Icons.search, color: AppColors.primary, size: 24.sp),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: AppColors.primary, width: 1.5.w),
                     ),
                   ),
                   onChanged: provider.filterSurahs,
-                )),
-            Expanded(
+                ),
+              ),
+              Expanded(
                 child: ListView.builder(
-                    itemCount: provider.surahs.length,
-                    itemBuilder: (context, index) {
-                      final surah = provider.surahs[index];
-                      return SurahCard(surah: surah);
-                    }))
-          ]);
+                  itemCount: provider.surahs.length,
+                  itemBuilder: (context, index) {
+                    final surah = provider.surahs[index];
+                    return SurahCard(surah: surah);
+                  },
+                ),
+              ),
+            ],
+          );
         },
       ),
     );

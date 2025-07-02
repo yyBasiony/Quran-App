@@ -21,7 +21,7 @@ class SearchProvider with ChangeNotifier {
       final results = await QuranService().searchAyah(query);
       searchResults = results;
     } catch (e) {
-      errorMessage = 'حدث خطأ أثناء البحث';
+errorMessage = 'error';
     } finally {
       isLoading = false;
       notifyListeners();

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:qanet/l10n/app_localizations.dart';
 import '../../../providers/main_provider.dart';
 import '../../../providers/prayer_times_provider.dart';
 import '../../../providers/surah_provider.dart';
@@ -19,8 +20,16 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = Provider.of<MainProvider>(context);
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final local = AppLocalizations.of(context);
 
-    Widget _getScreenByIndex(int index) {
+    final labels = [
+      local.home,
+      local.quran,
+      local.search,
+      local.settings,
+    ];
+
+    Widget getScreenByIndex(int index) {
       switch (index) {
         case 0:
           return ChangeNotifierProvider(
@@ -45,15 +54,15 @@ class MainScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      body: _getScreenByIndex(provider.selectedIndex),
+      body: getScreenByIndex(provider.selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
-        items: [
-          for (var item in AppConstants.bottomNavBarData)
-            BottomNavigationBarItem(
-              icon: Icon(item.icon, size: 24.sp),
-              label: item.label,
-            )
-        ],
+        items: List.generate(
+          AppConstants.bottomNavIcons.length,
+          (index) => BottomNavigationBarItem(
+            icon: Icon(AppConstants.bottomNavIcons[index], size: 24.sp),
+            label: labels[index],
+          ),
+        ),
         currentIndex: provider.selectedIndex,
         selectedItemColor: AppColors.primary,
         unselectedItemColor: AppColors.grey,
@@ -61,7 +70,7 @@ class MainScreen extends StatelessWidget {
         onTap: provider.setIndex,
         type: BottomNavigationBarType.fixed,
         selectedLabelStyle: TextStyle(fontSize: 13.sp),
-        unselectedLabelStyle: TextStyle(fontSize: 12.sp), 
+        unselectedLabelStyle: TextStyle(fontSize: 12.sp),
       ),
     );
   }

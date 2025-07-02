@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:qanet/core/themes/app_assets.dart';
+import 'package:qanet/l10n/app_localizations.dart';
 import '../../../providers/prayer_times_provider.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/themes/app_colors.dart';
@@ -18,13 +19,14 @@ class PrayerTimesPage extends StatelessWidget {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
     final isDark = theme.brightness == Brightness.dark;
+    final local = AppLocalizations.of(context); 
 
     Map<String, String> arabicNames = {
-      "Fajr": "الفجر",
-      "Dhuhr": "الظهر",
-      "Asr": "العصر",
-      "Maghrib": "المغرب",
-      "Isha": "العشاء",
+      "Fajr": local.fajr,
+      "Dhuhr": local.dhuhr,
+      "Asr": local.asr,
+      "Maghrib": local.maghrib,
+      "Isha": local.isha,
     };
 
     Map<String, String> prayers = {
@@ -40,38 +42,68 @@ class PrayerTimesPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-          backgroundColor: theme.primaryColor,
-          centerTitle: true,
-          title: CityDropdown(selectedCity: provider.selectedCity, cities: AppConstants.cities, onCityChanged: provider.changeCity)),
+        backgroundColor: theme.primaryColor,
+        centerTitle: true,
+        title: CityDropdown(
+          selectedCity: provider.selectedCity,
+          cities: AppConstants.cities,
+          onCityChanged: provider.changeCity,
+        ),
+      ),
       body: Padding(
         padding: EdgeInsets.all(8.w),
         child: Column(
           children: [
             SizedBox(height: 10.h),
             Container(
-                height: 180.h,
-                width: double.infinity,
-                padding: EdgeInsets.all(12.w),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.r),
-                  image: DecorationImage(
-                      image: AssetImage(getPrayerImage(provider.nextPrayer)),
-                      fit: BoxFit.cover,
-                      colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.3), BlendMode.darken)),
+              height: 180.h,
+              width: double.infinity,
+              padding: EdgeInsets.all(12.w),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12.r),
+                image: DecorationImage(
+                  image: AssetImage(getPrayerImage(provider.nextPrayer)),
+                  fit: BoxFit.cover,
+                  colorFilter: ColorFilter.mode(
+                    Colors.black.withOpacity(0.3),
+                    BlendMode.darken,
+                  ),
                 ),
-                child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
                   Text(
                     arabicNames[provider.nextPrayer] ?? provider.nextPrayer,
-                    style: textTheme.titleLarge?.copyWith(color: Colors.white, fontSize: 20.sp),
+                    style: textTheme.titleLarge?.copyWith(
+                      color: Colors.white,
+                      fontSize: 20.sp,
+                    ),
                   ),
                   SizedBox(height: 8.h),
-                  Text(provider.nextPrayerTime, style: textTheme.titleLarge?.copyWith(fontSize: 30.sp, color: Colors.white))
-                ])),
+                  Text(
+                    provider.nextPrayerTime,
+                    style: textTheme.titleLarge?.copyWith(
+                      fontSize: 30.sp,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
             Padding(
-                padding: EdgeInsets.symmetric(vertical: 16.h),
-                child: Text("مواقيت الصلاة",
-                    style: textTheme.titleLarge
-                        ?.copyWith(fontWeight: FontWeight.bold, color: isDark ? AppColors.darkTextPrimary : AppColors.textPrimary, fontSize: 20.sp))),
+              padding: EdgeInsets.symmetric(vertical: 16.h),
+              child: Text(
+                local.prayerTimes, 
+                style: textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: isDark
+                      ? AppColors.darkTextPrimary
+                      : AppColors.textPrimary,
+                  fontSize: 20.sp,
+                ),
+              ),
+            ),
             Expanded(
               child: GridView.count(
                 crossAxisCount: 2,
