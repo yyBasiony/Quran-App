@@ -187,7 +187,7 @@ final response = await http.get(
 
 ##  Author
 
-> **This application was developed by Yasmine Ibrahim with technical mentorship and guidance from Eng. Yousef Sayed.**
+> **This application was developed by Yasmine Ibrahim with technical mentorship , guidance and code reviews from Eng. Yousef Sayed.**
 
 
 
