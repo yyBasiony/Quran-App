@@ -22,7 +22,6 @@ void main() async {
   }
 
   //final prefs = await SharedPreferences.getInstance();
-
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => ThemeProvider()),
