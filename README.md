@@ -160,6 +160,21 @@ final response = await http.get(
   <img src="https://github.com/yyBasiony/Quran-App/blob/main/assets/images/8.jpg" width="30%" style="margin: 10px;" />
   <img src="https://github.com/yyBasiony/Quran-App/blob/main/assets/images/9.jpg" width="30%" style="margin: 10px;" />
 </p>
+<p align="center">
+  <img src="https://github.com/yyBasiony/Quran-App/blob/main/assets/images/10.jpg" width="30%" style="margin: 10px;" />
+  <img src="https://github.com/yyBasiony/Quran-App/blob/main/assets/images/11.jpg" width="30%" style="margin: 10px;" />
+  <img src="https://github.com/yyBasiony/Quran-App/blob/main/assets/images/12.jpg" width="30%" style="margin: 10px;" />
+</p>
+<p align="center">
+  <img src="https://github.com/yyBasiony/Quran-App/blob/main/assets/images/13.jpg" width="30%" style="margin: 10px;" />
+  <img src="https://github.com/yyBasiony/Quran-App/blob/main/assets/images/14.jpg" width="30%" style="margin: 10px;" />
+  <img src="https://github.com/yyBasiony/Quran-App/blob/main/assets/images/15.jpg" width="30%" style="margin: 10px;" />
+   <img src="https://github.com/yyBasiony/Quran-App/blob/main/assets/images/16.jpg" width="30%" style="margin: 10px;" />
+
+</p>
+
+
+
 
 
 
