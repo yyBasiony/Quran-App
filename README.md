@@ -1,8 +1,17 @@
 # quran_app
 #  Qanet -قَانِت -Islamic Flutter App
 
-**Qanet** is a Flutter-based Islamic application designed to provide essential religious utilities including Quran Surah display, audio recitations, prayer times, and Ayah search. The app supports localization (Arabic/English), dark/light mode, and offline access for enhanced user experience.
+**Qanet** is a simple Flutter-based Islamic app that provides core religious features to support daily worship.
 
+This app helps users by:
+- Showing accurate **prayer times** by city, with the **next upcoming prayer highlighted** in a large card.
+- Displaying **Quranic Ayahs** both in **text** and **audio form**, supporting playback from **multiple reciters**.
+- Allowing users to **search for Ayahs** using any keyword.
+- Supporting **two languages**: Arabic and English (Localization).
+- Providing both **Light and Dark modes** to enhance usability and user comfort.
+- Enabling **offline access after initial download**, so users can continue reading and listening without an active internet connection.
+
+Whether you're looking to check the prayer time, listen to a recitation, or search an Ayah — Qanet offers a clean, focused, and user-friendly experience.
 ---
 
 ##  Features
@@ -143,6 +152,8 @@ Search Ayahs using a separate public API.
 final response = await http.get(
   Uri.parse('https://api-quran.com/api?text=$searchText&type=search'));
 ```
+## 8. State Management: `Provider`
+
 <h3> UI Screenshots</h3>
 
 <p align="center">
