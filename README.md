@@ -185,11 +185,9 @@ final response = await http.get(
 </p>
 
 
-###  Author 
+##  Author
 
-**This application was developed by Yasmine Ibrahim with technical mentorship and guidance from Eng. Yousef Sayed.**
-
-
+> **This application was developed by Yasmine Ibrahim with technical mentorship and guidance from Eng. Yousef Sayed.**
 
 
 
