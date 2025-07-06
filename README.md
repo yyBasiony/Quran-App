@@ -143,6 +143,24 @@ Search Ayahs using a separate public API.
 final response = await http.get(
   Uri.parse('https://api-quran.com/api?text=$searchText&type=search'));
 ```
+<h3> UI Screenshots</h3>
+
+<p align="center">
+  <img src="https://github.com/yyBasiony/Quran-App/blob/main/assets/images/1.jpg" width="30%" style="margin: 10px;" />
+  <img src="https://github.com/yyBasiony/Quran-App/blob/main/assets/images/2.jpg" width="30%" style="margin: 10px;" />
+  <img src="https://github.com/yyBasiony/Quran-App/blob/main/assets/images/3.jpg" width="30%" style="margin: 10px;" />
+</p>
+<p align="center">
+  <img src="https://github.com/yyBasiony/Quran-App/blob/main/assets/images/4.jpg" width="30%" style="margin: 10px;" />
+  <img src="https://github.com/yyBasiony/Quran-App/blob/main/assets/images/5.jpg" width="30%" style="margin: 10px;" />
+  <img src="https://github.com/yyBasiony/Quran-App/blob/main/assets/images/6.jpg" width="30%" style="margin: 10px;" />
+</p>
+<p align="center">
+  <img src="https://github.com/yyBasiony/Quran-App/blob/main/assets/images/7.jpg" width="30%" style="margin: 10px;" />
+  <img src="https://github.com/yyBasiony/Quran-App/blob/main/assets/images/8.jpg" width="30%" style="margin: 10px;" />
+  <img src="https://github.com/yyBasiony/Quran-App/blob/main/assets/images/9.jpg" width="30%" style="margin: 10px;" />
+</p>
+
 
 
 
