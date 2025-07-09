@@ -8,6 +8,7 @@ class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
 
   @override
+  
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
