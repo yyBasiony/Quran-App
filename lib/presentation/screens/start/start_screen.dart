@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qanet/core/themes/app_assets.dart';
+import 'package:qanet/core/themes/app_colors.dart';
 import 'package:qanet/presentation/screens/start/widgets/start_button.dart';
 
 class StartScreen extends StatelessWidget {
@@ -33,7 +34,7 @@ class StartScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(16.r),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.3),
+                            color: AppColors.primary.withOpacity(0.3),
                             blurRadius: 6,
                             offset: const Offset(0, 3),
                           )
