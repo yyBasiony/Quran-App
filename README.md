@@ -159,7 +159,7 @@ final response = await http.get(
 <p align="center">
   <img src="https://github.com/yyBasiony/Quran-App/blob/main/assets/images/1.jpg" width="30%" style="margin: 10px;" />
   <img src="https://github.com/yyBasiony/Quran-App/blob/main/assets/images/2.jpg" width="30%" style="margin: 10px;" />
-  <img src="https://github.com/yyBasiony/Quran-App/blob/main/assets/images/3.jpg" width="30%" style="margin: 10px;" />
+  <img src="https://github.com/yyBasiony/Quran-App/blob/main/assets/images/start_screen.png" width="30%" style="margin: 10px;" />
 </p>
 <p align="center">
   <img src="https://github.com/yyBasiony/Quran-App/blob/main/assets/images/4.jpg" width="30%" style="margin: 10px;" />
