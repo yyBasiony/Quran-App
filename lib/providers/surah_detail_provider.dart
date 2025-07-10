@@ -43,34 +43,44 @@ class SurahDetailProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> playFullSurah(int surahNumber) async {
-    if (selectedReciter == null) return;
+Future<void> playFullSurah(int surahNumber) async {
+  if (selectedReciter == null) return;
 
-    try {
-      final audioModel = await LogicMethods.fetchSurahAudio(
-        selectedReciter!.reciterId,
-        surahNumber,
-      );
+  try {
+    final audioModel = await LogicMethods.fetchSurahAudio(
+      selectedReciter!.reciterId,
+      surahNumber,
+    );
 
-      // if (audioModel == null || audioModel.audioUrl.isEmpty) {
-      //   _showAudioNotFoundMessage();
-      //   return;
-      // }
-
-      final localPath = await LogicMethods.getOrDownloadAudio(
-        audioModel!.audioUrl,
-        '${surahNumber}_${selectedReciter!.reciterId}.mp3',
-      );
-
-      await player.play(DeviceFileSource(localPath));
-      isPlaying = true;
-      notifyListeners();
-    } catch (e) {
-      print(" خطأ أثناء تشغيل التلاوة: $e");
-
-      // _showAudioNotFoundMessage();
+    if (audioModel == null || audioModel.audioUrl.isEmpty) {
+      print("الصوت غير متوفر");
+      return;
     }
+
+    final fileName = '${surahNumber}_${selectedReciter!.reciterId}.mp3';
+
+    await player.play(UrlSource(audioModel.audioUrl));
+    isPlaying = true;
+    notifyListeners();
+
+    LogicMethods.getOrDownloadAudio(audioModel.audioUrl, fileName).then((path) {
+      print('تم تحميل الملف وتخزينه: $path');
+    }).catchError((e) {
+      print('فشل تحميل الملف للتخزين المحلي: $e');
+    });
+
+    // download
+    LogicMethods.fetchAyahs(surahNumber).then((fetchedAyahs) {
+      ayahs = fetchedAyahs;
+      notifyListeners();
+    }).catchError((e) {
+      print("فشل تحميل الآيات: $e");
+    });
+
+  } catch (e) {
+    print("خطأ أثناء تشغيل التلاوة: $e");
   }
+}
 
   void pauseAudio() async {
     await player.pause();
@@ -85,18 +95,47 @@ class SurahDetailProvider with ChangeNotifier {
 
   void disposePlayer() {
     player.dispose();
-  }
+  }}
+  // Future<void> playFullSurah(int surahNumber) async {
+  //   if (selectedReciter == null) return;
+
+  //   try {
+  //     final audioModel = await LogicMethods.fetchSurahAudio(
+  //       selectedReciter!.reciterId,
+  //       surahNumber,
+  //     );
+
+  //     // if (audioModel == null || audioModel.audioUrl.isEmpty) {
+  //     //   _showAudioNotFoundMessage();
+  //     //   return;
+  //     // }
+
+  //     final localPath = await LogicMethods.getOrDownloadAudio(
+  //       audioModel!.audioUrl,
+  //       '${surahNumber}_${selectedReciter!.reciterId}.mp3',
+  //     );
+
+  //     await player.play(DeviceFileSource(localPath));
+  //     isPlaying = true;
+  //     notifyListeners();
+  //   } catch (e) {
+  //     print(" خطأ أثناء تشغيل التلاوة: $e");
+
+  //     // _showAudioNotFoundMessage();
+  //   }
+  // }
+
 
   // void _showAudioNotFoundMessage() {
   //   if (_context != null) {
   //     ScaffoldMessenger.of(_context!).showSnackBar(
   //       const SnackBar(
-  //         content: Text(" عذرًا، هذه التلاوة غير متوفرة لهذا القارئ."),
+  //         content: Text("  هذه التلاوة غير متوفرة لهذا القارئ."),
   //         duration: Duration(seconds: 3),
   //       ),
   //     );
   //   } else {
-  //     print(" التلاوة غير متوفرة، ولم يتم تمرير السياق.");
+  //     print(" التلاوة غير متوفرة،    ");
   //   }
   // }
-}
+
