@@ -21,6 +21,8 @@ class SurahDetailScreen extends StatefulWidget {
 
 class _SurahDetailScreenState extends State<SurahDetailScreen> {
   late SurahDetailProvider provider;
+  double _scale = 1.0;
+  double _previousScale = 1.0;
 
   @override
   void initState() {
@@ -61,18 +63,51 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
           if (provider.isLoading) {
             return const Center(child: CircularProgressIndicator());
           }
-          return Column(children: [
-            Container(
-                margin: EdgeInsets.symmetric(vertical: 16.h),
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
-                decoration: BoxDecoration(
-                  border: Border.all(color: theme.primaryColor, width: 1.5.w),
-                  borderRadius: BorderRadius.circular(16.r),
+
+          return GestureDetector(
+            onScaleStart: (details) {
+              _previousScale = _scale;
+            },
+            onScaleUpdate: (details) {
+              setState(() {
+                _scale = (_previousScale * details.scale).clamp(1.0, 3.0);
+              });
+            },
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Transform.scale(
+                scale: _scale,
+                alignment: Alignment.topCenter,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 16.h),
+                      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: theme.primaryColor, width: 1.5.w),
+                        borderRadius: BorderRadius.circular(16.r),
+                      ),
+                      child: Text(
+                        widget.surahName,
+                        style: TextStyle(
+                          fontSize: 24.sp,
+                          fontWeight: FontWeight.bold,
+                          color: theme.primaryColor,
+                          fontFamily: 'Uthmani',
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: SurahAyahText(provider: provider),
+                    ),
+                    SizedBox(height: 40.h),
+                  ],
                 ),
-                child: Text(widget.surahName,
-                    style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold, color: theme.primaryColor, fontFamily: 'Uthmani'))),
-            Expanded(child: SurahAyahText(provider: provider))
-          ]);
+              ),
+            ),
+          );
         },
       ),
       bottomNavigationBar: SurahAudioControls(surahNumber: widget.surahNumber),

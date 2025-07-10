@@ -95,7 +95,9 @@ Future<void> playFullSurah(int surahNumber) async {
 
   void disposePlayer() {
     player.dispose();
-  }}
+  }
+
+  }
   // Future<void> playFullSurah(int surahNumber) async {
   //   if (selectedReciter == null) return;
 

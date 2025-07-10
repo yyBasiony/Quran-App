@@ -1,7 +1,7 @@
 class AppAssets {
   AppAssets._();
 
-  static const welcome = 'assets/images/welcome.png';
+  static const welcome = 'assets/images/welcom.png';
   static const background = 'assets/images/background.png';
   static const Fajr = 'assets/images/Fajr.png';
   static const Dhuhr = 'assets/images/dhuhr.png';
