@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qanet/presentation/screens/home/main_screen.dart';
+import 'package:qanet/presentation/screens/splash/splash_screen.dart';
 import 'package:qanet/presentation/screens/surah/surah_details_screen.dart';
 import 'package:qanet/presentation/screens/start/start_screen.dart';
-import 'package:qanet/providers/start_provider.dart';
 import '../../../providers/surah_detail_provider.dart';
 
 class AppRoutes {
+    static const String splashScreen = "/";
   static const String mainScreen = "/main";
   static const String surahDetails = "/surahDetails";
     static const String startScreen = "/startScreen";
@@ -14,6 +15,10 @@ class AppRoutes {
 
   static Route<dynamic> generateRoutes(RouteSettings settings) {
     switch (settings.name) {
+case splashScreen:
+  return MaterialPageRoute(
+    builder: (_) => const SplashScreen(),
+  );
 
 case mainScreen:
   return MaterialPageRoute(
@@ -36,11 +41,9 @@ case surahDetails:
   );
       case startScreen:
         return MaterialPageRoute(
-          builder: (_) => ChangeNotifierProvider(
-            create: (_) => StartProvider(),
-            child: const StartScreen(),
-          ),
+          builder: (_) => const StartScreen(),
         );
+
 
 
       default:

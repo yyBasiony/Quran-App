@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:qanet/core/themes/app_assets.dart';
-import 'package:qanet/core/themes/app_colors.dart';
+import 'package:qanet/presentation/resources/app_assets.dart';
+import 'package:qanet/presentation/resources/app_colors.dart';
 import 'package:qanet/presentation/screens/start/widgets/start_button.dart';
 
 class StartScreen extends StatelessWidget {
@@ -15,13 +15,7 @@ class StartScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: theme.scaffoldBackgroundColor,
         body: Stack(children: [
-          SizedBox.expand(
-            child: Image.asset(
-              AppAssets.welcome,
-              fit: BoxFit.cover,
-              colorBlendMode: BlendMode.darken,
-            ),
-          ),
+          SizedBox.expand(child: Image.asset(AppAssets.welcome, fit: BoxFit.cover, colorBlendMode: BlendMode.darken)),
           Center(
               child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -43,23 +37,13 @@ class StartScreen extends StatelessWidget {
                         child: Column(mainAxisSize: MainAxisSize.min, children: [
                           Text(
                             'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ',
-                            style: textTheme.bodyLarge?.copyWith(
-                              fontSize: 26.sp,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: 'Uthmani',
-                            ),
+                            style: textTheme.bodyLarge,
                             textAlign: TextAlign.center,
                           ),
                           SizedBox(height: 12.h),
                           Text(
                             '﴿ وَقُومُوا لِلَّهِ قَانِتِينَ﴾',
-                            style: textTheme.bodyLarge?.copyWith(
-                              fontSize: 32.sp,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Uthmani',
-                            ),
+                            style: textTheme.bodyLarge,
                             textAlign: TextAlign.center,
                           ),
                           SizedBox(height: 4.h)

@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:qanet/core/themes/app_assets.dart';
-import 'package:qanet/core/utils/splash_logic.dart'; 
+import 'package:qanet/presentation/resources/app_assets.dart';
+import 'package:qanet/core/utils/splash_logic.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -37,15 +37,13 @@ class _SplashScreenState extends State<SplashScreen> {
     final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: theme.scaffoldBackgroundColor,
-      body: Center(
-        child: Image.asset(
+        backgroundColor: theme.scaffoldBackgroundColor,
+        body: Center(
+            child: Image.asset(
           AppAssets.logo,
           width: 220.w,
           height: 220.h,
           fit: BoxFit.contain,
-        ),
-      ),
-    );
+        )));
   }
 }

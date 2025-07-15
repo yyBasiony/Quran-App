@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:qanet/core/utils/prayer_times_logic.dart';
-import 'package:qanet/l10n/app_localizations.dart';
-import '../../../core/constants/app_constants.dart';
-import '../../../core/themes/app_colors.dart';
+import 'package:easy_localization/easy_localization.dart';
+import '../../resources/app_constants.dart';
+import '../../resources/app_colors.dart';
 import '../../../providers/prayer_times_provider.dart';
 import 'widgets/city_dropdown.dart';
 import 'widgets/prayer_card.dart';
@@ -19,9 +19,8 @@ class PrayerTimesPage extends StatelessWidget {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
     final isDark = theme.brightness == Brightness.dark;
-    final local = AppLocalizations.of(context);
 
-    final arabicNames = PrayerTimesLogic.getArabicNames(local);
+    final arabicNames = PrayerTimesLogic.getArabicNames(context);
     final prayers = PrayerTimesLogic.getPrayerTimesMap(prayerTimes)..remove(provider.nextPrayer);
 
     return Scaffold(
@@ -44,26 +43,25 @@ class PrayerTimesPage extends StatelessWidget {
                         scale: 1.1,
                         child: Image.asset(PrayerTimesLogic.getPrayerImage(provider.nextPrayer),
                             fit: BoxFit.fitHeight, alignment: Alignment.bottomCenter)),
-                    Container(
-                      color: Colors.black.withOpacity(0.1),
-                    ),
+                    Container(color: Colors.black.withOpacity(0.1)),
                     Center(
                         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      Text(arabicNames[provider.nextPrayer] ?? provider.nextPrayer,
-                          style: textTheme.titleLarge?.copyWith(color: Colors.white, fontSize: 20.sp)),
+                      Text(
+                        arabicNames[provider.nextPrayer] ?? provider.nextPrayer,
+                        style: textTheme.titleLarge,
+                      ),
                       SizedBox(height: 8.h),
-                      Text(provider.nextPrayerTime,
-                          style: textTheme.titleLarge?.copyWith(
-                            fontSize: 30.sp,
-                            color: Colors.white,
-                          ))
+                      Text(provider.nextPrayerTime, style: textTheme.titleLarge)
                     ]))
                   ])),
               Padding(
                   padding: EdgeInsets.symmetric(vertical: 16.h),
-                  child: Text(local.prayerTimes,
+                  child: Text('prayerTimes'.tr(),
                       style: textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold, color: isDark ? AppColors.darkTextPrimary : AppColors.textPrimary, fontSize: 20.sp))),
+                        fontWeight: FontWeight.bold,
+                        color: isDark ? AppColors.darkTextPrimary : AppColors.textPrimary,
+                        fontSize: 20.sp,
+                      ))),
               Expanded(
                   child: GridView.count(
                 crossAxisCount: 2,

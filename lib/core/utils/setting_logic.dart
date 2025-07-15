@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:provider/provider.dart';
 import 'package:qanet/providers/theme_provider.dart';
-import 'package:qanet/providers/locale_provider.dart';
 
 class SettingLogic {
   static bool isDarkMode(BuildContext context) {
@@ -9,7 +9,7 @@ class SettingLogic {
   }
 
   static bool isArabic(BuildContext context) {
-    return context.watch<LocaleProvider>().locale.languageCode == 'ar';
+    return context.locale.languageCode == 'ar';
   }
 
   static void toggleTheme(BuildContext context, bool isOn) {
@@ -17,6 +17,10 @@ class SettingLogic {
   }
 
   static void toggleLocale(BuildContext context) {
-    context.read<LocaleProvider>().toggleLocale();
+    final currentLocale = context.locale;
+    final newLocale = currentLocale.languageCode == 'ar'
+        ? const Locale('en')
+        : const Locale('ar');
+    context.setLocale(newLocale);
   }
 }

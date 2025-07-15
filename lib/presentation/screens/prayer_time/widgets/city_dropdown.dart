@@ -1,9 +1,8 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:qanet/core/themes/app_colors.dart';
+import 'package:qanet/presentation/resources/app_colors.dart';
 import 'package:qanet/core/utils/prayer_times_logic.dart';
-import 'package:qanet/l10n/app_localizations.dart';
 
 class CityDropdown extends StatelessWidget {
   final String selectedCity;
@@ -22,7 +21,6 @@ class CityDropdown extends StatelessWidget {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
     final isDark = theme.brightness == Brightness.dark;
-    final local = AppLocalizations.of(context);
 
     return Center(
         child: Padding(
@@ -34,14 +32,8 @@ class CityDropdown extends StatelessWidget {
                   if (newValue != null) onCityChanged(newValue);
                 },
                 items: cities.map((city) {
-                  final localizedCity = PrayerTimesLogic.getCityName(local, city);
-                  return DropdownMenuItem<String>(
-                      value: city,
-                      child: Text(localizedCity,
-                          style: textTheme.bodyLarge?.copyWith(
-                            color: isDark ? Colors.white : Colors.black,
-                            fontSize: 15.sp,
-                          )));
+                  final localizedCity = PrayerTimesLogic.getCityName(context, city);
+                  return DropdownMenuItem<String>(value: city, child: Text(localizedCity, style: textTheme.headlineSmall));
                 }).toList(),
                 dropdownStyleData: DropdownStyleData(
                   maxHeight: 200.h,
@@ -63,11 +55,7 @@ class CityDropdown extends StatelessWidget {
                   icon: Icon(Icons.location_on, color: Colors.white, size: 20.sp),
                   iconSize: 24.sp,
                 ),
-                style: textTheme.bodyLarge?.copyWith(
-                  color: isDark ? Colors.white : Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16.sp,
-                ),
+                style: textTheme.bodyLarge,
                 underline: const SizedBox.shrink())));
   }
 }

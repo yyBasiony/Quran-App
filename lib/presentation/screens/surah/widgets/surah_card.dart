@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:qanet/core/themes/app_colors.dart';
+import 'package:qanet/presentation/resources/app_colors.dart';
 import 'package:qanet/presentation/routes/app_routes.dart';
 import '../../../../data/models/surah_model.dart';
 
@@ -21,23 +21,10 @@ class SurahCard extends StatelessWidget {
           radius: 20.r,
           backgroundColor: AppColors.primary,
           child: Text(surah.number.toString(), style: TextStyle(color: avatarTextColor, fontSize: 14.sp, fontWeight: FontWeight.bold))),
-      title: Text(
-        surah.englishName,
-        style: textTheme.bodyLarge?.copyWith(
-          fontWeight: FontWeight.bold,
-          fontSize: 16.sp,
-        ),
-      ),
-      trailing: Text(surah.name, style: textTheme.titleLarge?.copyWith(fontSize: 18.sp)),
+      title: Text(surah.englishName, style: textTheme.headlineMedium),
+      trailing: Text(surah.name, style: textTheme.headlineMedium),
       onTap: () {
-        Navigator.pushNamed(
-          context,
-          AppRoutes.surahDetails,
-          arguments: {
-            'surahNumber': surah.number,
-            'surahName': surah.name,
-          },
-        );
+        Navigator.pushNamed(context, AppRoutes.surahDetails, arguments: {'surahNumber': surah.number, 'surahName': surah.name});
       },
     );
   }

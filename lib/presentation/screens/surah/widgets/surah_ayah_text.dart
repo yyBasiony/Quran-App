@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qanet/providers/surah_detail_provider.dart';
 
 class SurahAyahText extends StatelessWidget {
@@ -14,11 +13,7 @@ class SurahAyahText extends StatelessWidget {
       textAlign: TextAlign.center,
       textDirection: TextDirection.rtl,
       text: TextSpan(
-        style: TextStyle(
-          fontSize: 26.sp,
-          fontFamily: 'Uthmani',
-          color: theme.textTheme.bodyLarge?.color,
-        ),
+        style: theme.textTheme.displayLarge,
         children: provider.ayahs.map((ayah) {
           return TextSpan(text: '${ayah.text} ﴿${ayah.number}﴾ ');
         }).toList(),

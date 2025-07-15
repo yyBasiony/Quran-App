@@ -1,15 +1,16 @@
-import 'package:qanet/core/themes/app_assets.dart';
-import 'package:qanet/l10n/app_localizations.dart';
+import 'package:flutter/material.dart';
+import 'package:qanet/presentation/resources/app_assets.dart';
+import 'package:easy_localization/easy_localization.dart';
 import '../../../data/models/prayer_times_model.dart';
 
 class PrayerTimesLogic {
-  static Map<String, String> getArabicNames(AppLocalizations local) {
+  static Map<String, String> getArabicNames(BuildContext context) {
     return {
-      "Fajr": local.fajr,
-      "Dhuhr": local.dhuhr,
-      "Asr": local.asr,
-      "Maghrib": local.maghrib,
-      "Isha": local.isha,
+      "Fajr": "fajr".tr(),
+      "Dhuhr": "dhuhr".tr(),
+      "Asr": "asr".tr(),
+      "Maghrib": "maghrib".tr(),
+      "Isha": "isha".tr(),
     };
   }
 
@@ -33,44 +34,43 @@ class PrayerTimesLogic {
     };
     return images[key] ?? AppAssets.Isha;
   }
-   static String getCityName(AppLocalizations local, String key) {
+
+  static String getCityName(BuildContext context, String key) {
     final map = {
-      'Cairo': local.cityCairo,
-      'Alexandria': local.cityAlexandria,
-      'Giza': local.cityGiza,
-      'Mansoura': local.cityMansoura,
-      'Asyut': local.cityAsyut,
-      'Tanta': local.cityTanta,
-      'Zagazig': local.cityZagazig,
-      'Suez': local.citySuez,
-      'Ismailia': local.cityIsmailia,
-      'Fayoum': local.cityFayoum,
-      'BeniSuef': local.cityBeniSuef,
-      'Minya': local.cityMinya,
-      'Sohag': local.citySohag,
-      'Qena': local.cityQena,
-      'Luxor': local.cityLuxor,
-      'Aswan': local.cityAswan,
-      'Damietta': local.cityDamietta,
-      'PortSaid': local.cityPortSaid,
-      'SharmElSheikh': local.citySharmElSheikh,
-      'Hurghada': local.cityHurghada,
-      'Damanhur': local.cityDamanhur,
-      'KafrElSheikh': local.cityKafrElSheikh,
-      'Mallawi': local.cityMallawi,
-      'Banha': local.cityBanha,
-      'Arish': local.cityArish,
-      'Matruh': local.cityMatruh,
-      'Qalyub': local.cityQalyub,
-      'Desouk': local.cityDesouk,
-      '6October': local.city6October,
-      'Obour': local.cityObour,
-      'NewCairo': local.cityNewCairo,
-      'Helwan': local.cityHelwan,
+      'Cairo': "cityCairo".tr(),
+      'Alexandria': "cityAlexandria".tr(),
+      'Giza': "cityGiza".tr(),
+      'Mansoura': "cityMansoura".tr(),
+      'Asyut': "cityAsyut".tr(),
+      'Tanta': "cityTanta".tr(),
+      'Zagazig': "cityZagazig".tr(),
+      'Suez': "citySuez".tr(),
+      'Ismailia': "cityIsmailia".tr(),
+      'Fayoum': "cityFayoum".tr(),
+      'BeniSuef': "cityBeniSuef".tr(),
+      'Minya': "cityMinya".tr(),
+      'Sohag': "citySohag".tr(),
+      'Qena': "cityQena".tr(),
+      'Luxor': "cityLuxor".tr(),
+      'Aswan': "cityAswan".tr(),
+      'Damietta': "cityDamietta".tr(),
+      'PortSaid': "cityPortSaid".tr(),
+      'SharmElSheikh': "citySharmElSheikh".tr(),
+      'Hurghada': "cityHurghada".tr(),
+      'Damanhur': "cityDamanhur".tr(),
+      'KafrElSheikh': "cityKafrElSheikh".tr(),
+      'Mallawi': "cityMallawi".tr(),
+      'Banha': "cityBanha".tr(),
+      'Arish': "cityArish".tr(),
+      'Matruh': "cityMatruh".tr(),
+      'Qalyub': "cityQalyub".tr(),
+      'Desouk': "cityDesouk".tr(),
+      '6October': "city6October".tr(),
+      'Obour': "cityObour".tr(),
+      'NewCairo': "cityNewCairo".tr(),
+      'Helwan': "cityHelwan".tr(),
     };
 
     return map[key] ?? key;
   }
-
-
 }

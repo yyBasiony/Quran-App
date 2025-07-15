@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:qanet/app/app_preferences.dart';
 import '../data/models/prayer_times_model.dart';
 import '../data/services/prayer_times_service.dart';
 import '../core/utils/logic_methods.dart';
@@ -29,19 +29,17 @@ class PrayerTimesProvider with ChangeNotifier {
     fetchPrayerTimes();
   }
 
-  Future<void> _loadSavedCity() async {
-    final prefs = await SharedPreferences.getInstance();
-    _selectedCity = prefs.getString('selected_city') ?? _selectedCity;
-    notifyListeners();
-  }
+Future<void> _loadSavedCity() async {
+  _selectedCity = await AppPreferences.getSelectedCity();
+  notifyListeners();
+}
 
-  Future<void> changeCity(String city) async {
-    _selectedCity = city;
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('selected_city', city);
-    fetchPrayerTimes();
-    notifyListeners();
-  }
+Future<void> changeCity(String city) async {
+  _selectedCity = city;
+  await AppPreferences.setSelectedCity(city);
+  fetchPrayerTimes();
+  notifyListeners();
+}
 
   Future<void> fetchPrayerTimes() async {
     final times = await LogicMethods.fetchPrayerTimes(_prayerService, _selectedCity);

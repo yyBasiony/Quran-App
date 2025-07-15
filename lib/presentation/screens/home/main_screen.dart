@@ -1,13 +1,13 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:qanet/l10n/app_localizations.dart';
 import '../../../providers/main_provider.dart';
 import '../../../providers/prayer_times_provider.dart';
 import '../../../providers/surah_provider.dart';
 import '../../../providers/search_provider.dart';
-import '../../../core/themes/app_colors.dart';
-import '../../../core/constants/app_constants.dart';
+import '../../resources/app_colors.dart';
+import '../../resources/app_constants.dart';
 import '../prayer_time/prayer_time_page.dart';
 import '../search/search_screen.dart';
 import '../settings/setting_screen.dart';
@@ -20,15 +20,13 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = Provider.of<MainProvider>(context);
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final local = AppLocalizations.of(context);
 
-    final labels = [
-      local.home,
-      local.quran,
-      local.search,
-      local.settings,
-    ];
-
+final labels = [
+  'home'.tr(),
+  'quran'.tr(),
+  'search'.tr(),
+  'settings'.tr(),
+];
     Widget getScreenByIndex(int index) {
       switch (index) {
         case 0:

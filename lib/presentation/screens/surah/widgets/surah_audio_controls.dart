@@ -35,7 +35,7 @@ class SurahAudioControls extends StatelessWidget {
                   items: provider.reciters.map((reciter) {
                     return DropdownMenuItem<AudioModel>(
                       value: reciter,
-                      child: Text(reciter.reciterName, style: TextStyle(fontSize: 14.sp), overflow: TextOverflow.ellipsis),
+                      child: Text(reciter.reciterName,   style: theme.textTheme.headlineSmall, overflow: TextOverflow.ellipsis),
                     );
                   }).toList(),
                   dropdownStyleData: DropdownStyleData(
