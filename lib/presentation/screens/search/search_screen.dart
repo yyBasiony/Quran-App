@@ -29,7 +29,7 @@ class SearchScreen extends StatelessWidget {
                 // textDirection: TextDirection.rtl,
                 decoration: InputDecoration(
                     hintText: 'searchHint'.tr(),
-                    hintStyle: theme.textTheme.bodyMedium,
+                    hintStyle: theme.textTheme.headlineMedium,
                     suffixIcon: IconButton(
                       icon: Icon(Icons.search, color: theme.primaryColor, size: 24.sp),
                       onPressed: () => provider.searchAyahs(provider.controller.text),
@@ -62,13 +62,13 @@ class SearchScreen extends StatelessWidget {
                                 ayah.text,
                                 textAlign: TextAlign.right,
                                 // textDirection: TextDirection.rtl,
-                                style: theme.textTheme.bodyLarge?.copyWith(fontSize: 16.sp),
+                                style: theme.textTheme.headlineMedium?.copyWith(fontSize: 16.sp),
                               ),
                               subtitle: ayah.surah != null
                                   ? Text(
                                       '[${ayah.surah}]',
                                       textAlign: TextAlign.right,
-                                      style: theme.textTheme.titleMedium,
+                                      style: theme.textTheme.headlineMedium,
                                     )
                                   : null,
                             ));
