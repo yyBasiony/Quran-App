@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:qanet/core/extensions/heme_extensions.dart';
+import 'package:qanet/core/extensions/theme_extensions.dart';
 import 'package:qanet/core/utils/prayer_times_logic.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../resources/app_constants.dart';

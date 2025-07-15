@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:qanet/presentation/routes/app_routes.dart';
+import 'package:qanet/presentation/resources/app_routes.dart';
 
 class SplashLogic {
   static Future<void> goNextScreen(BuildContext context) async {

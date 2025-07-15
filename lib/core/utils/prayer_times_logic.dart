@@ -26,13 +26,13 @@ class PrayerTimesLogic {
 
   static String getPrayerImage(String key) {
     const images = {
-      "Fajr": AppAssets.Fajr,
-      "Dhuhr": AppAssets.Dhuhr,
-      "Asr": AppAssets.Asr,
-      "Maghrib": AppAssets.Maghrib,
-      "Isha": AppAssets.Isha,
+      "Fajr": AppAssets.fajr,
+      "Dhuhr": AppAssets.dhuhr,
+      "Asr": AppAssets.asr,
+      "Maghrib": AppAssets.maghrib,
+      "Isha": AppAssets.isha,
     };
-    return images[key] ?? AppAssets.Isha;
+    return images[key] ?? AppAssets.isha;
   }
 
   static String getCityName(BuildContext context, String key) {

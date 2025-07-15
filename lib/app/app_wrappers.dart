@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:qanet/presentation/routes/app_routes.dart';
+import 'package:qanet/presentation/resources/app_routes.dart';
 import 'package:qanet/presentation/resources/app_theme.dart';
 import 'package:qanet/providers/theme_provider.dart';
 import 'package:easy_localization/easy_localization.dart';

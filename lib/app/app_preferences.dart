@@ -1,10 +1,11 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppPreferences {
-  static const String _keySelectedCity = 'selected_city';
+   static const String _keySelectedCity = 'selected_city';
   static const String _keyHasStarted = 'is_first_time';
   static const _isDarkModeKey = 'isDarkMode';
   static const _languageCodeKey = 'languageCode';
+
 //city
   static Future<void> setSelectedCity(String city) async {
     final prefs = await SharedPreferences.getInstance();

@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qanet/app/app_preferences.dart';
 import 'package:qanet/presentation/resources/app_colors.dart';
 import 'package:qanet/core/utils/start_logic.dart';
-import 'package:qanet/presentation/routes/app_routes.dart';
+import 'package:qanet/presentation/resources/app_routes.dart';
 
 class StartButton extends StatefulWidget {
   const StartButton({super.key});
