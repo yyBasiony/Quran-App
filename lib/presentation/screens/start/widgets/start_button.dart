@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qanet/app/app_preferences.dart';
+import 'package:qanet/core/extensions/theme_extensions.dart';
 import 'package:qanet/presentation/resources/app_colors.dart';
 import 'package:qanet/core/utils/start_logic.dart';
 import 'package:qanet/presentation/resources/app_routes.dart';
@@ -28,7 +29,7 @@ class _StartButtonState extends State<StartButton> {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    final textTheme = context.textTheme;
 
     return ElevatedButton(
         onPressed: isLoading ? null : () => _handleStart(context),

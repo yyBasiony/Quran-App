@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:qanet/core/extensions/theme_extensions.dart';
 import 'package:qanet/presentation/resources/app_assets.dart';
 import 'package:qanet/presentation/resources/app_colors.dart';
 import 'package:qanet/presentation/screens/start/widgets/start_button.dart';
@@ -9,11 +10,10 @@ class StartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final textTheme = theme.textTheme;
+    final textTheme = context.textTheme;
 
     return Scaffold(
-        backgroundColor: theme.scaffoldBackgroundColor,
+        backgroundColor: context.scaffoldColor,
         body: Stack(children: [
           SizedBox.expand(child: Image.asset(AppAssets.welcome, fit: BoxFit.cover, colorBlendMode: BlendMode.darken)),
           Center(

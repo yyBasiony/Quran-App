@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import '../../../providers/main_provider.dart';
+import 'package:qanet/core/extensions/theme_extensions.dart';
 import '../../../providers/prayer_times_provider.dart';
 import '../../../providers/surah_provider.dart';
 import '../../../providers/search_provider.dart';
@@ -13,20 +13,31 @@ import '../search/search_screen.dart';
 import '../settings/setting_screen.dart';
 import '../surah/surah_list_screen.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final provider = Provider.of<MainProvider>(context);
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+  State<MainScreen> createState() => _MainScreenState();
+}
 
-final labels = [
-  'home'.tr(),
-  'quran'.tr(),
-  'search'.tr(),
-  'settings'.tr(),
-];
+class _MainScreenState extends State<MainScreen> {
+    int selectedIndex = 0;
+
+  void onTabTapped(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final isDark = context.isDarkMode;
+    final labels = [
+      'home'.tr(),
+      'quran'.tr(),
+      'search'.tr(),
+      'settings'.tr(),
+    ];
     Widget getScreenByIndex(int index) {
       switch (index) {
         case 0:
@@ -52,7 +63,7 @@ final labels = [
     }
 
     return Scaffold(
-      body: getScreenByIndex(provider.selectedIndex),
+      body: getScreenByIndex(selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: List.generate(
           AppConstants.bottomNavIcons.length,
@@ -61,11 +72,11 @@ final labels = [
             label: labels[index],
           ),
         ),
-        currentIndex: provider.selectedIndex,
+        currentIndex: selectedIndex,
         selectedItemColor: AppColors.primary,
         unselectedItemColor: AppColors.grey,
         backgroundColor: isDark ? AppColors.darkBackground : AppColors.background,
-        onTap: provider.setIndex,
+        onTap:onTabTapped,
         type: BottomNavigationBarType.fixed,
         selectedLabelStyle: TextStyle(fontSize: 13.sp),
         unselectedLabelStyle: TextStyle(fontSize: 12.sp),

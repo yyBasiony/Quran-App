@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qanet/core/extensions/theme_extensions.dart';
 import 'package:qanet/providers/surah_detail_provider.dart';
 
 class SurahAyahText extends StatelessWidget {
@@ -8,12 +9,11 @@ class SurahAyahText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return RichText(
       textAlign: TextAlign.center,
       textDirection: TextDirection.rtl,
       text: TextSpan(
-        style: theme.textTheme.displayLarge,
+        style: context.textTheme.displayLarge,
         children: provider.ayahs.map((ayah) {
           return TextSpan(text: '${ayah.text} ﴿${ayah.number}﴾ ');
         }).toList(),

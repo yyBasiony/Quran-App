@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:qanet/core/extensions/theme_extensions.dart';
 import 'package:qanet/presentation/resources/app_colors.dart';
 import 'package:qanet/core/utils/setting_logic.dart';
 
@@ -9,8 +10,8 @@ class SettingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = SettingLogic.isDarkMode(context);
-    final isArabic = SettingLogic.isArabic(context);
+    final isDarkMode = context.isDarkMode;
+    final isArabic = context.isArabic;
 
     return Scaffold(
         appBar:

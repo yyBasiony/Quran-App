@@ -16,8 +16,8 @@ class ThemeProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void _loadThemeFromPrefs() async {
-    _isDarkMode = await AppPreferences.getTheme();
+  void _loadThemeFromPrefs()  {
+    _isDarkMode =  AppPreferences.getTheme();
     notifyListeners();
   }
 }

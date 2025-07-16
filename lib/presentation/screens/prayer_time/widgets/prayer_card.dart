@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:qanet/core/extensions/theme_extensions.dart';
 import 'package:qanet/core/utils/prayer_times_logic.dart';
 
 class PrayerCard extends StatelessWidget {
@@ -17,7 +18,7 @@ class PrayerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    final textTheme = context.textTheme;
 
     return Container(
         decoration: BoxDecoration(

@@ -30,7 +30,7 @@ class PrayerTimesProvider with ChangeNotifier {
   }
 
 Future<void> _loadSavedCity() async {
-  _selectedCity = await AppPreferences.getSelectedCity();
+  _selectedCity =  AppPreferences.getSelectedCity();
   notifyListeners();
 }
 

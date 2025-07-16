@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:qanet/core/extensions/theme_extensions.dart';
 import 'package:qanet/presentation/resources/app_colors.dart';
 import 'package:qanet/presentation/resources/app_routes.dart';
 import '../../../../data/models/surah_model.dart';
@@ -11,9 +12,8 @@ class SurahCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final textTheme = theme.textTheme;
-    final avatarTextColor = theme.brightness == Brightness.dark ? Colors.white70 : Colors.white;
+    final textTheme = context.textTheme;
+    final avatarTextColor = context.isDarkMode  ? Colors.white70 : Colors.white;
 
     return ListTile(
       contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),

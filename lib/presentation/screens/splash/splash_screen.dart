@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:qanet/core/extensions/theme_extensions.dart';
 import 'package:qanet/presentation/resources/app_assets.dart';
 import 'package:qanet/core/utils/splash_logic.dart';
 
@@ -34,10 +35,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
 
     return Scaffold(
-        backgroundColor: theme.scaffoldBackgroundColor,
+        backgroundColor: context.scaffoldColor,
         body: Center(
             child: Image.asset(
           AppAssets.logo,

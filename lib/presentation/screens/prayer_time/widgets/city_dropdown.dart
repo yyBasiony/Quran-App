@@ -1,6 +1,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:qanet/core/extensions/theme_extensions.dart';
 import 'package:qanet/presentation/resources/app_colors.dart';
 import 'package:qanet/core/utils/prayer_times_logic.dart';
 
@@ -18,9 +19,8 @@ class CityDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final textTheme = theme.textTheme;
-    final isDark = theme.brightness == Brightness.dark;
+    final textTheme = context.textTheme;
+    final isDark = context.isDarkMode;
 
     return Center(
         child: Padding(
@@ -48,7 +48,7 @@ class CityDropdown extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 12.w),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8.r),
-                    border: Border.all(color: theme.primaryColor),
+                    border: Border.all(color: context.primaryColor),
                   ),
                 ),
                 iconStyleData: IconStyleData(

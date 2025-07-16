@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:qanet/core/extensions/theme_extensions.dart';
 import 'package:qanet/presentation/screens/surah/widgets/surah_ayah_text.dart';
 import 'package:qanet/presentation/screens/surah/widgets/surah_audio_controls.dart';
 import 'package:qanet/providers/surah_detail_provider.dart';
@@ -44,12 +45,11 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: theme.scaffoldBackgroundColor,
+      backgroundColor: context.scaffoldColor,
       appBar: AppBar(
-          backgroundColor: theme.primaryColor, title: Text(widget.surahName, style: theme.textTheme.titleLarge?.copyWith(color: Colors.white))),
+          backgroundColor: context.primaryColor, title: Text(widget.surahName, style: context.textTheme.titleLarge?.copyWith(color: Colors.white))),
       body: Consumer<SurahDetailProvider>(
         builder: (context, provider, child) {
           if (provider.isLoading) {
@@ -63,11 +63,11 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
                     margin: EdgeInsets.symmetric(vertical: 16.h),
                     padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
                     decoration: BoxDecoration(
-                      border: Border.all(color: theme.primaryColor, width: 1.5.w),
+                      border: Border.all(color: context.primaryColor, width: 1.5.w),
                       borderRadius: BorderRadius.circular(16.r),
                     ),
                     child: Text(widget.surahName,
-                        style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold, color: theme.primaryColor, fontFamily: 'Uthmani'))),
+                        style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold, color: context.primaryColor, fontFamily: 'Uthmani'))),
                 InteractiveViewer(
                     panEnabled: true,
                     scaleEnabled: true,

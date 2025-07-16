@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:qanet/core/extensions/theme_extensions.dart';
 
 import 'package:qanet/presentation/resources/app_colors.dart';
 
@@ -13,12 +14,10 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<SearchProvider>(context);
-    final theme = Theme.of(context);
-
     return Scaffold(
-      backgroundColor: theme.scaffoldBackgroundColor,
+        backgroundColor: context.scaffoldColor,
       appBar:
-          AppBar(backgroundColor: theme.primaryColor, title: Text('searchTitle'.tr(), style: TextStyle(color: AppColors.onPrimary, fontSize: 20.sp))),
+          AppBar(backgroundColor: context.primaryColor, title: Text('searchTitle'.tr(), style: TextStyle(color: AppColors.onPrimary, fontSize: 20.sp))),
       body: Padding(
         padding: EdgeInsets.all(16.w),
         child: Column(
@@ -29,12 +28,12 @@ class SearchScreen extends StatelessWidget {
                 // textDirection: TextDirection.rtl,
                 decoration: InputDecoration(
                     hintText: 'searchHint'.tr(),
-                    hintStyle: theme.textTheme.headlineMedium,
+                    hintStyle: context.textTheme.headlineMedium,
                     suffixIcon: IconButton(
-                      icon: Icon(Icons.search, color: theme.primaryColor, size: 24.sp),
+                      icon: Icon(Icons.search, color: context.primaryColor, size: 24.sp),
                       onPressed: () => provider.searchAyahs(provider.controller.text),
                     ),
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12.r), borderSide: BorderSide(color: theme.primaryColor)))),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12.r), borderSide: BorderSide(color: context.primaryColor)))),
             SizedBox(height: 16.h),
             if (provider.isLoading)
               const CircularProgressIndicator()
@@ -46,7 +45,7 @@ class SearchScreen extends StatelessWidget {
             else if (provider.searchResults.isEmpty)
               Text(
                 'searchNoResults'.tr(),
-                style: theme.textTheme.bodyMedium?.copyWith(fontSize: 14.sp),
+                style: context.textTheme.bodyMedium?.copyWith(fontSize: 14.sp),
               )
             else
               Expanded(
@@ -55,20 +54,20 @@ class SearchScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final ayah = provider.searchResults[index];
                         return Card(
-                            color: theme.cardColor,
+                            color: context.theme.cardColor,
                             margin: EdgeInsets.symmetric(vertical: 8.h),
                             child: ListTile(
                               title: Text(
                                 ayah.text,
                                 textAlign: TextAlign.right,
                                 // textDirection: TextDirection.rtl,
-                                style: theme.textTheme.headlineMedium?.copyWith(fontSize: 16.sp),
+                                style: context.textTheme.headlineMedium?.copyWith(fontSize: 16.sp),
                               ),
                               subtitle: ayah.surah != null
                                   ? Text(
                                       '[${ayah.surah}]',
                                       textAlign: TextAlign.right,
-                                      style: theme.textTheme.headlineMedium,
+                                      style: context.textTheme.headlineMedium,
                                     )
                                   : null,
                             ));

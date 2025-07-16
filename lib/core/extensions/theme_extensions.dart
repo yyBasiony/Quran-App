@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 extension ThemeExtensions on BuildContext {
@@ -10,4 +11,6 @@ extension ThemeExtensions on BuildContext {
   Color get scaffoldColor => Theme.of(this).scaffoldBackgroundColor;
 
   Color get primaryColor => Theme.of(this).primaryColor;
+   bool get isArabic => locale.languageCode == 'ar'; 
+
 }
