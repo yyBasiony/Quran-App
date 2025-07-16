@@ -1,12 +1,8 @@
 import 'dart:async';
 import 'package:intl/intl.dart';
 
-import '../../data/models/audio_mobel.dart';
-import '../../data/models/ayah_model.dart';
-import '../../data/models/prayer_times_model.dart';
-import '../../data/services/audio_service.dart';
-import '../../data/services/prayer_times_service.dart';
-import '../../data/services/quran_service.dart';
+import '../../../../data/models/prayer_times_model.dart';
+import '../../../../data/services/prayer_times_service.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -69,28 +65,6 @@ static Future<PrayerTimesModel?> fetchPrayerTimes(
     } catch (e) {
       return null;
     }
-  }
-  //surah details
-    static Future<List<AyahModel>> fetchAyahs(int surahNumber) async {
-    return await QuranService().fetchSurahAyahs(surahNumber);
-  }
-
-   static Future<List<AudioModel>> fetchReciters() async {
-     return await AudioService().fetchReciters();
-   }
-static Future<List<AudioModel>> fetchRecitersWithSurah(int surahNumber) async {
-  return await AudioService().fetchRecitersWithSurah(surahNumber);
-}
-   
-
-   
-
- static Future<AudioModel?> fetchSurahAudio(int reciterId, int surahNumber) async {
-    return await AudioService().fetchSurahAudio(reciterId, surahNumber);
-  }
-
-  static Future<String> getOrDownloadAudio(String url, String fileName) async {
-    return await AudioService().getOrDownloadAudio(url, fileName);
   }
 
 

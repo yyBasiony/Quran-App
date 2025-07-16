@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:qanet/core/extensions/theme_extensions.dart';
+import 'package:qanet/extensions/theme_extensions.dart';
 import 'package:qanet/presentation/screens/surah/widgets/surah_ayah_text.dart';
 import 'package:qanet/presentation/screens/surah/widgets/surah_audio_controls.dart';
 import 'package:qanet/providers/surah_detail_provider.dart';

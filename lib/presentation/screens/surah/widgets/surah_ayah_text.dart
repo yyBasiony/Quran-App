@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qanet/core/extensions/theme_extensions.dart';
+import 'package:qanet/extensions/theme_extensions.dart';
 import 'package:qanet/providers/surah_detail_provider.dart';
 
 class SurahAyahText extends StatelessWidget {

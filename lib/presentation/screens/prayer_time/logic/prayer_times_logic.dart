@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qanet/presentation/resources/app_assets.dart';
 import 'package:easy_localization/easy_localization.dart';
-import '../../../data/models/prayer_times_model.dart';
+import '../../../../../data/models/prayer_times_model.dart';
 
 class PrayerTimesLogic {
   static Map<String, String> getArabicNames(BuildContext context) {

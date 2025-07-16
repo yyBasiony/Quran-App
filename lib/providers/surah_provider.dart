@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qanet/core/utils/surah_logic.dart';
+import 'package:qanet/presentation/screens/surah/logic/surah_logic.dart';
 import 'package:qanet/data/models/surah_model.dart';
 
 class SurahProvider extends ChangeNotifier {

@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:qanet/core/extensions/theme_extensions.dart';
+import 'package:qanet/extensions/theme_extensions.dart';
 import 'package:qanet/presentation/resources/app_colors.dart';
-import 'package:qanet/core/utils/setting_logic.dart';
+import 'package:qanet/presentation/screens/settings/logic/setting_logic.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});

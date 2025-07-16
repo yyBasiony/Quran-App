@@ -2,7 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:qanet/core/extensions/theme_extensions.dart';
+import 'package:qanet/extensions/theme_extensions.dart';
 import 'package:qanet/data/models/audio_mobel.dart';
 import 'package:qanet/providers/surah_detail_provider.dart';
 

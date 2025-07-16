@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qanet/data/models/ayah_model.dart';
 import 'package:qanet/data/models/audio_mobel.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:qanet/core/utils/logic_methods.dart';
+import 'package:qanet/presentation/screens/surah/logic/surah_logic.dart';
 
 class SurahDetailProvider with ChangeNotifier {
   List<AyahModel> ayahs = [];
@@ -29,9 +29,9 @@ class SurahDetailProvider with ChangeNotifier {
     isLoading = true;
     notifyListeners();
 
-    ayahs = await LogicMethods.fetchAyahs(surahNumber);
+    ayahs = await SurahLogic.fetchAyahs(surahNumber);
 
-    reciters = await LogicMethods.fetchRecitersWithSurah(surahNumber);
+    reciters = await SurahLogic.fetchRecitersWithSurah(surahNumber);
 
     if (reciters.isNotEmpty) {
       selectedReciter = reciters.first;
@@ -47,7 +47,7 @@ Future<void> playFullSurah(int surahNumber) async {
   if (selectedReciter == null) return;
 
   try {
-    final audioModel = await LogicMethods.fetchSurahAudio(
+    final audioModel = await SurahLogic.fetchSurahAudio(
       selectedReciter!.reciterId,
       surahNumber,
     );
@@ -63,14 +63,14 @@ Future<void> playFullSurah(int surahNumber) async {
     isPlaying = true;
     notifyListeners();
 
-    LogicMethods.getOrDownloadAudio(audioModel.audioUrl, fileName).then((path) {
+    SurahLogic.getOrDownloadAudio(audioModel.audioUrl, fileName).then((path) {
       print('تم تحميل الملف وتخزينه: $path');
     }).catchError((e) {
       print('فشل تحميل الملف للتخزين المحلي: $e');
     });
 
     // download
-    LogicMethods.fetchAyahs(surahNumber).then((fetchedAyahs) {
+    SurahLogic.fetchAyahs(surahNumber).then((fetchedAyahs) {
       ayahs = fetchedAyahs;
       notifyListeners();
     }).catchError((e) {

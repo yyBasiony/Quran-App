@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qanet/core/utils/search_logic.dart';
+import 'package:qanet/presentation/screens/search/logic/search_logic.dart';
 import 'package:qanet/data/models/search_ayah_model.dart';
 
 class SearchProvider with ChangeNotifier {

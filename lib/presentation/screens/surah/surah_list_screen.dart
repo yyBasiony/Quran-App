@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:qanet/core/extensions/theme_extensions.dart';
+import 'package:qanet/extensions/theme_extensions.dart';
 import 'package:qanet/presentation/screens/surah/widgets/surah_card.dart';
 import 'package:qanet/providers/surah_provider.dart';
 import 'package:qanet/presentation/resources/app_colors.dart';

@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:qanet/core/extensions/theme_extensions.dart';
+import 'package:qanet/extensions/theme_extensions.dart';
 import 'package:qanet/presentation/resources/app_assets.dart';
-import 'package:qanet/core/utils/splash_logic.dart';
+import 'package:qanet/presentation/screens/splash/logic/splash_logic.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
