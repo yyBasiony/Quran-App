@@ -2,11 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:qanet/extensions/theme_extensions.dart';
 import '../../../providers/prayer_times_provider.dart';
 import '../../../providers/surah_provider.dart';
 import '../../../providers/search_provider.dart';
-import '../../resources/app_colors.dart';
 import '../../resources/app_constants.dart';
 import '../prayer_time/prayer_time_page.dart';
 import '../search/search_screen.dart';
@@ -31,7 +29,6 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = context.isDarkMode;
     final labels = [
       'home'.tr(),
       'quran'.tr(),
@@ -64,23 +61,18 @@ class _MainScreenState extends State<MainScreen> {
 
     return Scaffold(
       body: getScreenByIndex(selectedIndex),
-      bottomNavigationBar: BottomNavigationBar(
-        items: List.generate(
-          AppConstants.bottomNavIcons.length,
-          (index) => BottomNavigationBarItem(
-            icon: Icon(AppConstants.bottomNavIcons[index], size: 24.sp),
-            label: labels[index],
-          ),
-        ),
-        currentIndex: selectedIndex,
-        selectedItemColor: AppColors.primary,
-        unselectedItemColor: AppColors.grey,
-        backgroundColor: isDark ? AppColors.darkBackground : AppColors.background,
-        onTap:onTabTapped,
-        type: BottomNavigationBarType.fixed,
-        selectedLabelStyle: TextStyle(fontSize: 13.sp),
-        unselectedLabelStyle: TextStyle(fontSize: 12.sp),
-      ),
+bottomNavigationBar: BottomNavigationBar(
+  items: List.generate(
+    AppConstants.bottomNavIcons.length,
+    (index) => BottomNavigationBarItem(
+      icon: Icon(AppConstants.bottomNavIcons[index], size: 24.sp),
+      label: labels[index],
+    ),
+  ),
+  currentIndex: selectedIndex,
+  onTap: onTabTapped,
+  type: BottomNavigationBarType.fixed,
+),
     );
   }
 }

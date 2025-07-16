@@ -28,7 +28,7 @@ class SearchScreen extends StatelessWidget {
                 // textDirection: TextDirection.rtl,
                 decoration: InputDecoration(
                     hintText: 'searchHint'.tr(),
-                    hintStyle: context.textTheme.headlineMedium,
+                    hintStyle: context.textTheme.titleMedium,
                     suffixIcon: IconButton(
                       icon: Icon(Icons.search, color: context.primaryColor, size: 24.sp),
                       onPressed: () => provider.searchAyahs(provider.controller.text),
@@ -45,7 +45,7 @@ class SearchScreen extends StatelessWidget {
             else if (provider.searchResults.isEmpty)
               Text(
                 'searchNoResults'.tr(),
-                style: context.textTheme.bodyMedium?.copyWith(fontSize: 14.sp),
+                style: context.textTheme.titleMedium,
               )
             else
               Expanded(

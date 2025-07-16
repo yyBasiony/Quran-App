@@ -24,7 +24,7 @@ class AppTheme {
         titleMedium: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.w500,
-          color: Colors.white,
+          color: AppColors.textSecondary,
         ),
         labelLarge: TextStyle(
           fontSize: 16,
@@ -49,6 +49,14 @@ class AppTheme {
           fontFamily: 'Uthmani',
         ),
       ),
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        backgroundColor: AppColors.background,
+        selectedItemColor: AppColors.primary,
+        unselectedItemColor: AppColors.grey,
+        selectedLabelStyle: TextStyle(fontSize: 13),
+        unselectedLabelStyle: TextStyle(fontSize: 12),
+      ),
+
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
@@ -85,7 +93,7 @@ class AppTheme {
         titleMedium: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.w500,
-          color: Colors.white,
+          color: AppColors.textSecondary,
         ),
         labelLarge: TextStyle(
           fontSize: 16,
@@ -110,6 +118,14 @@ class AppTheme {
           fontFamily: 'Uthmani',
         ),
       ),
+            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        backgroundColor: AppColors.darkBackground,
+        selectedItemColor: AppColors.primary,
+        unselectedItemColor: AppColors.grey,
+        selectedLabelStyle: TextStyle(fontSize: 13),
+        unselectedLabelStyle: TextStyle(fontSize: 12),
+      ),
+
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
