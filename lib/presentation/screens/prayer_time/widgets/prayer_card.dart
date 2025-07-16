@@ -15,7 +15,6 @@ class PrayerCard extends StatelessWidget {
     required this.imageKey,
   });
 
-
   @override
   Widget build(BuildContext context) {
     final textTheme = context.textTheme;
@@ -36,11 +35,9 @@ class PrayerCard extends StatelessWidget {
                     Colors.transparent,
                   ], begin: Alignment.bottomCenter, end: Alignment.topCenter))),
           Center(
-              child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Text(name, style: textTheme.titleLarge),
-            SizedBox(height: 6.h),
-            Text(time, style: textTheme.titleMedium)
-          ]))
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [Text(name, style: textTheme.titleLarge), SizedBox(height: 6.h), Text(time, style: textTheme.titleLarge)]))
         ]));
   }
 }

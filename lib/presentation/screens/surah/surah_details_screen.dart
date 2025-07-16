@@ -67,7 +67,7 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
                       borderRadius: BorderRadius.circular(16.r),
                     ),
                     child: Text(widget.surahName,
-                        style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold, color: context.primaryColor, fontFamily: 'Uthmani'))),
+                        style: context.textTheme.headlineMedium)),
                 InteractiveViewer(
                     panEnabled: true,
                     scaleEnabled: true,
