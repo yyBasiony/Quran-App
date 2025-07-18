@@ -23,6 +23,7 @@ class SearchScreen extends StatelessWidget {
         child: Column(
           children: [
             TextField(
+               style: Theme.of(context).textTheme.titleMedium, 
                 controller: provider.controller,
                 onSubmitted: provider.searchAyahs,
                 // textDirection: TextDirection.rtl,

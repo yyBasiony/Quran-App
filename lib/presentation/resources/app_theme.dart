@@ -22,9 +22,9 @@ class AppTheme {
           color: Colors.white,
         ),
         titleMedium: TextStyle(
-          fontSize: 20,
+          fontSize: 18,
           fontWeight: FontWeight.w500,
-          color: AppColors.textSecondary,
+          color: Colors.black,
         ),
         labelLarge: TextStyle(
           fontSize: 16,
@@ -93,7 +93,7 @@ class AppTheme {
         titleMedium: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.w500,
-          color: AppColors.textSecondary,
+          color: Colors.white,
         ),
         labelLarge: TextStyle(
           fontSize: 16,

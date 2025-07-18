@@ -7,37 +7,37 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LogicMethods {
-static Future<PrayerTimesModel?> fetchPrayerTimes(
-    PrayerTimesService service, String city) async {
-  try {
-    final prefs = await SharedPreferences.getInstance();
-    final todayKey = 'prayerTimes_${DateTime.now().toString().substring(0, 10)}_$city';
+  static Future<PrayerTimesModel?> fetchPrayerTimes(PrayerTimesService service, String city) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final todayKey = 'prayerTimes_${DateTime.now().toString().substring(0, 10)}_$city';
 //if there are local data return it
-    if (prefs.containsKey(todayKey)) {
-      final cachedData = prefs.getString(todayKey);
-      if (cachedData != null) {
-        final timingsMap = jsonDecode(cachedData);
-        return PrayerTimesModel.fromJson(timingsMap);
+      if (prefs.containsKey(todayKey)) {
+        final cachedData = prefs.getString(todayKey);
+        if (cachedData != null) {
+          final timingsMap = jsonDecode(cachedData);
+          return PrayerTimesModel.fromJson(timingsMap);
+        }
       }
-    }
 //if no  get from api
-    final times = await service.fetchPrayerTimes(city, "Egypt");
+      final times = await service.fetchPrayerTimes(city, "Egypt");
 //save it in  shared preferences
-    final timingsJson = jsonEncode({
-      "Fajr": times.fajr,
-      "Dhuhr": times.dhuhr,
-      "Asr": times.asr,
-      "Maghrib": times.maghrib,
-      "Isha": times.isha,
-    });
-    await prefs.setString(todayKey, timingsJson);
+      final timingsJson = jsonEncode({
+        "Fajr": times.fajr,
+        "Dhuhr": times.dhuhr,
+        "Asr": times.asr,
+        "Maghrib": times.maghrib,
+        "Isha": times.isha,
+      });
+      await prefs.setString(todayKey, timingsJson);
 
-    return times;
-  } catch (e) {
-    print('Error fetching prayer times: $e');
-    return null;
+      return times;
+    } catch (e) {
+      print('Error fetching prayer times: $e');
+      return null;
+    }
   }
-}
+
   static Map<String, String> getNextPrayerTime(PrayerTimesModel times) {
     DateTime now = DateTime.now();
     Map<String, String> prayers = {
@@ -66,7 +66,4 @@ static Future<PrayerTimesModel?> fetchPrayerTimes(
       return null;
     }
   }
-
-
 }
-
