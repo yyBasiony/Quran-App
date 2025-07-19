@@ -186,9 +186,9 @@ final response = await http.get(
 </p>
 
 <p align="center">
-  <img src="https://github.com/yyBasiony/Quran-App/blob/main/assets/screens/17.jpg" width="30%" style="margin: 10px;" />
-  <img src="https://github.com/yyBasiony/Quran-App/blob/main/assets/screens/18.jpg" width="30%" style="margin: 10px;" />
-  <img src="https://github.com/yyBasiony/Quran-App/blob/main/assets/screens/19.jpg" width="30%" style="margin: 10px;" />
+  <img src="https://github.com/yyBasiony/Quran-App/blob/main/assets/screens/17.png" width="30%" style="margin: 10px;" />
+  <img src="https://github.com/yyBasiony/Quran-App/blob/main/assets/screens/18.png" width="30%" style="margin: 10px;" />
+  <img src="https://github.com/yyBasiony/Quran-App/blob/main/assets/screens/19.png" width="30%" style="margin: 10px;" />
 
 </p>
 
