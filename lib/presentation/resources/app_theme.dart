@@ -27,12 +27,12 @@ class AppTheme {
           color: Colors.black,
         ),
         titleSmall: TextStyle(
-          fontSize: 10,
+          fontSize: 15,
           fontWeight: FontWeight.w500,
           color: Colors.black,
         ),
         labelLarge: TextStyle(
-          fontSize: 14,
+          fontSize: 18,
           fontWeight: FontWeight.bold,
           color: AppColors.primary,
         ),
@@ -100,7 +100,7 @@ class AppTheme {
           color: Colors.white,
         ),
         titleSmall: TextStyle(
-          fontSize: 13,
+          fontSize: 15,
           fontWeight: FontWeight.w500,
           color: Colors.white,
         ),

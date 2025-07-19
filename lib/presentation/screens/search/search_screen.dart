@@ -45,7 +45,7 @@ class SearchScreen extends StatelessWidget {
             else if (provider.searchResults.isEmpty)
               Text(
                 'searchNoResults'.tr(),
-                style: context.textTheme.titleMedium,
+                style: context.textTheme.titleSmall,
               )
             else
               Expanded(

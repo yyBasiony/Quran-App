@@ -21,41 +21,47 @@ class NoInternetWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.wifi_off,
-            size: 64.sp,
-            color: Colors.grey,
-          ),
-          SizedBox(height: 16.h),
-          Text(
-            title ?? 'noInternetTitle'.tr(),
-            style: context.textTheme.titleMedium,
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(height: 8.h),
-          Text(
-            subtitle ?? 'noInternetSubtitle'.tr(),
-            style: context.textTheme.bodySmall,
-            textAlign: TextAlign.center,
-          ),
-          if (showRetryButton && onRetry != null) ...[
-            SizedBox(height: 16.h),
-            ElevatedButton(
-              onPressed: onRetry,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.primary,
-              ),
-              child: Text(
-                'retry'.tr(),
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
-          ],
-        ],
-      ),
+      child: Padding(
+          padding: EdgeInsets.all(24.w),
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Container(
+                padding: EdgeInsets.all(20.w),
+                decoration: BoxDecoration(color: AppColors.background.withOpacity(0.3), shape: BoxShape.circle),
+                child: Icon(Icons.wifi_off_rounded, size: 48.sp, color: AppColors.grey)),
+            SizedBox(height: 24.h),
+            Text(title ?? 'noInternetTitle'.tr(),
+                style: context.textTheme.titleLarge?.copyWith(
+                  color: AppColors.textPrimary,
+                  fontWeight: FontWeight.w600,
+                ),
+                textAlign: TextAlign.center),
+            SizedBox(height: 12.h),
+            Text(subtitle ?? 'noInternetSubtitle'.tr(),
+                style: context.textTheme.bodyMedium?.copyWith(color: AppColors.textSecondary), textAlign: TextAlign.center),
+            if (showRetryButton && onRetry != null) ...[
+              SizedBox(height: 32.h),
+              ElevatedButton.icon(
+                  onPressed: onRetry,
+                  icon: Icon(
+                    Icons.refresh_rounded,
+                    color: AppColors.onPrimary,
+                    size: 20.sp,
+                  ),
+                  label: Text('retry'.tr(), style: const TextStyle(color: AppColors.onPrimary, fontWeight: FontWeight.w500)),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primary,
+                    foregroundColor: AppColors.onPrimary,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 24.w,
+                      vertical: 12.h,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    elevation: 2,
+                  ))
+            ]
+          ])),
     );
   }
 }

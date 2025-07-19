@@ -72,7 +72,7 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
                     padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
                     decoration:
                         BoxDecoration(border: Border.all(color: context.primaryColor, width: 1.5.w), borderRadius: BorderRadius.circular(16.r)),
-                    child: Text(widget.surahName, style: context.textTheme.titleLarge)),
+                    child: Text(widget.surahName, style: context.textTheme.labelLarge)),
                 InteractiveViewer(
                     panEnabled: true,
                     scaleEnabled: true,
