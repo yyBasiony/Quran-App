@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qanet/presentation/resources/app_colors.dart';
+
 class AppTheme {
   static ThemeData get lightTheme {
     return ThemeData(
@@ -20,11 +21,7 @@ class AppTheme {
           fontWeight: FontWeight.bold,
           color: Colors.white,
         ),
-        titleMedium: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-          color: Colors.black,
-        ),
+        titleMedium: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.black),
         titleSmall: TextStyle(
           fontSize: 15,
           fontWeight: FontWeight.w500,
