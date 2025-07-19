@@ -19,7 +19,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-    int selectedIndex = 0;
+  int selectedIndex = 0;
 
   void onTabTapped(int index) {
     setState(() {
@@ -61,18 +61,18 @@ class _MainScreenState extends State<MainScreen> {
 
     return Scaffold(
       body: getScreenByIndex(selectedIndex),
-bottomNavigationBar: BottomNavigationBar(
-  items: List.generate(
-    AppConstants.bottomNavIcons.length,
-    (index) => BottomNavigationBarItem(
-      icon: Icon(AppConstants.bottomNavIcons[index], size: 24.sp),
-      label: labels[index],
-    ),
-  ),
-  currentIndex: selectedIndex,
-  onTap: onTabTapped,
-  type: BottomNavigationBarType.fixed,
-),
+      bottomNavigationBar: BottomNavigationBar(
+        items: List.generate(
+          AppConstants.bottomNavIcons.length,
+          (index) => BottomNavigationBarItem(
+            icon: Icon(AppConstants.bottomNavIcons[index], size: 24.sp),
+            label: labels[index],
+          ),
+        ),
+        currentIndex: selectedIndex,
+        onTap: onTabTapped,
+        type: BottomNavigationBarType.fixed,
+      ),
     );
   }
 }

@@ -21,7 +21,7 @@ class SearchProvider with ChangeNotifier {
       final results = await SearchLogic.search(query);
       searchResults = results;
     } catch (e) {
-      errorMessage = 'حدث خطأ أثناء البحث.';
+errorMessage = 'An error occurred during the search.';
     } finally {
       isLoading = false;
       notifyListeners();

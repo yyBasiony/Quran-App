@@ -51,7 +51,17 @@
   "language": "اللغة",
   "arabic": "العربية",
   "english": "الإنجليزية",
-  "searchSurahHint": "ابحث عن سورة..."
+  "searchSurahHint": "ابحث عن سورة...",
+   "no_internet": "لا يوجد اتصال بالإنترنت",
+    "ok": "حسناً",
+  "loadingSurahs": "جاري تحميل قائمة السور...",
+  "cannotLoadSurahs": "لا يمكن تحميل قائمة السور",
+  "checkInternetConnection": "تحقق من الاتصال بالإنترنت",
+  "loadingSurahContent": "جاري تحميل محتوى السورة...",
+  "cannotLoadSurahContent": "لا يمكن تحميل محتوى السورة",
+  "searching": "جاري البحث...",
+  "retry":"اعاده التحميل"
+
 
 
 

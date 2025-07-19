@@ -51,7 +51,22 @@
   "language": "Language",
   "arabic": "Arabic",
   "english": "English",
-  "searchSurahHint": "Search for a Surah..."
+  "searchSurahHint": "Search for a Surah...",
+    "no_internet": "No internet connection",
+  "ok": "OK",
+    "noInternetTitle": "No Internet Connection",
+  "noInternetSubtitle": "Check your internet connection and try again",
+  "noInternetMessage": "No internet connection. Check your connection and try again.",
+  "retry": "Retry",
+  "loadingSurahs": "Loading Surahs...",
+  "cannotLoadSurahs": "Cannot load Surahs list",
+  "checkInternetConnection": "Check your internet connection",
+  "loadingSurahContent": "Loading Surah content...",
+  "cannotLoadSurahContent": "Cannot load Surah content"
+
+  
+
+
 
 
 

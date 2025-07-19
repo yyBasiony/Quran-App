@@ -22,12 +22,17 @@ class AppTheme {
           color: Colors.white,
         ),
         titleMedium: TextStyle(
-          fontSize: 18,
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+          color: Colors.black,
+        ),
+        titleSmall: TextStyle(
+          fontSize: 10,
           fontWeight: FontWeight.w500,
           color: Colors.black,
         ),
         labelLarge: TextStyle(
-          fontSize: 16,
+          fontSize: 14,
           fontWeight: FontWeight.bold,
           color: AppColors.primary,
         ),
@@ -49,14 +54,13 @@ class AppTheme {
           fontFamily: 'Uthmani',
         ),
       ),
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: AppColors.background,
         selectedItemColor: AppColors.primary,
         unselectedItemColor: AppColors.grey,
         selectedLabelStyle: TextStyle(fontSize: 13),
         unselectedLabelStyle: TextStyle(fontSize: 12),
       ),
-
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
@@ -95,6 +99,11 @@ class AppTheme {
           fontWeight: FontWeight.w500,
           color: Colors.white,
         ),
+        titleSmall: TextStyle(
+          fontSize: 13,
+          fontWeight: FontWeight.w500,
+          color: Colors.white,
+        ),
         labelLarge: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,
@@ -118,14 +127,13 @@ class AppTheme {
           fontFamily: 'Uthmani',
         ),
       ),
-            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: AppColors.darkBackground,
         selectedItemColor: AppColors.primary,
         unselectedItemColor: AppColors.grey,
         selectedLabelStyle: TextStyle(fontSize: 13),
         unselectedLabelStyle: TextStyle(fontSize: 12),
       ),
-
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),

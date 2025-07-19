@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:qanet/data/connectivity_helper.dart';
 import '../models/search_ayah_model.dart';
 import '../models/surah_model.dart';
 import '../models/ayah_model.dart';
@@ -7,12 +9,23 @@ import 'base_service.dart';
 class QuranService extends BaseService {
   static const String baseUrl = 'https://api.alquran.cloud/v1';
 
-  Future<List<SurahModel>> fetchSurahs() async {
+  Future<List<SurahModel>> fetchSurahs({BuildContext? context}) async {
     final box = await Hive.openBox<SurahModel>('surahsBox');
-
+    
     if (box.isNotEmpty) {
       print("من التخزين المحلي");
       return box.values.toList();
+    }
+
+    final hasInternet = await ConnectivityHelper.hasInternet();
+    if (!hasInternet) {
+      if (context != null) {
+        ConnectivityHelper.showNoInternetSnackBar(
+          context, 
+          customMessage: 'يتطلب تحميل قائمة السور الاتصال بالإنترنت لأول مرة'
+        );
+      }
+      throw Exception('لا يوجد اتصال بالإنترنت');
     }
 
     final data = await getRequest('$baseUrl/surah');
@@ -22,13 +35,12 @@ class QuranService extends BaseService {
     for (var surah in surahList) {
       box.put(surah.number, surah);
     }
-
     return surahList;
   }
 
-  Future<List<AyahModel>> fetchSurahAyahs(int surahNumber) async {
+  Future<List<AyahModel>> fetchSurahAyahs(int surahNumber, {BuildContext? context}) async {
     final box = await Hive.openBox('ayahsBox');
-
+    
     if (box.containsKey(surahNumber)) {
       print("من التخزين المحلي لـ سورة $surahNumber");
       final cachedData = box.get(surahNumber);
@@ -39,10 +51,20 @@ class QuranService extends BaseService {
       }
     }
 
+    final hasInternet = await ConnectivityHelper.hasInternet();
+    if (!hasInternet) {
+      if (context != null) {
+        ConnectivityHelper.showNoInternetSnackBar(
+          context,
+          customMessage: 'يتطلب تحميل آيات السورة الاتصال بالإنترنت لأول مرة'
+        );
+      }
+      throw Exception('لا يوجد اتصال بالإنترنت');
+    }
+
     print("من الـ API");
     final url = '$baseUrl/surah/$surahNumber/quran-uthmani';
     final data = await getRequest(url);
-
     final List<dynamic> ayahsData = data['data']['ayahs'];
     final ayahList = ayahsData.asMap().entries.map((entry) {
       final index = entry.key;
@@ -54,16 +76,25 @@ class QuranService extends BaseService {
     return ayahList;
   }
 
-  Future<List<SearchAyahModel>> searchAyah(String searchText) async {
-    final data = await getRequest('https://api-quran.com/api?text=$searchText&type=search');
+  Future<List<SearchAyahModel>> searchAyah(String searchText, {BuildContext? context}) async {
+    final hasInternet = await ConnectivityHelper.hasInternet();
+    if (!hasInternet) {
+      if (context != null) {
+        ConnectivityHelper.showNoInternetSnackBar(
+          context,
+          customMessage: 'يتطلب البحث في القرآن الاتصال بالإنترنت'
+        );
+      }
+      throw Exception('لا يوجد اتصال بالإنترنت');
+    }
 
+    final data = await getRequest('https://api-quran.com/api?text=$searchText&type=search');
     if (data.containsKey('result') && data['result'] is List) {
       return (data['result'] as List)
           .whereType<String>()
           .map((text) => SearchAyahModel(text: text))
           .toList();
     }
-
     return [];
   }
 }
