@@ -62,14 +62,17 @@
   "cannotLoadSurahs": "Cannot load Surahs list",
   "checkInternetConnection": "Check your internet connection",
   "loadingSurahContent": "Loading Surah content...",
-  "cannotLoadSurahContent": "Cannot load Surah content"
-
-  
-
-
-
-
-
+  "cannotLoadSurahContent": "Cannot load Surah content",
+  "offlineDataMessage": "No internet connection. Displaying cached data.",
+  "loadingRecitersMessage": "Internet connection required to load reciters list",
+  "loadingSurahsFirstTime": "Internet connection required to load Surahs list for the first time",
+  "loadingAyahsFirstTime": "Internet connection required to load Surah verses for the first time",
+  "loadingAudioMessage": "Internet connection required to load recitation",
+  "downloadingAudioMessage": "Internet connection required to download audio file",
+  "searchRequiresInternet": "Internet connection required to search in Quran",
+  "prayerTimesOfflineMessage": "No internet connection and no saved prayer times available",
+  "prayerTimesFromCache": "No internet connection. Displaying last saved prayer times",
+  "prayerTimesUpdateFailed": "Failed to update prayer times. Displaying last saved times"
 
 
 }

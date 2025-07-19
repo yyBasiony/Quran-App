@@ -60,11 +60,19 @@
   "loadingSurahContent": "جاري تحميل محتوى السورة...",
   "cannotLoadSurahContent": "لا يمكن تحميل محتوى السورة",
   "searching": "جاري البحث...",
-  "retry":"اعاده التحميل"
-
-
-
-
-
+  "retry":"اعاده التحميل",
+  "noInternetTitle": "لا يوجد اتصال بالإنترنت",
+  "noInternetSubtitle": "تحقق من اتصالك بالإنترنت وحاول مرة أخرى",
+  "noInternetMessage": "لا يوجد اتصال بالإنترنت",
+  "offlineDataMessage": "لا يوجد اتصال بالإنترنت. يتم عرض البيانات المحفوظة.",
+  "loadingRecitersMessage": "يتطلب تحميل قائمة القراء الاتصال بالإنترنت",
+  "loadingSurahsFirstTime": "يتطلب تحميل قائمة السور الاتصال بالإنترنت لأول مرة",
+  "loadingAyahsFirstTime": "يتطلب تحميل آيات السورة الاتصال بالإنترنت لأول مرة",
+  "loadingAudioMessage": "يتطلب تحميل التلاوة الاتصال بالإنترنت",
+  "downloadingAudioMessage": "يتطلب تحميل الملف الصوتي الاتصال بالإنترنت",
+  "searchRequiresInternet": "يتطلب البحث في القرآن الاتصال بالإنترنت",
+  "prayerTimesOfflineMessage": "لا يوجد اتصال بالإنترنت ولا توجد مواقيت محفوظة متاحة",
+  "prayerTimesFromCache": "لا يوجد اتصال بالإنترنت. يتم عرض آخر مواقيت محفوظة",
+  "prayerTimesUpdateFailed": "فشل في تحديث مواقيت الصلاة. يتم عرض آخر مواقيت "
 
 }

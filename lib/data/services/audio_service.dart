@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:qanet/data/connectivity_helper.dart';
+import 'package:easy_localization/easy_localization.dart';
 import '../models/audio_mobel.dart';
 import 'base_service.dart';
 
@@ -15,10 +16,10 @@ class AudioService extends BaseService {
       if (context != null) {
         ConnectivityHelper.showNoInternetSnackBar(
           context,
-          customMessage: 'يتطلب تحميل قائمة القراء الاتصال بالإنترنت'
+          customMessage: 'loadingRecitersMessage'.tr()
         );
       }
-      throw Exception('لا يوجد اتصال بالإنترنت');
+      throw Exception('noInternetMessage'.tr());
     }
 
     final recitersJson = await getListRequest('$baseUrl/reciters', 'reciters');
@@ -31,16 +32,17 @@ class AudioService extends BaseService {
       if (context != null) {
         ConnectivityHelper.showNoInternetSnackBar(
           context,
-          customMessage: 'يتطلب تحميل قائمة القراء الاتصال بالإنترنت'
+          customMessage: 'loadingRecitersMessage'.tr()
         );
       }
-      throw Exception('لا يوجد اتصال بالإنترنت');
+      throw Exception('noInternetMessage'.tr());
     }
 
     final recitersJson = await getListRequest('$baseUrl/reciters', 'reciters');
     final filtered = recitersJson.where((reciter) {
       final moshafList = reciter['moshaf'] as List<dynamic>?;
       if (moshafList == null || moshafList.isEmpty) return false;
+
       return moshafList.any((moshaf) {
         final surahList = moshaf['surah_list'];
         if (surahList == null) return false;
@@ -64,7 +66,7 @@ class AudioService extends BaseService {
       if (context != null) {
         ConnectivityHelper.showNoInternetSnackBar(
           context,
-          customMessage: 'يتطلب تحميل التلاوة الاتصال بالإنترنت'
+          customMessage: 'loadingAudioMessage'.tr()
         );
       }
       return null;
@@ -72,6 +74,7 @@ class AudioService extends BaseService {
 
     final recitersJson = await getListRequest('$baseUrl/reciters', 'reciters');
     var reciter = recitersJson.firstWhere((r) => r['id'] == reciterId, orElse: () => {});
+    
     if (reciter.isNotEmpty && reciter.containsKey('moshaf')) {
       return AudioModel.fromJson(reciter, surahNumber);
     }
@@ -83,7 +86,6 @@ class AudioService extends BaseService {
     final filePath = '${dir.path}/$filename';
     
     if (await File(filePath).exists()) {
-      print('الصوت موجود لوكل');
       return filePath;
     }
 
@@ -92,20 +94,19 @@ class AudioService extends BaseService {
       if (context != null) {
         ConnectivityHelper.showNoInternetSnackBar(
           context,
-          customMessage: 'يتطلب تحميل الملف الصوتي الاتصال بالإنترنت'
+          customMessage: 'downloadingAudioMessage'.tr()
         );
       }
-      throw Exception('لا يوجد اتصال بالإنترنت');
+      throw Exception('noInternetMessage'.tr());
     }
 
-    print('تحميل الصوت من ال api');
     final response = await http.get(Uri.parse(audioUrl));
     if (response.statusCode == 200) {
       final file = File(filePath);
       await file.writeAsBytes(response.bodyBytes);
       return filePath;
     } else {
-      throw Exception('فشل تحميل الصوت');
+      throw Exception('Failed to download audio');
     }
   }
 }

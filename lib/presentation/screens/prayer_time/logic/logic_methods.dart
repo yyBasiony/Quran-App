@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:qanet/data/connectivity_helper.dart';
+import 'package:easy_localization/easy_localization.dart';
 import '../../../../data/models/prayer_times_model.dart';
 import '../../../../data/services/prayer_times_service.dart';
 import 'dart:convert';
@@ -25,12 +25,12 @@ class LogicMethods {
       final lastAvailable = await _getLastAvailablePrayerTimes(prefs, city);
       if (lastAvailable != null) {
         if (context != null) {
-          ConnectivityHelper.showCacheDataSnackBar(context, 'No internet connection. Displaying the last saved prayer times.');
+          ConnectivityHelper.showCacheDataSnackBar(context, 'prayerTimesFromCache'.tr());
         }
         return lastAvailable;
       } else {
         if (context != null) {
-          ConnectivityHelper.showNoInternetSnackBar(context, customMessage: 'No internet connection and no saved prayer times available.');
+          ConnectivityHelper.showNoInternetSnackBar(context, customMessage: 'prayerTimesOfflineMessage'.tr());
         }
         return null;
       }
@@ -38,7 +38,6 @@ class LogicMethods {
 
     try {
       final times = await service.fetchPrayerTimes(city, "Egypt");
-
       final timingsJson = jsonEncode({
         "Fajr": times.fajr,
         "Dhuhr": times.dhuhr,
@@ -47,20 +46,18 @@ class LogicMethods {
         "Isha": times.isha,
       });
       await prefs.setString(todayKey, timingsJson);
-
       return times;
     } catch (e) {
       print('Error fetching prayer times: $e');
-
       final lastAvailable = await _getLastAvailablePrayerTimes(prefs, city);
       if (lastAvailable != null) {
         if (context != null) {
-          ConnectivityHelper.showCacheDataSnackBar(context, 'Failed to update prayer times. Displaying the last saved times.');
+          ConnectivityHelper.showCacheDataSnackBar(context, 'prayerTimesUpdateFailed'.tr());
         }
         return lastAvailable;
       } else {
         if (context != null) {
-          ConnectivityHelper.showNoInternetSnackBar(context, customMessage: 'Failed to fetch prayer times.');
+          ConnectivityHelper.showNoInternetSnackBar(context, customMessage: 'prayerTimesOfflineMessage'.tr());
         }
         return null;
       }
@@ -100,6 +97,7 @@ class LogicMethods {
         return {"name": entry.key, "time": entry.value};
       }
     }
+
     return {"name": "Fajr", "time": prayers["Fajr"]!};
   }
 
