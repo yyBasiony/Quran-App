@@ -6,7 +6,6 @@ import 'package:qanet/presentation/resources/app_theme.dart';
 import 'package:qanet/providers/theme_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-
 class IslamicApp extends StatelessWidget {
   const IslamicApp({super.key});
 
@@ -26,7 +25,7 @@ class IslamicApp extends StatelessWidget {
               localizationsDelegates: context.localizationDelegates,
               theme: AppTheme.lightTheme,
               darkTheme: AppTheme.darkTheme,
-              themeMode: themeProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+              themeMode: themeProvider.currentThemeMode,
               onGenerateRoute: AppRoutes.generateRoutes,
               initialRoute: AppRoutes.splashScreen,
             );

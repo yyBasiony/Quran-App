@@ -6,6 +6,9 @@ class ThemeProvider with ChangeNotifier {
 
   bool get isDarkMode => _isDarkMode;
 
+  ThemeMode get currentThemeMode => _isDarkMode ? ThemeMode.dark : ThemeMode.light;
+
+
   ThemeProvider() {
     _loadThemeFromPrefs();
   }

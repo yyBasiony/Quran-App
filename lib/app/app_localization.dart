@@ -15,10 +15,8 @@ class AppLocalization extends StatelessWidget {
       path: 'assets/translations',
       fallbackLocale: const Locale('ar'),
       startLocale: const Locale('ar'),
-      child: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (_) => ThemeProvider()),
-        ],
+      child: ChangeNotifierProvider(
+        create: (_) => ThemeProvider(),
         child: const IslamicApp(),
       ),
     );

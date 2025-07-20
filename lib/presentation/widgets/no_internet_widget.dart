@@ -30,14 +30,12 @@ class NoInternetWidget extends StatelessWidget {
                 child: Icon(Icons.wifi_off_rounded, size: 48.sp, color: AppColors.grey)),
             SizedBox(height: 24.h),
             Text(title ?? 'noInternetTitle'.tr(),
-                style: context.textTheme.titleLarge?.copyWith(
-                  color: AppColors.textPrimary,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: context.textTheme.titleSmall,
                 textAlign: TextAlign.center),
             SizedBox(height: 12.h),
             Text(subtitle ?? 'noInternetSubtitle'.tr(),
-                style: context.textTheme.bodyMedium?.copyWith(color: AppColors.textSecondary), textAlign: TextAlign.center),
+                style: context.textTheme.titleMedium
+                , textAlign: TextAlign.center),
             if (showRetryButton && onRetry != null) ...[
               SizedBox(height: 32.h),
               ElevatedButton.icon(
