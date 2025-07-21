@@ -6,8 +6,9 @@ import 'package:qanet/extensions/theme_extensions.dart';
 import 'package:qanet/presentation/screens/surah/widgets/surah_card.dart';
 import 'package:qanet/presentation/widgets/loading_widget.dart';
 import 'package:qanet/presentation/widgets/no_internet_widget.dart';
-import 'package:qanet/providers/surah_provider.dart';
 import 'package:qanet/presentation/resources/app_colors.dart';
+import 'package:qanet/presentation/widgets/status_snackbar.dart';
+import 'package:qanet/providers/surah_provider.dart';
 
 class SurahListScreen extends StatefulWidget {
   const SurahListScreen({super.key});
@@ -18,10 +19,11 @@ class SurahListScreen extends StatefulWidget {
 
 class _SurahListScreenState extends State<SurahListScreen> {
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final provider = Provider.of<SurahProvider>(context, listen: false);
-    provider.setContext(context);
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      Provider.of<SurahProvider>(context, listen: false).fetchSurahs();
+    });
   }
 
   @override
@@ -37,6 +39,13 @@ class _SurahListScreenState extends State<SurahListScreen> {
       ),
       body: Consumer<SurahProvider>(
         builder: (context, provider, child) {
+          if (provider.errorMessage != null) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              StatusSnackBar.showError(context, provider.errorMessage!.tr());
+              provider.clearMessages();
+            });
+          }
+
           if (provider.isLoading) {
             return LoadingWidget(message: 'loadingSurahs'.tr());
           }

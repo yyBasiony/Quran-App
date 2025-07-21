@@ -3,6 +3,7 @@ import 'package:qanet/data/models/ayah_model.dart';
 import 'package:qanet/data/models/audio_mobel.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:qanet/presentation/screens/surah/logic/surah_logic.dart';
+import 'package:qanet/data/connectivity_helper.dart';
 
 class SurahDetailProvider with ChangeNotifier {
   List<AyahModel> ayahs = [];
@@ -12,7 +13,8 @@ class SurahDetailProvider with ChangeNotifier {
   final player = AudioPlayer();
   AudioModel? selectedReciter;
   bool isPlaying = false;
-  BuildContext? context;
+
+  String? errorMessage;
 
   SurahDetailProvider() {
     player.onPlayerComplete.listen((event) {
@@ -21,51 +23,53 @@ class SurahDetailProvider with ChangeNotifier {
     });
   }
 
-  void setContext(BuildContext context) {
-    this.context = context;
-  }
-
   Future<void> loadData(int surahNumber) async {
     isLoading = true;
     hasFailedToLoad = false;
+    errorMessage = null;
     notifyListeners();
-    
+
     try {
-      ayahs = await SurahLogic.fetchAyahs(surahNumber, context: context);
-      reciters = await SurahLogic.fetchRecitersWithSurah(surahNumber, context: context);
-      
+      final hasInternet = await ConnectivityHelper.hasInternet();
+      if (!hasInternet) {
+        hasFailedToLoad = true;
+        errorMessage = 'noInternetMessage';
+        isLoading = false;
+        notifyListeners();
+        return;
+      }
+
+      ayahs = await SurahLogic.fetchAyahs(surahNumber);
+      reciters = await SurahLogic.fetchRecitersWithSurah(surahNumber);
+
       if (reciters.isNotEmpty) {
         selectedReciter = reciters.first;
       } else {
         selectedReciter = null;
       }
-      
+
       hasFailedToLoad = false;
     } catch (e) {
-      hasFailedToLoad = true; 
+      hasFailedToLoad = true;
+      errorMessage = e.toString();
     }
-    
+
     isLoading = false;
     notifyListeners();
   }
 
-  Future<void> retryLoading() async {
-    if (context != null) {
-    }
-  }
-
   Future<void> playFullSurah(int surahNumber) async {
     if (selectedReciter == null) return;
-    
+
     try {
       final audioModel = await SurahLogic.fetchSurahAudio(
         selectedReciter!.reciterId,
         surahNumber,
-        context: context,
       );
-      
+
       if (audioModel == null || audioModel.audioUrl.isEmpty) {
-        //print("الصوت غير متوفر");
+        errorMessage = 'audioNotAvailable';
+        notifyListeners();
         return;
       }
 
@@ -74,14 +78,15 @@ class SurahDetailProvider with ChangeNotifier {
       isPlaying = true;
       notifyListeners();
 
-      SurahLogic.getOrDownloadAudio(audioModel.audioUrl, fileName, context: context).then((path) {
-       // print('تم تحميل الملف وتخزينه: $path');
-      }).catchError((e) {
-       // print('فشل تحميل الملف للتخزين المحلي: $e');
-      });
-
+SurahLogic.getOrDownloadAudio(audioModel.audioUrl, fileName)
+  .catchError((e) {
+    errorMessage = 'downloadFailed';
+    notifyListeners();
+    return '';
+  });
     } catch (e) {
-     // print("خطأ أثناء تشغيل التلاوة: $e");
+      errorMessage = 'playbackError';
+      notifyListeners();
     }
   }
 
@@ -93,6 +98,11 @@ class SurahDetailProvider with ChangeNotifier {
 
   void changeReciter(AudioModel newReciter) {
     selectedReciter = newReciter;
+    notifyListeners();
+  }
+
+  void clearMessages() {
+    errorMessage = null;
     notifyListeners();
   }
 

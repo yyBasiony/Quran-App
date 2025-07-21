@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:qanet/data/connectivity_helper.dart';
-import 'package:easy_localization/easy_localization.dart';
 import '../models/search_ayah_model.dart';
 import '../models/surah_model.dart';
 import '../models/ayah_model.dart';
@@ -10,65 +7,38 @@ import 'base_service.dart';
 class QuranService extends BaseService {
   static const String baseUrl = 'https://api.alquran.cloud/v1';
 
-  Future<List<SurahModel>> fetchSurahs({BuildContext? context}) async {
+  Future<List<SurahModel>> fetchSurahs() async {
     final box = await Hive.openBox<SurahModel>('surahsBox');
-    
     if (box.isNotEmpty) {
-      print("Loading from local storage");
       return box.values.toList();
-    }
-
-    final hasInternet = await ConnectivityHelper.hasInternet();
-    if (!hasInternet) {
-      if (context != null) {
-        ConnectivityHelper.showNoInternetSnackBar(
-          context, 
-          customMessage: 'loadingSurahsFirstTime'.tr()
-        );
-      }
-      throw Exception('noInternetMessage'.tr());
     }
 
     final data = await getRequest('$baseUrl/surah');
     final List<dynamic> surahsData = data['data'];
     final surahList = surahsData.map((json) => SurahModel.fromJson(json)).toList();
-
+    
     for (var surah in surahList) {
       box.put(surah.number, surah);
     }
-
     return surahList;
   }
 
-  Future<List<AyahModel>> fetchSurahAyahs(int surahNumber, {BuildContext? context}) async {
+  Future<List<AyahModel>> fetchSurahAyahs(int surahNumber) async {
     final box = await Hive.openBox('ayahsBox');
-    
     if (box.containsKey(surahNumber)) {
-      print("Loading from local storage for Surah $surahNumber");
       final cachedData = box.get(surahNumber);
       if (cachedData is List) {
-        return cachedData.map((e) => e is AyahModel ? e : AyahModel.fromJson(Map<String, dynamic>.from(e))).toList();
+        return cachedData.map((e) => e is AyahModel
+            ? e
+            : AyahModel.fromJson(Map<String, dynamic>.from(e))).toList();
       } else {
         return [];
       }
     }
 
-    final hasInternet = await ConnectivityHelper.hasInternet();
-    if (!hasInternet) {
-      if (context != null) {
-        ConnectivityHelper.showNoInternetSnackBar(
-          context,
-          customMessage: 'loadingAyahsFirstTime'.tr()
-        );
-      }
-      throw Exception('noInternetMessage'.tr());
-    }
-
-    print("Loading from API");
     final url = '$baseUrl/surah/$surahNumber/quran-uthmani';
     final data = await getRequest(url);
     final List<dynamic> ayahsData = data['data']['ayahs'];
-    
     final ayahList = ayahsData.asMap().entries.map((entry) {
       final index = entry.key;
       final ayahJson = entry.value;
@@ -79,18 +49,7 @@ class QuranService extends BaseService {
     return ayahList;
   }
 
-  Future<List<SearchAyahModel>> searchAyah(String searchText, {BuildContext? context}) async {
-    final hasInternet = await ConnectivityHelper.hasInternet();
-    if (!hasInternet) {
-      if (context != null) {
-        ConnectivityHelper.showNoInternetSnackBar(
-          context,
-          customMessage: 'searchRequiresInternet'.tr()
-        );
-      }
-      throw Exception('noInternetMessage'.tr());
-    }
-
+  Future<List<SearchAyahModel>> searchAyah(String searchText) async {
     final data = await getRequest('https://api-quran.com/api?text=$searchText&type=search');
     if (data.containsKey('result') && data['result'] is List) {
       return (data['result'] as List)

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:qanet/data/models/audio_mobel.dart';
 import 'package:qanet/data/models/ayah_model.dart';
 import 'package:qanet/data/models/surah_model.dart';
@@ -9,8 +8,8 @@ class SurahLogic {
   static final QuranService _quranService = QuranService();
   static final AudioService _audioService = AudioService();
 
-  static Future<List<SurahModel>> fetchSurahs({BuildContext? context}) async {
-    return await _quranService.fetchSurahs(context: null); 
+  static Future<List<SurahModel>> fetchSurahs() async {
+    return await _quranService.fetchSurahs(); 
   }
 
   static String removeDiacritics(String text) {
@@ -26,23 +25,23 @@ class SurahLogic {
     }).toList();
   }
 
-  static Future<List<AyahModel>> fetchAyahs(int surahNumber, {BuildContext? context}) async {
-    return await _quranService.fetchSurahAyahs(surahNumber, context: context);
+  static Future<List<AyahModel>> fetchAyahs(int surahNumber) async {
+    return await _quranService.fetchSurahAyahs(surahNumber);
   }
 
-  static Future<List<AudioModel>> fetchReciters({BuildContext? context}) async {
-    return await _audioService.fetchReciters(context: context);
+  static Future<List<AudioModel>> fetchReciters() async {
+    return await _audioService.fetchReciters();
   }
 
-  static Future<List<AudioModel>> fetchRecitersWithSurah(int surahNumber, {BuildContext? context}) async {
-    return await _audioService.fetchRecitersWithSurah(surahNumber, context: context);
+  static Future<List<AudioModel>> fetchRecitersWithSurah(int surahNumber) async {
+    return await _audioService.fetchRecitersWithSurah(surahNumber);
   }
 
-  static Future<AudioModel?> fetchSurahAudio(int reciterId, int surahNumber, {BuildContext? context}) async {
-    return await _audioService.fetchSurahAudio(reciterId, surahNumber, context: context);
+  static Future<AudioModel?> fetchSurahAudio(int reciterId, int surahNumber) async {
+    return await _audioService.fetchSurahAudio(reciterId, surahNumber);
   }
 
-  static Future<String> getOrDownloadAudio(String url, String fileName, {BuildContext? context}) async {
-    return await _audioService.getOrDownloadAudio(url, fileName, context: context);
+  static Future<String> getOrDownloadAudio(String url, String fileName) async {
+    return await _audioService.getOrDownloadAudio(url, fileName);
   }
 }
