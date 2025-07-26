@@ -1,7 +1,8 @@
 import 'package:hive/hive.dart';
-import '../models/search_ayah_model.dart';
-import '../models/surah_model.dart';
-import '../models/ayah_model.dart';
+
+import '../../domain/models/ayah_model.dart';
+import '../../domain/models/search_ayah_model.dart';
+import '../../domain/models/surah_model.dart';
 import 'base_service.dart';
 
 class QuranService extends BaseService {
@@ -16,7 +17,7 @@ class QuranService extends BaseService {
     final data = await getRequest('$baseUrl/surah');
     final List<dynamic> surahsData = data['data'];
     final surahList = surahsData.map((json) => SurahModel.fromJson(json)).toList();
-    
+
     for (var surah in surahList) {
       box.put(surah.number, surah);
     }
@@ -28,9 +29,7 @@ class QuranService extends BaseService {
     if (box.containsKey(surahNumber)) {
       final cachedData = box.get(surahNumber);
       if (cachedData is List) {
-        return cachedData.map((e) => e is AyahModel
-            ? e
-            : AyahModel.fromJson(Map<String, dynamic>.from(e))).toList();
+        return cachedData.map((e) => e is AyahModel ? e : AyahModel.fromJson(Map<String, dynamic>.from(e))).toList();
       } else {
         return [];
       }
@@ -52,10 +51,7 @@ class QuranService extends BaseService {
   Future<List<SearchAyahModel>> searchAyah(String searchText) async {
     final data = await getRequest('https://api-quran.com/api?text=$searchText&type=search');
     if (data.containsKey('result') && data['result'] is List) {
-      return (data['result'] as List)
-          .whereType<String>()
-          .map((text) => SearchAyahModel(text: text))
-          .toList();
+      return (data['result'] as List).whereType<String>().map((text) => SearchAyahModel(text: text)).toList();
     }
     return [];
   }

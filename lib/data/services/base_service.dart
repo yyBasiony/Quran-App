@@ -1,41 +1,44 @@
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
+
 import 'connectivity_service.dart';
 
 abstract class BaseService {
   Future<Map<String, dynamic>> getRequest(String url) async {
-    // Check connectivity 
+    // Check connectivity
     final hasConnection = await ConnectivityService.hasInternetConnection();
     if (!hasConnection) {
       throw NoInternetException('noInternetConnection');
     }
-        
+
     try {
       final response = await http.get(
         Uri.parse(url),
         headers: {'Content-Type': 'application/json'},
       ).timeout(
         const Duration(seconds: 10),
-        onTimeout: () => throw TimeoutException('connectionTimeout'), 
+        onTimeout: () => throw TimeoutException('connectionTimeout'),
       );
-        
+
       if (response.statusCode == 200) {
         return jsonDecode(response.body);
       } else if (response.statusCode == 404) {
-        throw DataNotFoundException('dataNotFound'); 
+        throw DataNotFoundException('dataNotFound');
       } else if (response.statusCode >= 500) {
         throw ServerException('serverError');
       } else {
-        throw ApiException('apiError_${response.statusCode}'); 
+        throw ApiException('apiError_${response.statusCode}');
       }
-} on http.ClientException catch (e) {
-  print('ClientException: $e');
-  throw NetworkException('networkError');
-} on FormatException catch (e) {
-  print('FormatException: $e');
-  throw DataParsingException('dataParsingError');    } catch (e) {
-      if (e is NoInternetException || 
-          e is TimeoutException || 
+    } on http.ClientException catch (e) {
+      print('ClientException: $e');
+      throw NetworkException('networkError');
+    } on FormatException catch (e) {
+      print('FormatException: $e');
+      throw DataParsingException('dataParsingError');
+    } catch (e) {
+      if (e is NoInternetException ||
+          e is TimeoutException ||
           e is ApiException ||
           e is DataNotFoundException ||
           e is ServerException ||
@@ -57,7 +60,7 @@ abstract class BaseService {
         throw DataFormatException('invalidDataFormat');
       }
     } else {
-      throw DataNotFoundException('keyNotFound'); 
+      throw DataNotFoundException('keyNotFound');
     }
   }
 
@@ -73,7 +76,7 @@ abstract class BaseService {
       } catch (e) {
         attempts++;
         if (attempts >= maxRetries) rethrow;
-        
+
         if (e is NetworkException || e is TimeoutException) {
           await Future.delayed(delay * attempts);
           continue;
@@ -89,7 +92,7 @@ abstract class BaseService {
 class NoInternetException implements Exception {
   final String key;
   NoInternetException(this.key);
-  
+
   @override
   String toString() => 'NoInternetException: $key';
 }
@@ -97,7 +100,7 @@ class NoInternetException implements Exception {
 class TimeoutException implements Exception {
   final String key;
   TimeoutException(this.key);
-  
+
   @override
   String toString() => 'TimeoutException: $key';
 }
@@ -105,7 +108,7 @@ class TimeoutException implements Exception {
 class ApiException implements Exception {
   final String key;
   ApiException(this.key);
-  
+
   @override
   String toString() => 'ApiException: $key';
 }
@@ -113,7 +116,7 @@ class ApiException implements Exception {
 class DataNotFoundException implements Exception {
   final String key;
   DataNotFoundException(this.key);
-  
+
   @override
   String toString() => 'DataNotFoundException: $key';
 }
@@ -122,7 +125,7 @@ class DataNotFoundException implements Exception {
 class ServerException implements Exception {
   final String key;
   ServerException(this.key);
-  
+
   @override
   String toString() => 'ServerException: $key';
 }
@@ -130,7 +133,7 @@ class ServerException implements Exception {
 class NetworkException implements Exception {
   final String key;
   NetworkException(this.key);
-  
+
   @override
   String toString() => 'NetworkException: $key';
 }
@@ -138,7 +141,7 @@ class NetworkException implements Exception {
 class DataParsingException implements Exception {
   final String key;
   DataParsingException(this.key);
-  
+
   @override
   String toString() => 'DataParsingException: $key';
 }
@@ -146,7 +149,7 @@ class DataParsingException implements Exception {
 class DataFormatException implements Exception {
   final String key;
   DataFormatException(this.key);
-  
+
   @override
   String toString() => 'DataFormatException: $key';
 }
@@ -154,7 +157,7 @@ class DataFormatException implements Exception {
 class UnknownException implements Exception {
   final String key;
   UnknownException(this.key);
-  
+
   @override
   String toString() => 'UnknownException: $key';
 }

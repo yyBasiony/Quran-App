@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:qanet/data/models/ayah_model.dart';
-import 'package:qanet/data/models/audio_mobel.dart';
+import 'package:qanet/domain/models/ayah_model.dart';
+import 'package:qanet/domain/models/audio_model.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:qanet/presentation/screens/surah/logic/surah_logic.dart';
+import 'package:qanet/presentation/surah/surah_logic.dart';
 import 'package:qanet/data/connectivity_helper.dart';
 
 class SurahDetailProvider with ChangeNotifier {

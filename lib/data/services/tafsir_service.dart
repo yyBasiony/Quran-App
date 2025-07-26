@@ -1,6 +1,8 @@
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
-import '../models/tafsir_model.dart';
+
+import '../../domain/models/tafsir_model.dart';
 
 class TafsirService {
   Future<TafsirModel?> fetchTafsir(int surah, int ayah) async {

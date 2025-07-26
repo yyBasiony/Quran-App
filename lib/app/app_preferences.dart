@@ -1,52 +1,27 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppPreferences {
-   static const String _keySelectedCity = 'selected_city';
-  static const String _keyHasStarted = 'is_first_time';
-  static const _isDarkModeKey = 'isDarkMode';
-  static const _languageCodeKey = 'languageCode';
-  static SharedPreferences? _prefs;
+  static late final SharedPreferences _prefs;
+  static const String _isDarkMode = 'IS_DARK_MODE_PREFS_KEY';
+  static const String _isFirstTime = 'IS_FIRST_TIME_PREFS_KEY';
+  static const String _languageCode = 'LANGUAGE_CODE_PREFS_KEY';
+  static const String _selectedCity = 'SELECTED_CODE_PREFS_KEY';
 
-  static Future<void> init() async {
-    _prefs = await SharedPreferences.getInstance();
-  }
+  static Future<void> init() async => _prefs = await SharedPreferences.getInstance();
 
-  static SharedPreferences get prefs {
-    if (_prefs == null) {
-      throw Exception('AppPreferences not initialized.');
-    }
-    return _prefs!;
-  }
+  static bool isFirstTime() => _prefs.getBool(_isFirstTime) ?? true;
 
-//city
-  static Future<void> setSelectedCity(String city) async =>
-    await prefs.setString(_keySelectedCity, city);
+  static Future<void> setFirstTime() async => await _prefs.setBool(_isFirstTime, false);
 
-  static String getSelectedCity([String defaultValue = 'Zagazig'])  =>
-     prefs.getString(_keySelectedCity) ?? defaultValue;
-//start screen
-  static Future<void> setHasStarted(bool value) async {
-    await prefs.setBool(_keyHasStarted, value);
-  }
+  static String getSelectedCity([String city = 'Zagazig']) => _prefs.getString(_selectedCity) ?? city;
 
-  static bool hasStartedBefore()  =>
-     prefs.getBool(_keyHasStarted) ?? false;
-  
-  //theme
-    static bool getTheme()  =>
-     prefs.getBool(_isDarkModeKey) ?? false;
-  
+  static Future<void> setSelectedCity(String city) async => await _prefs.setString(_selectedCity, city);
 
-  static void setTheme(bool isDark)  =>
-     prefs.setBool(_isDarkModeKey, isDark);
-  
-//localization
-  static Future<String> getLanguageCode() async =>
-     prefs.getString(_languageCodeKey) ?? 'ar';
-  
+  static bool getTheme() => _prefs.getBool(_isDarkMode) ?? false;
 
-  static void setLanguageCode(String code)  =>
-     prefs.setString(_languageCodeKey, code);
-  
+  static Future<void> setTheme(bool isDark) async => await _prefs.setBool(_isDarkMode, isDark);
 
+  static String getLanguageCode() => _prefs.getString(_languageCode) ?? 'ar';
+
+  static Future<void> setLanguageCode(String code) async => await _prefs.setString(_languageCode, code);
 }
