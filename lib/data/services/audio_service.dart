@@ -1,7 +1,9 @@
 import 'dart:io';
+
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
-import '../models/audio_mobel.dart';
+
+import '../../domain/models/audio_model.dart';
 import 'base_service.dart';
 
 class AudioService extends BaseService {

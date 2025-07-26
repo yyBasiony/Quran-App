@@ -1,10 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:qanet/presentation/resources/app_routes.dart';
-import 'package:qanet/presentation/resources/app_theme.dart';
-import 'package:qanet/providers/theme_provider.dart';
-import 'package:easy_localization/easy_localization.dart';
+
+import '../presentation/resources/app_routes.dart';
+import '../presentation/resources/app_theme.dart';
+import '../providers/theme_provider.dart';
 
 class IslamicApp extends StatelessWidget {
   const IslamicApp({super.key});
@@ -12,22 +13,22 @@ class IslamicApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<ThemeProvider>(
-      builder: (context, themeProvider, child) {
+      builder: (_, themeProvider, __) {
         return ScreenUtilInit(
-          designSize: const Size(390, 844),
           minTextAdapt: true,
           splitScreenMode: true,
-          builder: (context, child) {
+          designSize: const Size(390, 844),
+          builder: (context, _) {
             return MaterialApp(
-              debugShowCheckedModeBanner: false,
               locale: context.locale,
-              supportedLocales: context.supportedLocales,
-              localizationsDelegates: context.localizationDelegates,
               theme: AppTheme.lightTheme,
               darkTheme: AppTheme.darkTheme,
+              debugShowCheckedModeBanner: false,
+              initialRoute: AppRoutes.splashScreen,
               themeMode: themeProvider.currentThemeMode,
               onGenerateRoute: AppRoutes.generateRoutes,
-              initialRoute: AppRoutes.splashScreen,
+              supportedLocales: context.supportedLocales,
+              localizationsDelegates: context.localizationDelegates,
             );
           },
         );

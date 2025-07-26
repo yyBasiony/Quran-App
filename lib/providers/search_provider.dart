@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qanet/presentation/screens/search/logic/search_logic.dart';
-import 'package:qanet/data/models/search_ayah_model.dart';
+import 'package:qanet/presentation/search/search_logic.dart';
+import 'package:qanet/domain/models/search_ayah_model.dart';
 
 class SearchProvider with ChangeNotifier {
   final TextEditingController controller = TextEditingController();

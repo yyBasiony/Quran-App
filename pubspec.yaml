@@ -1,6 +1,6 @@
 name: qanet
-description: "A new Flutter project."
-publish_to: 'none'
+description: "A Quran application built with Flutter."
+publish_to: "none"
 
 version: 1.0.0+1
 
@@ -8,42 +8,57 @@ environment:
   sdk: ^3.6.0
 
 dependencies:
+  # Flutter SDK
   flutter:
     sdk: flutter
-  easy_localization: ^3.0.3
-  hive: ^2.2.3
-  hive_flutter: ^1.1.0
-  http: ^0.13.6
-  path_provider:
-  provider:
+  flutter_localizations:
+    sdk: flutter
+
+  # UI & Icons
+  dropdown_button2: any
+  flutter_screenutil: any
   cupertino_icons: ^1.0.8
-  audioplayers:
-  intl:
-  font_awesome_flutter:
-  shared_preferences:
-  flutter_screenutil:
-  dropdown_button2:
-  connectivity_plus:
-  lottie:
+  font_awesome_flutter: any
+
+  # State Management
+  provider: any
+
+  # Networking
+  http: ^0.13.6
+  connectivity_plus: any
+
+  # Local Data Storage
+  hive: ^2.2.3
+  path_provider: any
+  hive_flutter: ^1.1.0
+  shared_preferences: any
+
+  # Audio Playback
+  audioplayers: any
+
+  # Internationalization
+  intl: any
+  easy_localization: ^3.0.3
+
 dev_dependencies:
-  hive_generator: ^2.0.0
+  # Code Generation
   build_runner: ^2.1.7
-  flutter_launcher_icons: ^0.13.1
+  hive_generator: ^2.0.0
+
+  # Flutter Tools
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.13.1
 
 flutter:
+  generate: true
   uses-material-design: true
 
-
-  #generate: true 
-
   assets:
-    - assets/images/
     - assets/fonts/
+    - assets/images/
     - assets/translations/
-
 
   fonts:
     - family: Uthmani
@@ -51,6 +66,6 @@ flutter:
         - asset: assets/fonts/UthmanTNB_v2-0.ttf
 
 flutter_launcher_icons:
-  android: true
   ios: true
+  android: true
   image_path: "assets/images/logo.png"

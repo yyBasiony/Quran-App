@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qanet/data/connectivity_helper.dart';
-import 'package:qanet/presentation/screens/surah/logic/surah_logic.dart';
-import 'package:qanet/data/models/surah_model.dart';
+import 'package:qanet/presentation/surah/surah_logic.dart';
+import 'package:qanet/domain/models/surah_model.dart';
 
 class SurahProvider extends ChangeNotifier {
   List<SurahModel> _surahs = [];

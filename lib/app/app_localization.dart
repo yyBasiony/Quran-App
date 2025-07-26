@@ -1,7 +1,7 @@
-
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:easy_localization/easy_localization.dart';
+
 import '../providers/theme_provider.dart';
 import 'app.dart';
 
@@ -11,14 +11,11 @@ class AppLocalization extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return EasyLocalization(
-      supportedLocales: const [Locale('ar'), Locale('en')],
       path: 'assets/translations',
-      fallbackLocale: const Locale('ar'),
       startLocale: const Locale('ar'),
-      child: ChangeNotifierProvider(
-        create: (_) => ThemeProvider(),
-        child: const IslamicApp(),
-      ),
+      fallbackLocale: const Locale('ar'),
+      supportedLocales: const [Locale('ar'), Locale('en')],
+      child: ChangeNotifierProvider(create: (_) => ThemeProvider(), child: const IslamicApp()),
     );
   }
 }
