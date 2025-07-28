@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:qanet/app/app_preferences.dart';
+import '../../../app/app_preferences.dart';
 
 class ReciterCacheService {
   static Future<void> cacheReciters(int surahNumber, List<Map<String, dynamic>> reciters) async {
