@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:qanet/app/app_preferences.dart';
 import '../data/models/prayer_times_model.dart';
-import '../data/services/prayer_times_service.dart';
+import '../data/services/prayer_times/prayer_times_service.dart';
 import '../presentation/screens/prayer_time/logic/logic_methods.dart';
 
 class PrayerTimesProvider with ChangeNotifier {

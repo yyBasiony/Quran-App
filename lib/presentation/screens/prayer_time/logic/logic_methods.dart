@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:qanet/data/connectivity_helper.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../../../data/models/prayer_times_model.dart';
-import '../../../../data/services/prayer_times_service.dart';
+import '../../../../data/services/prayer_times/prayer_times_service.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 

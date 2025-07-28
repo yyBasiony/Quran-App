@@ -5,6 +5,8 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:qanet/presentation/screens/surah/logic/surah_logic.dart';
 import 'package:qanet/data/connectivity_helper.dart';
 
+import '../data/services/audio/audio_downloader.dart';
+
 class SurahDetailProvider with ChangeNotifier {
   List<AyahModel> ayahs = [];
   List<AudioModel> reciters = [];
@@ -78,7 +80,7 @@ class SurahDetailProvider with ChangeNotifier {
       isPlaying = true;
       notifyListeners();
 
-SurahLogic.getOrDownloadAudio(audioModel.audioUrl, fileName)
+AudioDownloader.getOrDownloadAudio(audioModel.audioUrl, fileName)
   .catchError((e) {
     errorMessage = 'downloadFailed';
     notifyListeners();

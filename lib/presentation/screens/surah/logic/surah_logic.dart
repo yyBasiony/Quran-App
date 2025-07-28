@@ -1,15 +1,18 @@
-import 'package:qanet/data/models/audio_mobel.dart';
-import 'package:qanet/data/models/ayah_model.dart';
-import 'package:qanet/data/models/surah_model.dart';
-import 'package:qanet/data/services/audio_service.dart';
-import 'package:qanet/data/services/quran_service.dart';
+
+import '../../../../data/models/audio_mobel.dart';
+import '../../../../data/models/ayah_model.dart';
+import '../../../../data/models/surah_model.dart';
+import '../../../../data/services/audio/audio_service.dart';
+import '../../../../data/services/quran/ayah_service.dart';
+import '../../../../data/services/quran/surah_service.dart';
 
 class SurahLogic {
-  static final QuranService _quranService = QuranService();
+  static  final AyahService _ayahService = AyahService();
+    static  final SurahService _surahService = SurahService();
   static final AudioService _audioService = AudioService();
 
   static Future<List<SurahModel>> fetchSurahs() async {
-    return await _quranService.fetchSurahs(); 
+    return await _surahService.fetchSurahs(); 
   }
 
   static String removeDiacritics(String text) {
@@ -26,7 +29,7 @@ class SurahLogic {
   }
 
   static Future<List<AyahModel>> fetchAyahs(int surahNumber) async {
-    return await _quranService.fetchSurahAyahs(surahNumber);
+    return await _ayahService.fetchSurahAyahs(surahNumber);
   }
 
   static Future<List<AudioModel>> fetchReciters() async {
@@ -41,7 +44,7 @@ class SurahLogic {
     return await _audioService.fetchSurahAudio(reciterId, surahNumber);
   }
 
-  static Future<String> getOrDownloadAudio(String url, String fileName) async {
-    return await _audioService.getOrDownloadAudio(url, fileName);
-  }
+  // static Future<String> getOrDownloadAudio(String url, String fileName) async {
+  //   return await _audioService.AudioDownloader(url, fileName);
+  // }
 }
