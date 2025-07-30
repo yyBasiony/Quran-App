@@ -2,9 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import '../../../providers/prayer_times_provider.dart';
-import '../../../providers/surah_provider.dart';
-import '../../../providers/search_provider.dart';
+import '../../../providers/prayer_times/prayer_times_provider.dart';
+import '../../../providers/surah/surah_provider.dart';
+import '../../../providers/search/search_provider.dart';
 import '../../resources/app_constants.dart';
 import '../prayer_time/prayer_time_page.dart';
 import '../search/search_screen.dart';
@@ -44,14 +44,15 @@ class _MainScreenState extends State<MainScreen> {
           );
         case 1:
           return ChangeNotifierProvider(
-            create: (_) => SurahProvider(),
+            create: (_) => SurahProvider.withDependencies(),
             child: const SurahListScreen(),
           );
         case 2:
           return ChangeNotifierProvider(
-            create: (_) => SearchProvider(),
+            create: (_) => SearchProvider.withDependencies(),
             child: const SearchScreen(),
           );
+
         case 3:
           return const SettingScreen();
         default:

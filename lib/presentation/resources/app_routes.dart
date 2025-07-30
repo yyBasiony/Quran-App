@@ -4,7 +4,8 @@ import 'package:qanet/presentation/screens/home/main_screen.dart';
 import 'package:qanet/presentation/screens/splash/splash_screen.dart';
 import 'package:qanet/presentation/screens/surah/surah_details_screen.dart';
 import 'package:qanet/presentation/screens/start/start_screen.dart';
-import '../../../providers/surah_detail_provider.dart';
+
+import '../../providers/surah_details/surah_detail_provider.dart';
 
 class AppRoutes {
     static const String splashScreen = "/";

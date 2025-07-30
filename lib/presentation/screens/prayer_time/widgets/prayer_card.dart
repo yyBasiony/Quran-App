@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qanet/extensions/theme_extensions.dart';
-import 'package:qanet/presentation/screens/prayer_time/logic/prayer_times_logic.dart';
+
+import 'prayer_times_ui_helpers.dart';
 
 class PrayerCard extends StatelessWidget {
   final String name;
@@ -23,7 +24,7 @@ class PrayerCard extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16.r),
             image: DecorationImage(
-              image: AssetImage(PrayerTimesLogic.getPrayerImage(imageKey)),
+              image: AssetImage(PrayerTimesUIHelpers.getPrayerImage(imageKey)),
               fit: BoxFit.cover,
             )),
         child: Stack(children: [

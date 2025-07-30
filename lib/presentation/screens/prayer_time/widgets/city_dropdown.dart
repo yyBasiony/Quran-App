@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qanet/extensions/theme_extensions.dart';
 import 'package:qanet/presentation/resources/app_colors.dart';
-import 'package:qanet/presentation/screens/prayer_time/logic/prayer_times_logic.dart';
+
+import 'prayer_times_ui_helpers.dart';
 
 class CityDropdown extends StatelessWidget {
   final String selectedCity;
@@ -32,7 +33,7 @@ class CityDropdown extends StatelessWidget {
                   if (newValue != null) onCityChanged(newValue);
                 },
                 items: cities.map((city) {
-                  final localizedCity = PrayerTimesLogic.getCityName(context, city);
+                  final localizedCity = PrayerTimesUIHelpers.getCityName(context, city);
                   return DropdownMenuItem<String>(value: city, child: Text(localizedCity, style: textTheme.headlineSmall));
                 }).toList(),
                 dropdownStyleData: DropdownStyleData(

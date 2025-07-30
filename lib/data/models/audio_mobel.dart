@@ -1,3 +1,4 @@
+
 class AudioModel {
   final String reciterName;
   final int reciterId;
@@ -13,30 +14,40 @@ class AudioModel {
     required this.audioUrl,
   });
 
-factory AudioModel.fromJson(Map<String, dynamic> json, int requestedSurah) {
-  List<MoshafModel> moshafList = [];
+  factory AudioModel.fromJson(Map<String, dynamic> json, int requestedSurah) {
+    List<MoshafModel> moshafList = [];
 
-  if (json['moshaf'] != null && (json['moshaf'] as List).isNotEmpty) {
-    moshafList = (json['moshaf'] as List)
-        .map((moshaf) => MoshafModel.fromJson(moshaf, requestedSurah))
-        .where((moshaf) => moshaf.audioUrl.isNotEmpty)
-        .toList();
+    if (json['moshaf'] != null && (json['moshaf'] as List).isNotEmpty) {
+      moshafList = (json['moshaf'] as List)
+          .map((moshaf) => MoshafModel.fromJson(moshaf, requestedSurah))
+          .where((moshaf) => moshaf.audioUrl.isNotEmpty)
+          .toList();
+    }
+
+    if (moshafList.isEmpty) {
+      throw Exception("No surah audio for this reciter");
+    }
+
+    String firstAudioUrl = moshafList.first.audioUrl;
+
+    return AudioModel(
+      reciterName: json['name'] ?? 'Unknown',
+      reciterId: json['id'],
+      surahNumber: requestedSurah,
+      moshafs: moshafList,
+      audioUrl: firstAudioUrl,
+    );
   }
 
-  if (moshafList.isEmpty) {
-    throw Exception("No surah audio for this reciter");
+  Map<String, dynamic> toJson() {
+    return {
+      'name': reciterName,
+      'id': reciterId,
+      'surah_number': surahNumber,
+      'audio_url': audioUrl,
+      'moshaf': moshafs.map((e) => e.toJson()).toList(),
+    };
   }
-
-  String firstAudioUrl = moshafList.first.audioUrl;
-
-  return AudioModel(
-    reciterName: json['name'] ?? 'Unknown',
-    reciterId: json['id'],
-    surahNumber: requestedSurah,
-    moshafs: moshafList,
-    audioUrl: firstAudioUrl,
-  );
-}
 }
 
 class MoshafModel {
@@ -63,5 +74,13 @@ class MoshafModel {
       name: json['name'] ?? 'Unknown Moshaf',
       audioUrl: audioUrl,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'audio_url': audioUrl,
+    };
   }
 }

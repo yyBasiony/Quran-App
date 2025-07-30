@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:easy_localization/easy_localization.dart';
-import '../providers/theme_provider.dart';
+import '../providers/locale/locale_provider.dart';
+import '../providers/theme/theme_provider.dart';
 import 'app.dart';
 
 class AppLocalization extends StatelessWidget {
@@ -15,8 +15,11 @@ class AppLocalization extends StatelessWidget {
       path: 'assets/translations',
       fallbackLocale: const Locale('ar'),
       startLocale: const Locale('ar'),
-      child: ChangeNotifierProvider(
-        create: (_) => ThemeProvider(),
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => ThemeProvider()),
+          ChangeNotifierProvider(create: (_) => LocaleProvider()),
+        ],
         child: const IslamicApp(),
       ),
     );
