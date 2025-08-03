@@ -1,32 +1,26 @@
-import 'dart:convert';
 import '../../models/prayer_times_model.dart';
-import '../../../app/app_preferences.dart';
+import '../shared_prefs_cache_services.dart';
 
 class PrayerTimesCache {
-  static Future<PrayerTimesModel?> getLastAvailablePrayerTimes(String city) async {
-    final prefs = AppPreferences.prefs;
+  static final _cache = SharedPrefsCacheService();
 
+  static Future<PrayerTimesModel?> getLastAvailablePrayerTimes(String city) async {
     for (int i = 0; i < 7; i++) {
       final date = DateTime.now().subtract(Duration(days: i));
       final dateString = date.toString().substring(0, 10);
       final key = 'prayerTimes_${dateString}_$city';
 
-      if (prefs.containsKey(key)) {
-        final cachedData = prefs.getString(key);
-        if (cachedData != null) {
-          final timingsMap = jsonDecode(cachedData);
-          return PrayerTimesModel.fromJson(timingsMap);
-        }
+      final data = await _cache.getData(key);
+      if (data != null) {
+        return PrayerTimesModel.fromJson(data);
       }
     }
     return null;
   }
 
   static Future<void> savePrayerTimes(String city, DateTime date, Map<String, dynamic> timings) async {
-    final prefs = AppPreferences.prefs;
     final dateString = date.toString().substring(0, 10);
     final key = 'prayerTimes_${dateString}_$city';
-    final jsonString = jsonEncode(timings);
-    await prefs.setString(key, jsonString);
+    await _cache.saveData(key, timings);
   }
 }

@@ -1,28 +1,24 @@
-import 'package:hive/hive.dart';
+import '../../../presentation/resources/hive_box_names.dart';
+import '../../models/audio_info.dart';
+import '../hive_chach_services.dart';
 
 class AudioCacheService {
-  static Future<void> saveAudioInfo({
-    required int surahNumber,
-    required int reciterId,
-    required String audioUrl,
-    required String reciterName,
-  }) async {
-    final box = await Hive.openBox('audioInfoBox');
-    final key = 'audio_${surahNumber}_${reciterId}';
-    await box.put(key, {
-      'audioUrl': audioUrl,
-      'reciterName': reciterName,
-      'surahNumber': surahNumber,
-      'reciterId': reciterId,
-    });
+  static final _cache = HiveCacheService(HiveBoxNames.audioInfoBox);
+
+  static Future<void> saveAudioInfo(AudioInfo info) async {
+    final key = 'audio_${info.surahNumber}_${info.reciterId}';
+    await _cache.saveData(key, info.toJson());
   }
 
-  static Future<Map<String, dynamic>?> getSavedAudioInfo({
+  static Future<AudioInfo?> getSavedAudioInfo({
     required int surahNumber,
     required int reciterId,
   }) async {
-    final box = await Hive.openBox('audioInfoBox');
     final key = 'audio_${surahNumber}_${reciterId}';
-    return box.get(key);
+    final data = await _cache.getData(key);
+    if (data != null) {
+      return AudioInfo.fromJson(Map<String, dynamic>.from(data));
+    }
+    return null;
   }
 }
