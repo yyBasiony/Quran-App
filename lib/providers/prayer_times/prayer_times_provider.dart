@@ -1,22 +1,24 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import '../../data/models/prayer_times_model.dart';
+import '../../data/services/exceptions.dart';
 import 'prayer_times_updater.dart';
 import 'selected_city_manager.dart';
 import 'prayer_times_loader.dart';
 
 class PrayerTimesProvider with ChangeNotifier {
   final PrayerTimesLoader _loader = PrayerTimesLoader();
+PrayerTimesProvider() {
+  _selectedCity = SelectedCityManager.getSelectedCity();
+  fetchPrayerTimes();
+}
 
-  PrayerTimesModel? _prayerTimes;
-  String _selectedCity = 'Zagazig';
-  String _nextPrayer = '';
-  String _nextPrayerTime = '';
-  String? _statusMessage;
-  bool _isFromCache = false;
-  bool _hasInternet = true;
-  Timer? _timer;
-  bool _isDisposed = false;
+
+PrayerTimesModel? _prayerTimes;
+String _selectedCity = 'Zagazig', _nextPrayer = '', _nextPrayerTime = '';
+String? _statusMessage;
+bool _isFromCache = false, _hasInternet = true, _isDisposed = false;
+Timer? _timer;
 
   String get selectedCity => _selectedCity;
   PrayerTimesModel? get prayerTimes => _prayerTimes;
@@ -26,14 +28,6 @@ class PrayerTimesProvider with ChangeNotifier {
   bool get isFromCache => _isFromCache;
   bool get hasInternet => _hasInternet;
 
-  PrayerTimesProvider() {
-    _init();
-  }
-
-  Future<void> _init() async {
-    _selectedCity = SelectedCityManager.getSelectedCity();
-    await fetchPrayerTimes();
-  }
 
   Future<void> changeCity(String city) async {
     _selectedCity = city;
@@ -42,18 +36,24 @@ class PrayerTimesProvider with ChangeNotifier {
   }
 
   Future<void> fetchPrayerTimes() async {
-    final (result, fromCache, message) =
-        await _loader.loadPrayerTimes(_selectedCity);
+    try {
+      final (result, fromCache, message) =
+          await _loader.loadPrayerTimes(_selectedCity);
 
-    if (result != null) {
-      _updateWithModel(result, fromCache: fromCache);
+      if (result != null) {
+        _updateWithModel(result, fromCache: fromCache);
+      }
+
+      _statusMessage = message;
+    } on AppException catch (e) {
+      _statusMessage = e.message;
+    } catch (_) {
+      _statusMessage = UnknownException().message;
     }
 
-    _statusMessage = message;
     safeNotifyListeners();
     _resetStatusMessage();
   }
-
   void _updateWithModel(PrayerTimesModel model, {bool fromCache = false}) {
     _prayerTimes = model;
     final (prayer, time) = PrayerTimesUpdater.calculateNextPrayer(model);
@@ -73,13 +73,9 @@ class PrayerTimesProvider with ChangeNotifier {
     });
   }
 
-  void safeNotifyListeners() {
-    if (!_isDisposed) notifyListeners();
-  }
+  void safeNotifyListeners() => !_isDisposed ? notifyListeners() : null;
 
-  void disposeTimer() {
-    _timer?.cancel();
-  }
+  void disposeTimer() => _timer?.cancel();
 
   @override
   void dispose() {

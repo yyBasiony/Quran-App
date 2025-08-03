@@ -4,7 +4,6 @@ import 'package:qanet/app/app_preferences.dart';
 import 'package:qanet/extensions/theme_extensions.dart';
 import 'package:qanet/presentation/resources/app_colors.dart';
 import 'package:qanet/presentation/resources/app_routes.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class StartButton extends StatefulWidget {
   const StartButton({super.key});
@@ -22,8 +21,7 @@ class _StartButtonState extends State<StartButton> {
     await Future.delayed(const Duration(seconds: 1));
     await AppPreferences.setHasStarted(true);
 
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('is_first_time', false);
+await AppPreferences.setHasStarted(false);
 
     setState(() => isLoading = false);
 
