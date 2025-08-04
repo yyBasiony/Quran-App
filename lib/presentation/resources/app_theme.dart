@@ -28,7 +28,7 @@ class AppTheme {
           color: Colors.black,
         ),
         labelLarge: TextStyle(
-          fontSize: 18,
+          fontSize: 28,
           fontWeight: FontWeight.bold,
           color: AppColors.primary,
         ),
@@ -101,7 +101,7 @@ class AppTheme {
           color: Colors.white,
         ),
         labelLarge: TextStyle(
-          fontSize: 16,
+          fontSize: 28,
           fontWeight: FontWeight.bold,
           color: AppColors.primary,
         ),
