@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../data/models/surah_model.dart';
-import 'surahs_usecase.dart';
+import '../../data/services/exceptions.dart';
+import '../../domain/surahs_usecase.dart';
 
 class SurahProvider extends ChangeNotifier {
   final SurahsUseCase _surahsUseCase;
@@ -27,22 +28,28 @@ class SurahProvider extends ChangeNotifier {
     if (!_isDisposed) notifyListeners();
   }
 
-  Future<void> fetchSurahs() async {
-    _isLoading = true;
-    safeNotifyListeners();
-    try {
-      final result = await _surahsUseCase.execute();
-      _surahs = result;
-      _filteredSurahs = result;
-      errorMessage = null;
-    } catch (e) {
-      errorMessage = e.toString();
-      _surahs = [];
-      _filteredSurahs = [];
-    }
-    _isLoading = false;
-    safeNotifyListeners();
+Future<void> fetchSurahs() async {
+  _isLoading = true;
+  safeNotifyListeners();
+
+  try {
+    final result = await _surahsUseCase.execute();
+    _surahs = result;
+    _filteredSurahs = result;
+    errorMessage = null;
+  } on AppException catch (e) {
+    errorMessage = e.message; 
+    _surahs = [];
+    _filteredSurahs = [];
+  } catch (e) {
+    errorMessage = UnknownException().message;
+    _surahs = [];
+    _filteredSurahs = [];
   }
+
+  _isLoading = false;
+  safeNotifyListeners();
+}
 
   void filterSurahs(String query) {
     final normalizedQuery = _removeDiacritics(query.toLowerCase().trim());

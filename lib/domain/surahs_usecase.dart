@@ -1,8 +1,9 @@
-import '../../../data/models/surah_model.dart';
+import '../../data/models/surah_model.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../data/services/base_service.dart'; 
-import '../../data/services/quran/i_surah_service.dart';
+import '../data/services/base_service.dart';
+import '../data/services/exceptions.dart';
+import '../data/services/quran/i_surah_service.dart';
 
 class SurahsUseCase extends BaseService {
   final ISurahService _ayahService;
@@ -18,12 +19,15 @@ class SurahsUseCase extends BaseService {
     }
 
     try {
-      await checkInternetOrThrow();
+      await checkInternetOrThrow(); 
       final updatedSurahs = await _ayahService.fetchSurahs();
       return updatedSurahs;
+    } on AppException {
+      if (cachedSurahs.isNotEmpty) return cachedSurahs;
+      rethrow; 
     } catch (_) {
-      if (cachedSurahs.isEmpty) throw Exception("noInternetMessage");
-      return cachedSurahs;
+      if (cachedSurahs.isNotEmpty) return cachedSurahs;
+      throw UnknownException(); 
     }
   }
 }

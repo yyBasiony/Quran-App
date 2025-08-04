@@ -29,9 +29,11 @@ class SearchProvider with ChangeNotifier {
     try {
       final results = await _searchService.searchAyah(query);
       searchResults = results;
-    } catch (e) {
+    } 
+    catch (e) {
       errorMessage = 'An error occurred during the search.'.tr();
-    } finally {
+    }
+     finally {
       isLoading = false;
       notifyListeners();
     }

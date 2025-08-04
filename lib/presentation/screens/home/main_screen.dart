@@ -6,7 +6,7 @@ import '../../../data/services/quran/surah_service.dart';
 import '../../../providers/prayer_times/prayer_times_provider.dart';
 import '../../../providers/surah/surah_provider.dart';
 import '../../../providers/search/search_provider.dart';
-import '../../../providers/surah/surahs_usecase.dart';
+import '../../../domain/surahs_usecase.dart';
 import '../../resources/app_constants.dart';
 import '../prayer_time/prayer_time_page.dart';
 import '../search/search_screen.dart';

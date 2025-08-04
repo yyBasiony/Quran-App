@@ -80,7 +80,8 @@ abstract class BaseService {
   }
   Future<void> checkInternetOrThrow() async {
     final hasInternet = await ConnectivityHelper.hasInternet();
-    if (!hasInternet) throw Exception("noInternetMessage");
+    if (!hasInternet) 
+   throw NoInternetException();
   }
 
 }

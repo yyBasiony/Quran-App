@@ -1,5 +1,4 @@
 import 'package:hive/hive.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:qanet/providers/surah_details/surah_content_result.dart';
 
 import '../../../data/models/audio_mobel.dart';
@@ -7,7 +6,7 @@ import '../../../data/services/quran/ayah_service.dart';
 import '../../../data/services/audio/audio_service.dart';
 import '../../../data/services/audio/reciter_cache_service.dart';
 import '../../data/connectivity_helper.dart';
-
+import '../../data/services/exceptions.dart';
 
 class SurahContentLoader {
   final AyahService _ayahService = AyahService();
@@ -27,16 +26,12 @@ class SurahContentLoader {
           final box = await Hive.openBox('recitersBox');
           await box.put('reciters_surah_$surahNumber', online.map((e) => e.toJson()).toList());
         }
-      } catch (_) {}
+      } catch (_) {
+      }
 
       final hasInternet = await ConnectivityHelper.hasInternet();
       if (!hasInternet && ayahs.isEmpty) {
-        return SurahContentResult(
-          ayahs: [],
-          reciters: [],
-          hasFailed: true,
-          errorMessage: 'no_internet_message'.tr(),
-        );
+        throw NoInternetException();
       }
 
       return SurahContentResult(
@@ -44,12 +39,19 @@ class SurahContentLoader {
         reciters: reciters,
         hasFailed: false,
       );
+    } on AppException catch (e) {
+      return SurahContentResult(
+        ayahs: [],
+        reciters: [],
+        hasFailed: true,
+        errorMessage: e.message,
+      );
     } catch (e) {
       return SurahContentResult(
         ayahs: [],
         reciters: [],
         hasFailed: true,
-        errorMessage: e.toString(),
+        errorMessage: UnknownException().message,
       );
     }
   }
