@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import '../connectivity_helper.dart';
 import 'connectivity_service.dart';
 import 'exceptions.dart';
 
@@ -77,4 +78,9 @@ abstract class BaseService {
     }
     throw UnknownException('errors.max_retries');
   }
+  Future<void> checkInternetOrThrow() async {
+    final hasInternet = await ConnectivityHelper.hasInternet();
+    if (!hasInternet) throw Exception("noInternetMessage");
+  }
+
 }

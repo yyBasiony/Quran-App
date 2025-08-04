@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../../data/models/surah_model.dart';
-import '../../../data/services/quran/surah_service.dart';
 import 'surahs_usecase.dart';
 
 class SurahProvider extends ChangeNotifier {
   final SurahsUseCase _surahsUseCase;
 
   SurahProvider(this._surahsUseCase);
-
-  factory SurahProvider.withDependencies() {
-    return SurahProvider(SurahsUseCase(SurahService()));
-  }
 
   List<SurahModel> _surahs = [];
   List<SurahModel> _filteredSurahs = [];

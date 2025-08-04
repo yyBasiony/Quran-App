@@ -11,12 +11,8 @@ class SurahDetailProvider with ChangeNotifier {
   List<AyahModel> ayahs = [];
   List<AudioModel> reciters = [];
   AudioModel? selectedReciter;
-  bool isLoading = true;
-  bool hasFailedToLoad = false;
-  bool isPlaying = false;
-  bool isDownloading = false;
+  bool isLoading = true, hasFailedToLoad = false, isPlaying = false, isDownloading = false, _isDisposed = false;
   String? errorMessage;
-  bool _isDisposed = false;
 
   SurahDetailProvider() {
     _audioManager.setOnCompleteListener(() {
@@ -25,17 +21,18 @@ class SurahDetailProvider with ChangeNotifier {
       safeNotifyListeners();
     });
   }
-
   Future<void> loadData(int surahNumber) async {
     isLoading = true;
-    hasFailedToLoad = false;
-    errorMessage = null;
+    // hasFailedToLoad = false;
+    // errorMessage = null;
     safeNotifyListeners();
 
     final result = await _surahContent.loadSurahData(surahNumber);
+
     ayahs = result.ayahs;
     reciters = result.reciters;
     selectedReciter = reciters.isNotEmpty ? reciters.first : null;
+
     hasFailedToLoad = result.hasFailed;
     errorMessage = result.errorMessage;
 
@@ -74,10 +71,7 @@ class SurahDetailProvider with ChangeNotifier {
     safeNotifyListeners();
   }
 
-  void disposePlayer() {
-    _audioManager.dispose();
-  }
-
+  void disposePlayer() => _audioManager.dispose();
   void safeNotifyListeners() {
     if (!_isDisposed) notifyListeners();
   }

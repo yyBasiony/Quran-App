@@ -1,11 +1,11 @@
 import '../../../data/models/surah_model.dart';
-import '../../../data/services/quran/surah_service.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../data/connectivity_helper.dart';
+import '../../data/services/base_service.dart'; 
+import '../../data/services/quran/i_surah_service.dart';
 
-class SurahsUseCase {
-  final SurahService _ayahService;
+class SurahsUseCase extends BaseService {
+  final ISurahService _ayahService;
 
   SurahsUseCase(this._ayahService);
 
@@ -17,11 +17,11 @@ class SurahsUseCase {
       cachedSurahs = box.values.toList();
     }
 
-    final hasInternet = await ConnectivityHelper.hasInternet();
-    if (hasInternet) {
+    try {
+      await checkInternetOrThrow();
       final updatedSurahs = await _ayahService.fetchSurahs();
       return updatedSurahs;
-    } else {
+    } catch (_) {
       if (cachedSurahs.isEmpty) throw Exception("noInternetMessage");
       return cachedSurahs;
     }
