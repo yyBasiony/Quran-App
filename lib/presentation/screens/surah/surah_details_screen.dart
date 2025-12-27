@@ -8,7 +8,7 @@ import 'package:qanet/presentation/screens/surah/widgets/surah_audio_controls.da
 import 'package:qanet/presentation/widgets/loading_widget.dart';
 import 'package:qanet/presentation/widgets/no_internet_widget.dart';
 import 'package:qanet/presentation/widgets/status_snackbar.dart';
-import 'package:qanet/providers/surah_detail_provider.dart';
+import 'package:qanet/providers/surah_details/surah_detail_provider.dart';
 
 class SurahDetailScreen extends StatefulWidget {
   final int surahNumber;

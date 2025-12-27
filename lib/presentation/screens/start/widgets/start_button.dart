@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qanet/app/app_preferences.dart';
 import 'package:qanet/extensions/theme_extensions.dart';
 import 'package:qanet/presentation/resources/app_colors.dart';
-import 'package:qanet/presentation/screens/start/logic/start_logic.dart';
 import 'package:qanet/presentation/resources/app_routes.dart';
 
 class StartButton extends StatefulWidget {
@@ -22,9 +21,11 @@ class _StartButtonState extends State<StartButton> {
     await Future.delayed(const Duration(seconds: 1));
     await AppPreferences.setHasStarted(true);
 
+await AppPreferences.setHasStarted(false);
+
     setState(() => isLoading = false);
 
-    StartLogic.handleStartButton(context, () => Navigator.pushReplacementNamed(context, AppRoutes.mainScreen));
+    Navigator.pushReplacementNamed(context, AppRoutes.mainScreen);
   }
 
   @override
@@ -32,13 +33,17 @@ class _StartButtonState extends State<StartButton> {
     final textTheme = context.textTheme;
 
     return ElevatedButton(
-        onPressed: isLoading ? null : () => _handleStart(context),
-        style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primary,
-            padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 14.h),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r))),
-        child: isLoading
-            ? const CircularProgressIndicator(color: Colors.white)
-            : Text("لنبدأ", style: textTheme.bodyMedium));
+      onPressed: isLoading ? null : () => _handleStart(context),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.primary,
+        padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 14.h),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24.r),
+        ),
+      ),
+      child: isLoading
+          ? const CircularProgressIndicator(color: Colors.white)
+          : Text("لنبدأ", style: textTheme.bodyMedium),
+    );
   }
 }

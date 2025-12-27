@@ -8,7 +8,7 @@ import 'package:qanet/presentation/widgets/loading_widget.dart';
 import 'package:qanet/presentation/widgets/no_internet_widget.dart';
 import 'package:qanet/presentation/resources/app_colors.dart';
 import 'package:qanet/presentation/widgets/status_snackbar.dart';
-import 'package:qanet/providers/surah_provider.dart';
+import 'package:qanet/providers/surah/surah_provider.dart';
 
 class SurahListScreen extends StatefulWidget {
   const SurahListScreen({super.key});

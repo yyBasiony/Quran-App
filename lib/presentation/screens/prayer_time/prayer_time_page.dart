@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:qanet/extensions/theme_extensions.dart';
-import 'package:qanet/presentation/screens/prayer_time/logic/prayer_times_logic.dart';
 import 'package:easy_localization/easy_localization.dart';
+import '../../../providers/prayer_times/prayer_times_provider.dart';
 import '../../resources/app_constants.dart';
 import '../../resources/app_colors.dart';
-import '../../../providers/prayer_times_provider.dart';
 import 'widgets/city_dropdown.dart';
 import 'widgets/prayer_card.dart';
+import 'widgets/prayer_times_ui_helpers.dart';
 
 class PrayerTimesPage extends StatelessWidget {
   const PrayerTimesPage({super.key});
@@ -18,8 +18,8 @@ class PrayerTimesPage extends StatelessWidget {
     final provider = Provider.of<PrayerTimesProvider>(context);
     final prayerTimes = provider.prayerTimes;
 
-    final arabicNames = PrayerTimesLogic.getArabicNames(context);
-    final prayers = PrayerTimesLogic.getPrayerTimesMap(prayerTimes)..remove(provider.nextPrayer);
+    final arabicNames = PrayerTimesUIHelpers.getArabicNames(context);
+    final prayers = PrayerTimesUIHelpers.getPrayerTimesMap(prayerTimes)..remove(provider.nextPrayer);
 
     return Scaffold(
         backgroundColor: context.scaffoldColor,
@@ -39,7 +39,7 @@ class PrayerTimesPage extends StatelessWidget {
                   child: Stack(fit: StackFit.expand, children: [
                     Transform.scale(
                         scale: 1.1,
-                        child: Image.asset(PrayerTimesLogic.getPrayerImage(provider.nextPrayer),
+                        child: Image.asset(PrayerTimesUIHelpers.getPrayerImage(provider.nextPrayer),
                             fit: BoxFit.fitHeight, alignment: Alignment.bottomCenter)),
                     Container(color: Colors.black.withOpacity(0.1)),
                     Center(

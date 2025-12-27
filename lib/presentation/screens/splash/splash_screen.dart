@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qanet/extensions/theme_extensions.dart';
 import 'package:qanet/presentation/resources/app_assets.dart';
-import 'package:qanet/presentation/screens/splash/logic/splash_logic.dart';
+import 'package:qanet/presentation/resources/app_routes.dart';
+
+import '../../../app/app_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -27,23 +29,30 @@ class _SplashScreenState extends State<SplashScreen> {
     super.dispose();
   }
 
-  void _startTimer() {
-    _timer = Timer(const Duration(seconds: 3), () {
-      SplashLogic.goNextScreen(context);
-    });
-  }
+void _startTimer() {
+  _timer = Timer(const Duration(seconds: 3), () async {
+    final isFirstTime = AppPreferences.prefs.getBool('is_first_time') ?? true;
+
+    final nextRoute =
+        isFirstTime ? AppRoutes.startScreen : AppRoutes.mainScreen;
+
+    if (!mounted) return;
+    Navigator.pushReplacementNamed(context, nextRoute);
+  });
+}
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-        backgroundColor: context.scaffoldColor,
-        body: Center(
-            child: Image.asset(
+      backgroundColor: context.scaffoldColor,
+      body: Center(
+        child: Image.asset(
           AppAssets.logo,
           width: 220.w,
           height: 220.h,
           fit: BoxFit.contain,
-        )));
+        ),
+      ),
+    );
   }
 }
